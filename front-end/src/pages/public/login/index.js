@@ -83,7 +83,7 @@ export default function Login() {
           <div
             data-aos="fade-down"
             data-aos-duration="1000"
-            className="absolute translate-x-[-40%] top-[25%] left-[20%]"
+            className="absolute translate-x-[-40%] top-[20%] left-[20%]"
           >
             <h1 className="text-[35px] font-medium">
               ƯU ĐÃI DÀNH CHO THÀNH VIÊN HỆ THỐNG

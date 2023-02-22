@@ -41,7 +41,6 @@ const movieSoonSchema = new mongoose.Schema({
     },
     limitAge: {
         type: String,
-        required: true,
     },
     actors: [{
         type: String,

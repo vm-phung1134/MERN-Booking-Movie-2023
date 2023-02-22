@@ -31,8 +31,8 @@ exports.createMovie = async (req, res, next) => {
 
 exports.updateMovie = async (req, res, next) => {
     try {
-        const {MovieId} = req.params;
-        const movie = await Movie.findByIdAndUpdate(MovieId,{...req.body})
+        const {movieId} = req.params;
+        const movie = await Movie.findByIdAndUpdate(movieId,{...req.body})
         res.status(200).json(movie)
     } catch (error) {
         res.json(error)

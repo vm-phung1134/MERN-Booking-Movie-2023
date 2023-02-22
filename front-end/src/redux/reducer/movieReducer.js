@@ -7,10 +7,7 @@ import {
   ONE_MOVIE_SUCCESS,
   CREATE_MOVIE_REQUEST,
   CREATE_MOVIE_SUCCESS,
-  CREATE_MOVIE_FAIL,
-  UPDATE_MOVIE_REQUEST,
-  UPDATE_MOVIE_SUCCESS,
-  UPDATE_MOVIE_FAIL,
+  CREATE_MOVIE_FAIL
 } from "../constants/movieConstants";
 
 //REDUCER GET ALL MOVIES
@@ -81,24 +78,6 @@ export const movieDetailReducer = (
       return {
         loading: false,
         isCreated: false,
-      };
-
-    // UPDATE MOVIE
-    case UPDATE_MOVIE_REQUEST:
-      return {
-        loading: true,
-        isUpdated: false,
-      };
-    case UPDATE_MOVIE_SUCCESS:
-      return {
-        loading: false,
-        movie: action.payload,
-        isUpdated: true,
-      };
-    case UPDATE_MOVIE_FAIL:
-      return {
-        loading: false,
-        isUpdated: false,
       };
     default:
       return state;

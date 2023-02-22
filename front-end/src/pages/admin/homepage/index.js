@@ -22,7 +22,6 @@ function Dashboard() {
   const users = useSelector((state) => state.users.users);
   let [countTotal, setCountTotal] = useState(0);
   const reservations = useSelector((state) => state.reservations.reservations);
-  console.log(reservations);
   const data = [
     { name: "Tháng 1", Total: 0 },
     { name: "Tháng 2", Total: 100 },

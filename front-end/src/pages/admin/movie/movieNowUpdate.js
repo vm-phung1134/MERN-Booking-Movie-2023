@@ -2,19 +2,87 @@ import SideBars from "../components/sideBars";
 import NavBars from "../components/navBars";
 import { Formik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
-import { getOneMovie, updateMovie } from "../../../redux/actions/movieActions";
+import { getOneMovie } from "../../../redux/actions/movieActions";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useEffect} from "react";
+import { useEffect, memo } from "react";
 import { useParams } from "react-router-dom";
+import axios from "axios";
+const baseURL = "http://localhost:5000";
 
 function MovieNowUpdate() {
   const dispatch = useDispatch();
   const movieId = useParams();
+  const id = movieId.id;
   const movie = useSelector((state) => state.movie.movie);
-  useEffect(() => {
-    dispatch(getOneMovie(movieId.id));
-  }, [dispatch, movieId.id]);
+  const validate = (values) => {
+    let errors = {};
+    // tên người dùng
+    if (!values.name) {
+      errors.name = "! Vui lòng nhập tên phim";
+    } else if (values.name.length > 30) {
+      errors.name = "! Tên phim không vượt quá 30 ký tự";
+    }
+    if (!values.namevn) {
+      errors.namevn = "! Vui lòng nhập tên việt hóa";
+    } else if (values.namevn.length > 30) {
+      errors.namevn = "! Tên phim không vượt quá 30 ký tự";
+    }
+    if (!values.country) {
+      errors.country = "! Vui lòng nhập quốc gia sản xuất";
+    } else if (values.country.length > 30) {
+      errors.country = "! Tên quốc gia không vượt quá 30 ký tự";
+    }
+    if (!values.type) {
+      errors.type = "! Vui lòng nhập thể loại phim";
+    } else if (values.type.length > 30) {
+      errors.type = "! Tên thể loại không vượt quá 30 ký tự";
+    }
+    if (!values.released) {
+      errors.released = "! Vui lòng chọn ngày khởi chiếu";
+    } else if (values.released.length > 12) {
+      errors.released = "! Không phải định dạng ngày";
+    }
+    if (!values.director) {
+      errors.director = "! Vui lòng nhập tên đạo diễn";
+    } else if (values.director > 30) {
+      errors.director = "! Vui lòng nhập tên khác";
+    }
+    if (!values.poster) {
+      errors.poster = "! Vui lòng nhập đường dẫn poster";
+    }
+    if (!values.image) {
+      errors.image = "! Vui lòng nhập đường dẫn hình ảnh phim";
+    }
+    if (!values.bg) {
+      errors.bg = "! Vui lòng nhập đường dẫn ảnh nền";
+    }
+    if (!values.discription) {
+      errors.discription = "! Vui lòng nhập nội dung phim";
+    } else if (values.discription > 1000) {
+      errors.discription = "! Nội dung phim không vượt quá 1000 ký tự";
+    }
+    if (!values.trailer) {
+      errors.trailer = "! Vui lòng nhập mã nhúng trailer";
+    }
+    return errors;
+  };
+
+  const submitForm = async (values) => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    await axios
+      .put(`${baseURL}/api/v1/movies/${id}`, values, config)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err.message));
+    toast.success("Một bộ phim đã được cập nhật vào mục đang chiếu !", {
+      position: toast.POSITION.BOTTOM_LEFT,
+      className: "text-black",
+    });
+  };
   const initialValues = {
     name: movie.name,
     namevn: movie.namevn,
@@ -32,28 +100,9 @@ function MovieNowUpdate() {
     discription: movie.discription,
     trailer: movie.trailer,
   };
-
- 
-  const validate = (values) => {
-    let errors = {};
-    // tên người dùng
-    if (!values.name) {
-      errors.name = "! Vui lòng nhập tên";
-    } else if (values.name.length < 6) {
-      errors.name = "! Tên người tối thiếu phải có 6 ký tự";
-    } else if (values.name.length > 30) {
-      errors.name = "! Name không vượt quá 30 ký tự";
-    }
-    return errors;
-  };
-  
- const submitForm = async (values) => {
-    await dispatch(updateMovie(movieId.id, values));
-    toast.success("Một bộ phim đã được cập nhật vào mục đang chiếu !", {
-      position: toast.POSITION.BOTTOM_LEFT,
-      className: "text-black",
-    });
-  };
+  useEffect(() => {
+    dispatch(getOneMovie(id));
+  }, [dispatch, id]);
   return (
     <Formik
       initialValues={initialValues}
@@ -81,13 +130,13 @@ function MovieNowUpdate() {
                 <div>
                   <div className="m-5">
                     <h1 className="font-bold text-[35px] uppercase">
-                      Thêm phim đang chiếu
+                      Cập nhật phim đang chiếu
                     </h1>
                   </div>
                   <div className="grid-cols-10 grid m-5">
                     <div className="col-span-4">
                       <div
-                        className="md:mx-6 mx-0 lg:mx-0 xl:mx-6 mt-10 lg:mt-0 h-[100%] lg:h-[70%] bg-cover bg-center"
+                        className="md:mx-6 mx-0 lg:mx-0 xl:mx-6 mt-10 lg:mt-0 h-[100%] lg:h-[80%] bg-cover bg-center"
                         style={{ backgroundImage: `url("${values.poster}")` }}
                       >
                         <div className="bg-gradient-to-r from-black/100 to-black/40  text-white text-sm w-full h-full">
@@ -168,7 +217,7 @@ function MovieNowUpdate() {
                             type="text"
                             name="name"
                             id="name"
-                            value={values.name}
+                            value={values.name || ""}
                             onChange={handleChange}
                             onBlur={handleBlur}
                             placeholder="Tên phim"
@@ -185,7 +234,7 @@ function MovieNowUpdate() {
                             type="text"
                             name="namevn"
                             id="namevn"
-                            value={values.namevn}
+                            value={values.namevn || ""}
                             onChange={handleChange}
                             onBlur={handleBlur}
                             placeholder="Tên việt hóa"
@@ -204,7 +253,7 @@ function MovieNowUpdate() {
                                 type="number"
                                 name="year"
                                 id="year"
-                                value={values.year}
+                                value={values.year || ""}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 placeholder="Năm sản xuất"
@@ -224,7 +273,7 @@ function MovieNowUpdate() {
                                 name="limitAge"
                                 id="limitAge"
                                 placeholder="Độ tuổi giới hạn"
-                                value={values.limitAge}
+                                value={values.limitAge || ""}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 className="placeholder:text-gray-500 block w-full px-4 py-2 text-sm mt-2 text-black border border-gray-500 rounded-md focus:border-black focus:ring-black focus:outline-none"
@@ -242,7 +291,7 @@ function MovieNowUpdate() {
                                 type="number"
                                 name="duration"
                                 id="duration"
-                                value={values.duration}
+                                value={values.duration || ""}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 placeholder="Thời lượng"
@@ -261,7 +310,7 @@ function MovieNowUpdate() {
                             type="text"
                             name="country"
                             id="country"
-                            value={values.country}
+                            value={values.country || ""}
                             onChange={handleChange}
                             onBlur={handleBlur}
                             placeholder="Quốc gia"
@@ -278,7 +327,7 @@ function MovieNowUpdate() {
                             type="text"
                             name="type"
                             id="type"
-                            value={values.type}
+                            value={values.type || ""}
                             onChange={handleChange}
                             onBlur={handleBlur}
                             placeholder="Thể loại"
@@ -295,7 +344,7 @@ function MovieNowUpdate() {
                             type="date"
                             name="released"
                             id="released"
-                            value={values.released}
+                            value={values.released || ""}
                             onChange={handleChange}
                             onBlur={handleBlur}
                             className="placeholder-gray-500 block w-full px-4 py-2 text-sm mt-2 text-black border border-gray-500 rounded-md focus:border-black focus:ring-black  focus:outline-none"
@@ -312,7 +361,7 @@ function MovieNowUpdate() {
                             type="text"
                             name="poster"
                             id="poster"
-                            value={values.poster}
+                            value={values.poster || ""}
                             onChange={handleChange}
                             onBlur={handleBlur}
                             placeholder="Poster"
@@ -329,7 +378,7 @@ function MovieNowUpdate() {
                             type=""
                             name="image"
                             id="image"
-                            value={values.image}
+                            value={values.image || ""}
                             onChange={handleChange}
                             onBlur={handleBlur}
                             placeholder="Hình ảnh"
@@ -346,7 +395,7 @@ function MovieNowUpdate() {
                             type=""
                             name="bg"
                             id="bg"
-                            value={values.bg}
+                            value={values.bg || ""}
                             onChange={handleChange}
                             onBlur={handleBlur}
                             placeholder="BackGround"
@@ -365,7 +414,7 @@ function MovieNowUpdate() {
                             name="director"
                             id="director"
                             placeholder="Đạo diễn"
-                            value={values.director}
+                            value={values.director || ""}
                             onChange={handleChange}
                             onBlur={handleBlur}
                           />
@@ -382,7 +431,7 @@ function MovieNowUpdate() {
                             name="actors"
                             id="actors"
                             placeholder="Diễn viên"
-                            value={values.actors}
+                            value={values.actors || ""}
                             onChange={handleChange}
                             onBlur={handleBlur}
                             className="placeholder:text-gray-500 block w-full px-4 py-2 text-sm mt-2 text-black border border-gray-500 rounded-md focus:border-black focus:ring-black focus:outline-none"
@@ -398,7 +447,7 @@ function MovieNowUpdate() {
                             type=""
                             name="discription"
                             id="discription"
-                            value={values.discription}
+                            value={values.discription || ""}
                             onChange={handleChange}
                             onBlur={handleBlur}
                             placeholder="Nội dung phim"
@@ -415,7 +464,7 @@ function MovieNowUpdate() {
                             type=""
                             name="trailer"
                             id="trailer"
-                            value={values.trailer}
+                            value={values.trailer || ""}
                             onChange={handleChange}
                             onBlur={handleBlur}
                             placeholder="Trailer"
@@ -449,4 +498,4 @@ function MovieNowUpdate() {
   );
 }
 
-export default MovieNowUpdate;
+export default memo(MovieNowUpdate);

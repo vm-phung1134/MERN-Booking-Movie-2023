@@ -20,6 +20,8 @@ import ManageMovie from "../pages/admin/movie";
 import MovieNowAdd from "../pages/admin/movie/movieNowAdd";
 import MovieSoonAdd from "../pages/admin/movie/movieSoonAdd";
 import MovieNowUpdate from "../pages/admin/movie/movieNowUpdate";
+import MovieSoonUpdate from "../pages/admin/movie/movieSoonUpdate";
+
 
 const publicRoutes = [
   {
@@ -98,12 +100,16 @@ const privateRoutes = [
     component: MovieNowAdd
   },
   {
-    path: "/admin/movie/add-movie-now",
+    path: "/admin/movie/add-movie-soon",
     component: MovieSoonAdd
   },
   {
     path: "/admin/movie/update-movie-now/:id",
     component: MovieNowUpdate
+  },
+  {
+    path: "/admin/movie/update-movie-soon/:id",
+    component: MovieSoonUpdate
   }
 ];
 

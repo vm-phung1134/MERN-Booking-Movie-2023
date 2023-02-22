@@ -41,7 +41,6 @@ const movieSchema = new mongoose.Schema({
     },
     limitAge: {
         type: Number,
-        required: true,
     },
     actors: [{
         type: String,
