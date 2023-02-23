@@ -31,7 +31,7 @@ function UserTickets() {
   const [loadingPage, setLoadingPage] = useState(false);
   const [id, setId] = useState("");
   const [idQR, setIdQR] = useState("");
-  const [newReservations, setNewReservation] = useState([]); //CREATE ONE EMPTY ARRAY TO SAVE CURRENT RESERVATION
+  const [newReservations, setNewReservations] = useState([]); //CREATE ONE EMPTY ARRAY TO SAVE CURRENT RESERVATION
   const handleOpen = useCallback((value, id) => {
     setSize(value);
     setId(id);
@@ -44,7 +44,7 @@ function UserTickets() {
     await dispatch(deleteTicket(id));
 
     setSize(null); //DISMISS MODAL
-    setNewReservation(reservations.filter((item) => item._id !== id)); //AFTER DELETE SAVE INTO NEW RESERVATION
+    setNewReservations(reservations.filter((item) => item._id !== id)); //AFTER DELETE SAVE INTO NEW RESERVATION
     toast.success("Hủy vé thành công !", {
       position: toast.POSITION.BOTTOM_LEFT,
       className: "text-black",
@@ -63,7 +63,7 @@ function UserTickets() {
     };
   }, [dispatch]);
   useEffect(() => {
-    setNewReservation(reservations); //INIT NEW ARRAY IS CURRENT ARRAY
+    setNewReservations(reservations); //INIT NEW ARRAY IS CURRENT ARRAY
   }, [reservations]);
   return (
     <>

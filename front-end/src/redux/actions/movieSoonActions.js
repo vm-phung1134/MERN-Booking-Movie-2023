@@ -10,6 +10,9 @@ import {
     CREATE_MOVIESOON_REQUEST,
     CREATE_MOVIESOON_SUCCESS,
     CREATE_MOVIESOON_FAIL,
+    DELETE_MOVIESOON_REQUEST,
+    DELETE_MOVIESOON_SUCCESS,
+    DELETE_MOVIESOON_FAIL,
 } from '../constants/movieSoonConstants'
 const baseURL = "http://localhost:5000"
 
@@ -67,6 +70,23 @@ export const createMovieSoon = (values) => async (dispatch) => {
         dispatch({
             type: CREATE_MOVIESOON_FAIL,
             payload: error.response.data.message
+        })
+    }
+}
+
+export const deleteOneMovieSoon = (id) => async (dispatch) => {
+    try{
+        
+        dispatch({type: DELETE_MOVIESOON_REQUEST})
+        const {data} = await axios.delete(`${baseURL}/api/v1/moviesoons/${id}`)
+        dispatch({
+            type: DELETE_MOVIESOON_SUCCESS,
+            payload: data
+        })
+    }catch(error){
+        dispatch({
+            type: DELETE_MOVIESOON_FAIL,
+            payload: error
         })
     }
 }
