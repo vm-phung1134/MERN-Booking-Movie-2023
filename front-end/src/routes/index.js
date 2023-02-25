@@ -21,7 +21,9 @@ import MovieNowAdd from "../pages/admin/movie/movieNowAdd";
 import MovieSoonAdd from "../pages/admin/movie/movieSoonAdd";
 import MovieNowUpdate from "../pages/admin/movie/movieNowUpdate";
 import MovieSoonUpdate from "../pages/admin/movie/movieSoonUpdate";
-
+import ShowTime from "../pages/admin/showtime/index"
+import ShowTimeAdd from "../pages/admin/showtime/showtimeAdd"
+import ShowTimeEdit from "../pages/admin/showtime/showtimeEdit"
 
 const publicRoutes = [
   {
@@ -110,7 +112,20 @@ const privateRoutes = [
   {
     path: "/admin/movie/update-movie-soon/:id",
     component: MovieSoonUpdate
-  }
+  },
+  {
+    path: "/admin/showtime/",
+    component: ShowTime
+  },
+  {
+    path: "/admin/showtime/add-showtime",
+    component: ShowTimeAdd
+  },
+  {
+    path: "/admin/showtime/edit-showtime/:id",
+    component: ShowTimeEdit
+  },
+
 ];
 
 export { publicRoutes, privateRoutes };

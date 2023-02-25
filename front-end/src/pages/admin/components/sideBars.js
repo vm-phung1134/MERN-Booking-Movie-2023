@@ -47,10 +47,13 @@ function SideBars() {
       <div className="mt-2">
         <h2 className="font-medium text-sm text-gray-600">SUẤT CHIẾU</h2>
         <div className="flex flex-col items-start">
+          <Link to="/admin/showtime">
           <button className="py-1 pl-8 hover:bg-gray-800 hover:text-white hover:w-full">
             <i className="fas fa-solid fa-business-time"></i>&ensp;Quản lý suất
             chiếu
           </button>
+          </Link>
+          
         </div>
       </div>
       <div className="mt-2">
