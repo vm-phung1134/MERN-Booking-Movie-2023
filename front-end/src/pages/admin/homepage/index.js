@@ -102,14 +102,14 @@ function Dashboard() {
               </h1>
               <div className="p-5" style={{ width: 200, height: 200 }}>
                 <CircularProgressbar
-                  value={((countTotal * 1000 + 100000) / 200000000) * 100}
-                  text={`${((countTotal * 1000 + 100000) / 200000000) * 100}%`}
+                  value={((countTotal * 1000 ) / 200000000) * 100}
+                  text={`${((countTotal * 1000 ) / 200000000) * 100}%`}
                   strokeWidth={2}
                 />
               </div>
               <p>
                 Danh số hiện tại{" "}
-                <span className="font-medium">{countTotal + 300}.000 đ</span>
+                <span className="font-medium">{countTotal}.000 đ</span>
               </p>
               <p>
                 Mục tiêu đề ra{" "}
@@ -183,7 +183,7 @@ function Dashboard() {
                         </tr>
                       </thead>
                       <tbody className="divide-y divide-gray-200">
-                        {reservations.map((reservation, index) => (
+                        {reservations.slice().reverse().map((reservation, index) => (
                           <tr key={index}>
                             <td className="px-6 py-4 text-sm whitespace-nowrap">
                               {reservation._id}

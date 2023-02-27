@@ -4,59 +4,59 @@ import { Formik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import ShowTimeForm from "./showtimeForm"
+import ShowTimeForm from "./showtimeForm";
 import { useEffect, useState } from "react";
 import { getAllCinema } from "../../../redux/actions/cinemaActions";
 import { getAllMovie } from "../../../redux/actions/movieActions";
+import { createShowTime } from "../../../redux/actions/showTimeActions";
 
 function ShowTimeAdd() {
   const dispatch = useDispatch();
-  const cinemas = useSelector(state => state.cinemas.cinemas)
-  const movies = useSelector(state => state.movies.movies)
-  const inputArr = [
-    {
-      type: "time",
-      id: 1,
-    }
-  ];
-  const [arr, setArr] = useState(inputArr);
-  const createInput =  () => {
-    setArr(s => {
-      return [
-        ...s,
-        {
-          type: "time",
-        }
-      ];
-    });
-  }
+  const cinemas = useSelector((state) => state.cinemas.cinemas);
+  const movies = useSelector((state) => state.movies.movies);
+  const [arrTime, setArrTime] = useState([]);
+
   const initialValues = {
-    name: ""
+    typeMovie: "",
+    startTime: "",
+    screen: "",
+    startDate: "",
+    movieId: "",
+    cinemaId: "",
   };
-  
   const submitForm = async (values, { resetForm }) => {
+    const newValues = {
+      typeMovie: values.typeMovie,
+      startTime: arrTime,
+      startDate: values.startDate,
+    };
+    await dispatch(createShowTime(values.cinemaId, values.movieId, newValues));
     resetForm({
-      
+      typeMovie: "",
+      startTime: "",
+      screen: "",
+      startDate: "",
+      movieId: "",
+      cinemaId: "",
     });
-    toast.success("Một bộ phim đã được thêm vào mục đang chiếu !", {
+    toast.success("Đã thêm một suất chiếu thành công !", {
       position: toast.POSITION.BOTTOM_LEFT,
       className: "text-black",
     });
   };
+  const handleAddTime = (screen, time) => {
+    setArrTime((prev) => [{ nameScreen: screen, time: time }, ...prev]);
+  };
+  console.log(arrTime);
   const validate = (values) => {
     let errors = {};
     // tên người dùng
-    if (!values.name) {
-      errors.name = "! Vui lòng nhập tên phim";
-    } else if (values.name.length > 30) {
-      errors.name = "! Tên phim không vượt quá 30 ký tự";
-    }
     return errors;
   };
   useEffect(() => {
     dispatch(getAllCinema());
-    dispatch(getAllMovie())
-  },[dispatch])
+    dispatch(getAllMovie());
+  }, [dispatch]);
 
   return (
     <Formik
@@ -87,7 +87,19 @@ function ShowTimeAdd() {
                       Thêm suất chiếu mới
                     </h1>
                   </div>
-                  <ShowTimeForm movies={movies} cinemas={cinemas} arr={arr} createInput={createInput} ToastContainer={ToastContainer} touched={touched} errors={errors} handleSubmit={handleSubmit} handleChange={handleChange} handleBlur={handleBlur} values = {values}/>
+                  <ShowTimeForm
+                    arrTime={arrTime}
+                    handleAddTime={handleAddTime}
+                    movies={movies}
+                    cinemas={cinemas}
+                    ToastContainer={ToastContainer}
+                    touched={touched}
+                    errors={errors}
+                    handleSubmit={handleSubmit}
+                    handleChange={handleChange}
+                    handleBlur={handleBlur}
+                    values={values}
+                  />
                 </div>
               </div>
             </div>

@@ -114,7 +114,7 @@ const privateRoutes = [
     component: MovieSoonUpdate
   },
   {
-    path: "/admin/showtime/",
+    path: "/admin/showtime",
     component: ShowTime
   },
   {

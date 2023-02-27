@@ -30,7 +30,7 @@ function ShowTime() {
                 <h1>TỔNG SUẤT CHIẾU TRÊN HỆ THỐNG</h1>
                 <p className="text-[35px] py-4 font-bold">{showtimes.length}</p>
                 {cinemas.map((cinema) => (
-                  <div>
+                  <div key={cinema._id}>
                     <p className="text-sm">
                       Số suất chiếu tại <span>{cinema.name}: </span>
                       {
@@ -41,16 +41,16 @@ function ShowTime() {
                     </p>
                   </div>
                 ))}
-                <Link to="add-showtime">
-                  <button className="p-2 text-green-500">
-                    <i className="fas fa-plus"></i>&ensp;Thêm mới
-                  </button>
-                </Link>
+
+                <button className="p-2 text-green-500">
+                  <i className="fas fa-plus"></i>&ensp;
+                  <Link to="add-showtime">Thêm mới</Link>
+                </button>
               </div>
             </div>
             <div className="mt-5 px-2 py-4 rounded-lg shadow-xl">
               {cinemas.map((cinema) => (
-                <div>
+                <div key={cinema._id}>
                   <h2 className="py-3 mt-3 font-medium">
                     Danh sách suất chiếu tại <span>{cinema.name}</span>
                   </h2>
@@ -100,48 +100,51 @@ function ShowTime() {
                               </tr>
                             </thead>
                             <tbody className="divide-y divide-gray-200">
-                              {showtimes.map((showtime) => (
-                                <>
-                                  {showtime.cinemaId === cinema._id ? (
-                                    <tr key={showtime._id}>
-                                      <td className="px-6 py-4 text-sm whitespace-nowrap">
-                                        {showtime._id}
-                                      </td>
-                                      <td className="px-4 py-4 text-sm text-center capitalize whitespace-nowrap">
-                                        {showtime.movieId}
-                                      </td>
-                                      <td className="px-6 py-4 text-sm text-center capitalize whitespace-nowrap">
-                                        {showtime.typeMovie}
-                                      </td>
-                                      <td className="px-6 py-4 text-sm text-center capitalize whitespace-nowrap">
-                                        {showtime.startDate}
-                                      </td>
-                                      <td className="px-8 py-4 text-sm text-center whitespace-nowrap">
-                                        {showtime.startTime.map((time) => (
-                                          <span key={time._id}>
-                                            {time.time}{" "}
-                                          </span>
-                                        ))}
-                                      </td>
-                                      <td className="px-6 py-4 text-sm text-center capitalize whitespace-nowrap">
-                                        <Link
-                                          to={`edit-showtime/${showtime._id}`}
-                                        >
-                                          <button className="px-2 text-blue-600">
-                                            Cập nhật
-                                          </button>
-                                        </Link>
+                              {showtimes
+                                .slice()
+                                .reverse()
+                                .map((showtime) => (
+                                  <>
+                                    {showtime.cinemaId === cinema._id ? (
+                                      <tr key={showtime._id}>
+                                        <td className="px-6 py-4 text-sm whitespace-nowrap">
+                                          {showtime._id}
+                                        </td>
+                                        <td className="px-4 py-4 text-sm text-center capitalize whitespace-nowrap">
+                                          {showtime.movieId}
+                                        </td>
+                                        <td className="px-6 py-4 text-sm text-center capitalize whitespace-nowrap">
+                                          {showtime.typeMovie}
+                                        </td>
+                                        <td className="px-6 py-4 text-sm text-center capitalize whitespace-nowrap">
+                                          {showtime.startDate}
+                                        </td>
+                                        <td className="px-8 py-4 text-sm text-center whitespace-nowrap">
+                                          {showtime.startTime.map((time) => (
+                                            <span key={time._id}>
+                                              {time.time}{" "}
+                                            </span>
+                                          ))}
+                                        </td>
+                                        <td className="px-6 py-4 text-sm text-center capitalize whitespace-nowrap">
+                                          <Link
+                                            to={`edit-showtime/${showtime._id}`}
+                                          >
+                                            <button className="px-2 text-blue-600">
+                                              Cập nhật
+                                            </button>
+                                          </Link>
 
-                                        <button className="px-2 text-red-500">
-                                          Xóa
-                                        </button>
-                                      </td>
-                                    </tr>
-                                  ) : (
-                                    <></>
-                                  )}
-                                </>
-                              ))}
+                                          <button className="px-2 text-red-500">
+                                            Xóa
+                                          </button>
+                                        </td>
+                                      </tr>
+                                    ) : (
+                                      <></>
+                                    )}
+                                  </>
+                                ))}
                             </tbody>
                           </table>
                         </div>
