@@ -1,18 +1,49 @@
 import SideBars from "../components/sideBars";
 import NavBars from "../components/navBars";
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
+import {
+  Dialog,
+  DialogHeader,
+  DialogBody,
+  DialogFooter,
+} from "@material-tailwind/react";
+import { useEffect, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllShowTime } from "../../../redux/actions/showTimeActions";
+import {
+  getAllShowTime,
+  deleteOneShowTime,
+} from "../../../redux/actions/showTimeActions";
 import { getAllCinema } from "../../../redux/actions/cinemaActions";
+import { toast, ToastContainer } from "react-toastify";
+
 function ShowTime() {
   const dispatch = useDispatch();
   const showtimes = useSelector((state) => state.showtimes.showtimes);
   const cinemas = useSelector((state) => state.cinemas.cinemas);
+  const [size, setSize] = useState(null);
+  const [id, setId] = useState("");
+  const [newShowTimes, setNewShowTimes] = useState([]);
+  const handleOpen = useCallback((value, id) => {
+    setSize(value);
+    setId(id);
+  }, []);
+
+  const handleDeleteShowTime = (id) => {
+    dispatch(deleteOneShowTime(id));
+    setSize(null); //DISMISS MODAL
+    setNewShowTimes(showtimes.filter((item) => item._id !== id)); //AFTER DELETE SAVE INTO NEW RESERVATION
+    toast.success("Đã xóa 1 suất chiếu!", {
+      position: toast.POSITION.BOTTOM_LEFT,
+      className: "text-black",
+    });
+  };
   useEffect(() => {
     dispatch(getAllShowTime());
     dispatch(getAllCinema());
   }, [dispatch]);
+  useEffect(() => {
+    setNewShowTimes(showtimes);
+  }, [showtimes]);
   return (
     <>
       <div className="grid grid-cols-10">
@@ -21,6 +52,7 @@ function ShowTime() {
         </div>
         <div className="col-span-8">
           <NavBars />
+          <ToastContainer toastStyle={{ color: "black" }} />
           <div className="m-5">
             <h1 className="font-bold text-[35px] uppercase">
               Quản lý suất chiếu
@@ -28,13 +60,13 @@ function ShowTime() {
             <div className="flex justify-start mt-5">
               <div className="rounded-lg shadow-2xl text-center mr-2 p-5">
                 <h1>TỔNG SUẤT CHIẾU TRÊN HỆ THỐNG</h1>
-                <p className="text-[35px] py-4 font-bold">{showtimes.length}</p>
+                <p className="text-[35px] py-4 font-bold">{newShowTimes.length}</p>
                 {cinemas.map((cinema) => (
                   <div key={cinema._id}>
                     <p className="text-sm">
                       Số suất chiếu tại <span>{cinema.name}: </span>
                       {
-                        showtimes.filter(
+                        newShowTimes.filter(
                           (showtime) => showtime.cinemaId === cinema._id
                         ).length
                       }
@@ -100,7 +132,7 @@ function ShowTime() {
                               </tr>
                             </thead>
                             <tbody className="divide-y divide-gray-200">
-                              {showtimes
+                              {newShowTimes
                                 .slice()
                                 .reverse()
                                 .map((showtime) => (
@@ -135,7 +167,12 @@ function ShowTime() {
                                             </button>
                                           </Link>
 
-                                          <button className="px-2 text-red-500">
+                                          <button
+                                            onClick={() =>
+                                              handleOpen("sm", showtime._id)
+                                            }
+                                            className="px-2 text-red-500"
+                                          >
                                             Xóa
                                           </button>
                                         </td>
@@ -154,6 +191,33 @@ function ShowTime() {
                 </div>
               ))}
             </div>
+            <Dialog
+              open={size === "sm"}
+              size={size || "sm"}
+              handler={handleOpen}
+              style={{ borderRadius: "0px" }}
+            >
+              <DialogHeader>
+                <h2 className="text-sm lg:text-[17px] text-[#c40404] font-bold">
+                  XOÁ SUẤT CHIẾU
+                </h2>
+              </DialogHeader>
+              <DialogBody divider>
+                <div className="mb-5 w-full">
+                  <p className="my-2 text-[#000000]">
+                    Bạn có chắc là muốn xóa suất chiếu này không?
+                  </p>
+                </div>
+              </DialogBody>
+              <DialogFooter>
+                <button
+                  className="px-6 my-5 py-2 text-sm text-white bg-[#c40404]"
+                  onClick={() => handleDeleteShowTime(id)}
+                >
+                  Tiếp tục
+                </button>
+              </DialogFooter>
+            </Dialog>
           </div>
         </div>
       </div>

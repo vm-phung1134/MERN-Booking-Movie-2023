@@ -10,6 +10,9 @@ import {
   CREATE_SHOWTIME_REQUEST,
   CREATE_SHOWTIME_SUCCESS,
   CREATE_SHOWTIME_FAIL,
+  DELETE_SHOWTIME_REQUEST,
+  DELETE_SHOWTIME_SUCCESS,
+  DELETE_SHOWTIME_FAIL,
 } from "../constants/showTimeConstants";
 const baseURL = "http://localhost:5000";
 
@@ -46,7 +49,7 @@ export const getOneShowTime = (id) => async (dispatch) => {
 };
 
 export const createShowTime =
-  ( cinemaId, movieId,  values) => async (dispatch) => {
+  (cinemaId, movieId, values) => async (dispatch) => {
     try {
       dispatch({ type: CREATE_SHOWTIME_REQUEST });
       const config = {
@@ -70,3 +73,19 @@ export const createShowTime =
       });
     }
   };
+
+export const deleteOneShowTime = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: DELETE_SHOWTIME_REQUEST });
+    const { data } = await axios.delete(`${baseURL}/api/v1/showtimes/${id}`);
+    dispatch({
+      type: DELETE_SHOWTIME_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: DELETE_SHOWTIME_FAIL,
+      payload: error,
+    });
+  }
+};

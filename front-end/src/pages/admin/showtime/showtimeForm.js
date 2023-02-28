@@ -5,6 +5,7 @@ function ShowTimeForm({
   arrTime,
   handleBlur,
   handleChange,
+  handleDeleteTime,
   handleSubmit,
   ToastContainer,
   errors,
@@ -38,7 +39,7 @@ function ShowTimeForm({
                             focus:text-black bg-white focus:outline-none"
             aria-label="Default select example"
           >
-            <option value="" selected disabled>
+            <option value="" disabled>
               Chọn rạp chiếu
             </option>
             {cinemas.map((cinema) => (
@@ -70,7 +71,7 @@ function ShowTimeForm({
                             focus:text-black bg-white focus:outline-none"
             aria-label="Default select example"
           >
-            <option value="" selected disabled>
+            <option value="" disabled>
               Chọn phim
             </option>
             {movies.map((movie) => (
@@ -111,7 +112,6 @@ function ShowTimeForm({
             value={values.screen}
             onChange={handleChange}
             onBlur={handleBlur}
-            required
             className="form-select appearance-none
                             block
                             w-full
@@ -151,16 +151,16 @@ function ShowTimeForm({
             value={values.startTime}
             onChange={handleChange}
             onBlur={handleBlur}
-            required
             className="block w-full text-black px-4 py-1 text-sm  border-b border-gray-700 bg-transparent focus:border-black focus:ring-black  focus:outline-none"
           />
           <div className="text-sm mt-5 font-medium">
             Suất chiếu đã thêm
-            {arrTime.map((time) => (
+            {arrTime && arrTime.map((time) => (
               <>
                 <p className="font-normal" disabled>
-                  - {time.nameScreen} - {time.time}
-                </p>
+                  - {time.nameScreen} - {time.time} &emsp;
+                  <span onClick={() => handleDeleteTime(time._id)} className="font-medium text-lg cursor-pointer"><i className="fas fa-xmark"></i></span>
+                </p> 
               </>
             ))}
           </div>

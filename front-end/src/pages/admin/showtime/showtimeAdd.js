@@ -39,6 +39,7 @@ function ShowTimeAdd() {
       movieId: "",
       cinemaId: "",
     });
+    setArrTime([])
     toast.success("Đã thêm một suất chiếu thành công !", {
       position: toast.POSITION.BOTTOM_LEFT,
       className: "text-black",
@@ -47,7 +48,6 @@ function ShowTimeAdd() {
   const handleAddTime = (screen, time) => {
     setArrTime((prev) => [{ nameScreen: screen, time: time }, ...prev]);
   };
-  console.log(arrTime);
   const validate = (values) => {
     let errors = {};
     // tên người dùng
