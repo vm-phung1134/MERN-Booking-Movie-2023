@@ -17,9 +17,10 @@ import {
     showtimeDetailReducer
 } from './redux/reducer/showTimeReducer'
 import {
-    ticketReducer
+    ticketReducer,
+    ticketDetailReducer
 } from './redux/reducer/ticketReducer'
-import { foodReducer } from './redux/reducer/foodReducer'
+import { foodReducer,foodDetailReducer } from './redux/reducer/foodReducer'
 import { editReservationReducer, getAllReservationReducer, newReservationReducer } from './redux/reducer/reservationReducer'
 import { seatsReducer } from './redux/reducer/seatReducer'
 import { feedBackReducer } from './redux/reducer/feedBackReducer'
@@ -39,8 +40,10 @@ const reducer = combineReducers({
     cinemas: cinemaReducer,
     showtimes: showTimeReducer,
     tickets: ticketReducer,
+    ticket: ticketDetailReducer,
     seats: seatsReducer,
     foods: foodReducer,
+    food: foodDetailReducer,
     cinema: cinemaDetailReducer,
     showtime: showtimeDetailReducer,
     newReservation: newReservationReducer,

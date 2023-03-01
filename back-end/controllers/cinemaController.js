@@ -31,7 +31,8 @@ exports.createCinema = async (req, res, next) => {
 
 exports.updateCinema = async (req, res, next) => {
     try {
-        const cinema = await Cinema.findByIdAndUpdate(CinemaId,{...req.body})
+        const {cinemaId} = req.params;
+        const cinema = await Cinema.findByIdAndUpdate(cinemaId,{...req.body})
         res.status(200).json(cinema)
     } catch (error) {
         res.json(error)

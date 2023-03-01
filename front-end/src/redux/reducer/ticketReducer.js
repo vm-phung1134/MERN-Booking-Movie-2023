@@ -5,7 +5,7 @@ import {
   ONE_TICKET_FAIL,
   ONE_TICKET_REQUEST,
   ONE_TICKET_SUCCESS,
-  INCREMENT, DECREMENT
+  INCREMENT, DECREMENT, CREATE_TICKET_REQUEST, CREATE_TICKET_SUCCESS, CREATE_TICKET_FAIL
 } from "../constants/ticketConstants";
 
 //REDUCER GET ALL TICKETS
@@ -78,6 +78,49 @@ export const getOneTicketReducer = (
       return {
         loading: false,
         error: action.payload,
+      };
+    default:
+      return state;
+  }
+};
+
+export const ticketDetailReducer = (
+  state = {
+    ticket: {},
+  },
+  action
+) => {
+  switch (action.type) {
+    case ONE_TICKET_REQUEST:
+      return {
+        loading: true,
+        ticket: {},
+      };
+    case ONE_TICKET_SUCCESS:
+      return {
+        loading: false,
+        ticket: action.payload,
+      };
+    case ONE_TICKET_FAIL:
+      return {
+        loading: false,
+        error: action.payload,
+      };
+    case CREATE_TICKET_REQUEST:
+      return {
+        loading: true,
+        isCreated: false,
+      };
+    case CREATE_TICKET_SUCCESS:
+      return {
+        loading: false,
+        ticket: action.payload,
+        isCreated: true,
+      };
+    case CREATE_TICKET_FAIL:
+      return {
+        loading: false,
+        isCreated: false,
       };
     default:
       return state;

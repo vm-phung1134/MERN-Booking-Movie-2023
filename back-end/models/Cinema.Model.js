@@ -4,12 +4,13 @@ const cinemaSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    area: {
+        type: String,
+        required: true
+    },
     address: {
         type: String,
-    },
-    city: {
-        type: String
-    },
+    }
 
 }, {timestamps: true})
 

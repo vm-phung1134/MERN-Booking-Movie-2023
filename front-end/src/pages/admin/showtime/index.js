@@ -15,6 +15,7 @@ import {
 } from "../../../redux/actions/showTimeActions";
 import { getAllCinema } from "../../../redux/actions/cinemaActions";
 import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function ShowTime() {
   const dispatch = useDispatch();

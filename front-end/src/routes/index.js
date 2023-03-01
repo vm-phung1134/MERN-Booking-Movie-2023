@@ -21,9 +21,16 @@ import MovieNowAdd from "../pages/admin/movie/movieNowAdd";
 import MovieSoonAdd from "../pages/admin/movie/movieSoonAdd";
 import MovieNowUpdate from "../pages/admin/movie/movieNowUpdate";
 import MovieSoonUpdate from "../pages/admin/movie/movieSoonUpdate";
-import ShowTime from "../pages/admin/showtime/index"
+import ManageShowTime from "../pages/admin/showtime"
 import ShowTimeAdd from "../pages/admin/showtime/showtimeAdd"
 import ShowTimeEdit from "../pages/admin/showtime/showtimeEdit"
+import ManageCinema from "../pages/admin/cinema";
+import CinemaEdit from "../pages/admin/cinema/cinemaEdit";
+import CinemaAdd from "../pages/admin/cinema/cinemaAdd";
+import ManageCombo from "../pages/admin/food-ticket";
+import FoodAdd from "../pages/admin/food-ticket/foodAdd";
+import FoodEdit from "../pages/admin/food-ticket/foodEdit";
+import Calendar from "../pages/admin/calendar";
 
 const publicRoutes = [
   {
@@ -94,6 +101,10 @@ const privateRoutes = [
     component: Dashboard,
   },
   {
+    path: "/admin/calendar",
+    component: Calendar,
+  },
+  {
     path: "/admin/movie",
     component: ManageMovie
   },
@@ -115,7 +126,7 @@ const privateRoutes = [
   },
   {
     path: "/admin/showtime",
-    component: ShowTime
+    component: ManageShowTime
   },
   {
     path: "/admin/showtime/add-showtime",
@@ -125,7 +136,30 @@ const privateRoutes = [
     path: "/admin/showtime/edit-showtime/:id",
     component: ShowTimeEdit
   },
-
+  {
+    path: "/admin/cinema",
+    component: ManageCinema
+  },
+  {
+    path: "/admin/cinema/add-cinema",
+    component: CinemaAdd
+  },
+  {
+    path: "/admin/cinema/edit-cinema/:id",
+    component: CinemaEdit
+  },
+  {
+    path: "/admin/food-ticket",
+    component: ManageCombo
+  },
+  {
+    path: "/admin/food-ticket/add-food",
+    component: FoodAdd
+  },
+  {
+    path:"/admin/food-ticket/edit-food/:id",
+    component: FoodEdit
+  }
 ];
 
 export { publicRoutes, privateRoutes };

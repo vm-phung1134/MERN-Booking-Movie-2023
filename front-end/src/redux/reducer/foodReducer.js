@@ -3,7 +3,13 @@ import {
   ALL_FOOD_SUCCESS,
   ALL_FOOD_FAIL,
   INCREMENT_FOOD,
-  DECREMENT_FOOD
+  DECREMENT_FOOD,
+  ONE_FOOD_REQUEST,
+  ONE_FOOD_SUCCESS,
+  ONE_FOOD_FAIL,
+  CREATE_FOOD_REQUEST,
+  CREATE_FOOD_SUCCESS,
+  CREATE_FOOD_FAIL
 } from "../constants/foodConstants";
 
 //REDUCER GET ALL FOODS
@@ -51,6 +57,49 @@ export const foodReducer = (
         return value;
       });
       return { ...state, foods: decreaseSL };
+    default:
+      return state;
+  }
+};
+
+export const foodDetailReducer = (
+  state = {
+    food: {},
+  },
+  action
+) => {
+  switch (action.type) {
+    case ONE_FOOD_REQUEST:
+      return {
+        loading: true,
+        food: {},
+      };
+    case ONE_FOOD_SUCCESS:
+      return {
+        loading: false,
+        food: action.payload,
+      };
+    case ONE_FOOD_FAIL:
+      return {
+        loading: false,
+        error: action.payload,
+      };
+    case CREATE_FOOD_REQUEST:
+      return {
+        loading: true,
+        isCreated: false,
+      };
+    case CREATE_FOOD_SUCCESS:
+      return {
+        loading: false,
+        food: action.payload,
+        isCreated: true,
+      };
+    case CREATE_FOOD_FAIL:
+      return {
+        loading: false,
+        isCreated: false,
+      };
     default:
       return state;
   }

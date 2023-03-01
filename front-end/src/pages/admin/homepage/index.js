@@ -84,8 +84,8 @@ function Dashboard() {
             <div className="p-3 border-none shadow-xl rounded-xl">
               <h1>DOANH THU TRONG THÁNG 3</h1>
               <p className="text-[35px] py-4 font-bold">
-                {countTotal}.000{" "}
-                <span className="text-[20px] font-medium">VNĐ</span>
+                {countTotal}
+                <span className="text-[20px] font-medium">.000 VNĐ</span>
               </p>
               <div className="flex justify-between">
                 <p className="pt-2 border-b border-gray-700">Xem danh sách</p>
@@ -100,24 +100,26 @@ function Dashboard() {
               <h1 className="font-medium text-[18px]">
                 TỔNG DOANH THU QUÝ 1 NĂM 2023
               </h1>
+              <p className="text-sm">&#40; Đơn vị tính theo 1 = 1000 VNĐ &#41;</p>
               <div className="p-5" style={{ width: 200, height: 200 }}>
                 <CircularProgressbar
-                  value={((countTotal * 1000 ) / 200000000) * 100}
-                  text={`${((countTotal * 1000 ) / 200000000) * 100}%`}
+                  value={((countTotal+100) / 20000) * 100}
+                  text={`${((countTotal+100) / 20000) * 100}%`}
                   strokeWidth={2}
                 />
               </div>
-              <p>
+              <p className="text-sm">
                 Danh số hiện tại{" "}
-                <span className="font-medium">{countTotal}.000 đ</span>
+                <span className="font-medium">{countTotal+100}</span>
               </p>
-              <p>
+              <p className="text-sm">
                 Mục tiêu đề ra{" "}
-                <span className="font-medium">200.000.000 đ</span>
+                <span className="font-medium">20000</span>
               </p>
               <p className="text-sm">
                 Tổng danh thu từ việc bán vé so với mục tiêu đặt ra
               </p>
+              <button className="py-2 mt-2 px-4 bg-black text-sm text-white font-medium">Lập Báo Cáo</button>
             </div>
             <div className="p-3 col-span-7 shadow-2xl rounded-lg">
               <ResponsiveContainer width="100%" height="100%">

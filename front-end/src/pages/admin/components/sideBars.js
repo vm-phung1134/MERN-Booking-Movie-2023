@@ -30,18 +30,16 @@ function SideBars() {
       <div className="mt-2">
         <h2 className="font-medium text-sm text-gray-600">RẠP CHIẾU</h2>
         <div className="flex flex-col items-start">
-          <button className="py-1 pl-8 hover:bg-gray-800 hover:text-white hover:w-full">
-            <i className="fas fa-house-laptop"></i>&ensp;Cụm rạp cần thơ
+          <Link to="/admin/cinema" className="py-1 pl-8 hover:bg-gray-800 hover:text-white hover:w-full">
+           <button >
+            <i className="fas fa-house-laptop"></i>&ensp;Quản lý rạp chiếu
           </button>
-        </div>
-      </div>
-      <div className="mt-2">
-        <h2 className="font-medium text-sm text-gray-600">PHÒNG CHIẾU</h2>
-        <div className="flex flex-col items-start">
-          <button className="py-1 pl-8 hover:bg-gray-800 hover:text-white hover:w-full">
-            <i className="fas fa-solid fa-person-booth"></i>&ensp;Quản lý phòng
-            chiếu
+          </Link>
+          <Link to="/admin/food-ticket" className="py-1 pl-8 hover:bg-gray-800 hover:text-white hover:w-full">
+           <button >
+            <i className="fas fa-house-laptop"></i>&ensp;Gói combo & Vé
           </button>
+          </Link>
         </div>
       </div>
       <div className="mt-2">
