@@ -64,7 +64,7 @@ function ShowTime() {
                 <p className="text-[35px] py-4 font-bold">{newShowTimes.length}</p>
                 {cinemas.map((cinema) => (
                   <div key={cinema._id}>
-                    <p className="text-sm">
+                    <p className="text-sm text-start">
                       Số suất chiếu tại <span>{cinema.name}: </span>
                       {
                         newShowTimes.filter(

@@ -68,9 +68,12 @@ function SideBars() {
       <div className="mt-2">
         <h2 className="font-medium text-sm text-gray-600">NGƯỜI DÙNG</h2>
         <div className="flex flex-col items-start">
+          <Link to="/admin/users">
           <button className="py-1 pl-8 hover:bg-gray-800 hover:text-white hover:w-full">
             <i className="fas fa-users"></i>&ensp;Quản lý tài khoản
           </button>
+          </Link>
+          
           <button className="py-1 pl-8 hover:bg-gray-800 hover:text-white hover:w-full">
             <i className="fas fa-solid fa-file-invoice"></i>&emsp;Quản lý hóa
             đơn

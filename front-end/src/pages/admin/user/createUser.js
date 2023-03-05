@@ -1,62 +1,52 @@
 import SideBars from "../components/sideBars";
 import NavBars from "../components/navBars";
 import { Formik } from "formik";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useEffect } from "react";
-import CinemaForm from "./cinemaForm";
-import {
-  getOneCinema,
-} from "../../../redux/actions/cinemaActions";
-import axios from "axios";
-import { useParams } from "react-router-dom";
+import UserForm from "./userForm";
+import { authRegister } from "../../../redux/actions/authActions";
 
-const baseURL="http://localhost:5000"
-function CinemaEdit() {
+function CreateUser() {
   const dispatch = useDispatch();
-  const cinemaId = useParams();
-  const cinema = useSelector((state) => state.cinema.cinema || null)|| null;
   const initialValues = {
-    name: cinema.name,
-    area: cinema.area,
-    address: cinema.address,
+    name: "",
+    phone: "",
+    email: "",
+    password: "",
+    cardId: "",
+    position: "",
+    gender: "",
   };
-  const submitForm = async (values) => {
-    const config = {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      };
-    await axios
-        .put(
-          `${baseURL}/api/v1/cinemas/${cinemaId.id}`,
-          values,
-          config
+  const submitForm = async (values, { resetForm }) => {
+    await dispatch(
+        authRegister(
+          values.name,
+          values.email,
+          values.password,
+          values.phone,
+          values.cardId,
+          values.gender,
+          values.position
         )
-        .then((res) => console.log(res))
-        .catch((err) => console.log(err.message));
-      toast.success("Cập nhật rạp chiếu thành công", {
-        position: toast.POSITION.BOTTOM_LEFT,
-        className: "text-black",
-      });
-    };
+      );
+    resetForm({});
+    toast.success("Đã thêm 1 người dùng hệ thống thành công !", {
+      position: toast.POSITION.BOTTOM_LEFT,
+      className: "text-black",
+    });
+  };
   const validate = (values) => {
     let errors = {};
     // tên người dùng
     return errors;
   };
 
-  useEffect(() => {
-    dispatch(getOneCinema(cinemaId.id));
-  }, [cinemaId.id, dispatch]);
-
   return (
     <Formik
       initialValues={initialValues}
       validate={validate}
       onSubmit={submitForm}
-      enableReinitialize
     >
       {(formik) => {
         const {
@@ -78,10 +68,10 @@ function CinemaEdit() {
                 <div>
                   <div className="m-5">
                     <h1 className="font-bold text-[35px] uppercase">
-                      Thêm suất chiếu mới
+                      THÊM NGƯỜI DÙNG HỆ THỐNG
                     </h1>
                   </div>
-                  <CinemaForm
+                  <UserForm
                     ToastContainer={ToastContainer}
                     touched={touched}
                     errors={errors}
@@ -100,4 +90,4 @@ function CinemaEdit() {
   );
 }
 
-export default CinemaEdit;
+export default CreateUser;

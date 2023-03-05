@@ -5,42 +5,31 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useEffect } from "react";
-import CinemaForm from "./cinemaForm";
-import {
-  getOneCinema,
-} from "../../../redux/actions/cinemaActions";
-import axios from "axios";
+import UserForm from "./userForm";
+import { getOneUser, updateOneUser } from "../../../redux/actions/authActions";
 import { useParams } from "react-router-dom";
 
-const baseURL="http://localhost:5000"
-function CinemaEdit() {
+function UpdateUser() {
   const dispatch = useDispatch();
-  const cinemaId = useParams();
-  const cinema = useSelector((state) => state.cinema.cinema || null)|| null;
+  const userId = useParams();
+  const user = useSelector((state) => state.userInfo.userInfo)
+  console.log(user)
   const initialValues = {
-    name: cinema.name,
-    area: cinema.area,
-    address: cinema.address,
+    name: user.name,
+    phone: user.phone,
+    email: user.email,
+    password: user.password,
+    cardId: user.cardId,
+    position: user.position,
+    gender: user.gender,
   };
   const submitForm = async (values) => {
-    const config = {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      };
-    await axios
-        .put(
-          `${baseURL}/api/v1/cinemas/${cinemaId.id}`,
-          values,
-          config
-        )
-        .then((res) => console.log(res))
-        .catch((err) => console.log(err.message));
-      toast.success("Cập nhật rạp chiếu thành công", {
-        position: toast.POSITION.BOTTOM_LEFT,
-        className: "text-black",
-      });
-    };
+    dispatch(updateOneUser(userId.id, values));
+    toast.success("Cập nhật người dùng thành công !", {
+      position: toast.POSITION.BOTTOM_LEFT,
+      className: "text-black",
+    });
+  };
   const validate = (values) => {
     let errors = {};
     // tên người dùng
@@ -48,8 +37,8 @@ function CinemaEdit() {
   };
 
   useEffect(() => {
-    dispatch(getOneCinema(cinemaId.id));
-  }, [cinemaId.id, dispatch]);
+    dispatch(getOneUser(userId.id));
+  }, [dispatch, userId.id]);
 
   return (
     <Formik
@@ -81,7 +70,7 @@ function CinemaEdit() {
                       Thêm suất chiếu mới
                     </h1>
                   </div>
-                  <CinemaForm
+                  <UserForm
                     ToastContainer={ToastContainer}
                     touched={touched}
                     errors={errors}
@@ -100,4 +89,4 @@ function CinemaEdit() {
   );
 }
 
-export default CinemaEdit;
+export default UpdateUser;

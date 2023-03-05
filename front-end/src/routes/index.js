@@ -31,6 +31,9 @@ import ManageCombo from "../pages/admin/food-ticket";
 import FoodAdd from "../pages/admin/food-ticket/foodAdd";
 import FoodEdit from "../pages/admin/food-ticket/foodEdit";
 import Calendar from "../pages/admin/calendar";
+import ManageUser from "../pages/admin/user";
+import CreateUser from "../pages/admin/user/createUser";
+import UpdateUser from "../pages/admin/user/updateUser";
 
 const publicRoutes = [
   {
@@ -159,7 +162,20 @@ const privateRoutes = [
   {
     path:"/admin/food-ticket/edit-food/:id",
     component: FoodEdit
+  },
+  {
+    path: "/admin/users",
+    component: ManageUser
+  },
+  {
+    path: "/admin/users/create-user",
+    component: CreateUser
+  },
+  {
+    path: "/admin/users/update-user/:id",
+    component: UpdateUser
   }
+
 ];
 
 export { publicRoutes, privateRoutes };

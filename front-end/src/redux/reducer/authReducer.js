@@ -106,7 +106,7 @@ export const getAllReducer = (
     case AUTH_GETALLUSER_SUCCESS:
       return {
         loading: false,
-        users: action.payload,
+        users: action.payload.users,
       };
     case AUTH_GETALLUSER_FAIL:
       return {

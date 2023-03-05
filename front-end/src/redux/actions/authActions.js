@@ -22,6 +22,9 @@ import {
   AUTH_CHANGEPW_REQUEST,
   AUTH_CHANGEPW_SUCCESS,
   CLEAR_ERRORS,
+  AUTH_DELETE_REQUEST,
+  AUTH_DELETE_SUCCESS,
+  AUTH_DELETE_FAIL,
 } from "../constants/authConstants";
 
 const baseURL = "http://localhost:5000"
@@ -138,6 +141,23 @@ export const updateOneUser = (id, user) => async (dispatch) => {
     });
   }
 };
+
+export const deleteOneUser = (id) => async (dispatch) => {
+  try{
+      
+      dispatch({type: AUTH_DELETE_REQUEST})
+      const {data} = await axios.delete(`${baseURL}/api/v1/auth/user/${id}`)
+      dispatch({
+          type: AUTH_DELETE_SUCCESS,
+          payload: data
+      })
+  }catch(error){
+      dispatch({
+          type: AUTH_DELETE_FAIL,
+          payload: error
+      })
+  }
+}
 
 export const changePasswordUser =
   (id, passwordCurrent, passwordNew) => async (dispatch) => {

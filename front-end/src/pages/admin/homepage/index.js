@@ -50,12 +50,12 @@ function Dashboard() {
               <div className="flex justify-between">
                 <h1>NGƯỜI DÙNG ĐĂNG KÝ</h1>
                 <p className="text-green-500">
-                  <i className="fas fa-caret-up"></i>&ensp;{users.usersCount}
+                  <i className="fas fa-caret-up"></i>&ensp;{users.length}
                 </p>
               </div>
 
               <p className="text-[35px] py-4 font-bold">
-                {1000 + users.usersCount}
+                {1000 + users.length}
               </p>
               <div className="flex justify-between">
                 <p className="pt-2 border-b border-gray-700">Xem danh sách</p>
@@ -100,7 +100,7 @@ function Dashboard() {
               <h1 className="font-medium text-[18px]">
                 TỔNG DOANH THU QUÝ 1 NĂM 2023
               </h1>
-              <p className="text-sm">&#40; Đơn vị tính theo 1 = 1000 VNĐ &#41;</p>
+              <p className="text-sm">&#40; Đơn vị tính: Nghìn đồng &#41;</p>
               <div className="p-5" style={{ width: 200, height: 200 }}>
                 <CircularProgressbar
                   value={((countTotal+100) / 20000) * 100}
@@ -174,6 +174,12 @@ function Dashboard() {
                             scope="col"
                             className="px-6 py-3 text-xs font-bold text-center uppercase "
                           >
+                            Ngày giao dịch
+                          </th>
+                          <th
+                            scope="col"
+                            className="px-6 py-3 text-xs font-bold text-center uppercase "
+                          >
                             Tổng thanh toán
                           </th>
                           <th
@@ -192,6 +198,9 @@ function Dashboard() {
                             </td>
                             <td className="px-6 py-4 text-sm text-center capitalize whitespace-nowrap">
                               {reservation.author.name}
+                            </td>
+                            <td className="px-6 py-4 text-sm text-center capitalize whitespace-nowrap">
+                              {reservation.createdAt}
                             </td>
                             <td className="px-6 text-center py-4 text-sm whitespace-nowrap">
                               {reservation.total}.000 đ

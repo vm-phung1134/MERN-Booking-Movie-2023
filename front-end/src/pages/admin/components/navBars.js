@@ -3,18 +3,25 @@ import {
   MenuHandler,
   MenuList,
   MenuItem,
-  Avatar,
+  Avatar,Dialog,
+  DialogHeader,
+  DialogBody
 } from "@material-tailwind/react";
-import { useEffect} from "react";
+import { useEffect, useState, useCallback} from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { authLogout } from "../../../redux/actions/authActions";
+import { authLogout} from "../../../redux/actions/authActions";
+import AdminForm from "../admin/adminForm";
 
 function NavBars() {
   const dispatch = useDispatch()
   const navigate = useNavigate();
   const {user ,isAuthenticated } = useSelector((state) => state.user);
   const adminName = localStorage.getItem('user')
+  const [size, setSize] = useState(null);
+  const handleOpen = useCallback((value, id) => {
+    setSize(value);
+  }, []);
   const handleLogout = async () => {
     await dispatch(authLogout());
     localStorage.removeItem("user");
@@ -26,6 +33,7 @@ function NavBars() {
       navigate("/");
     }
   }, [isAuthenticated, navigate, user]);
+  
   return (
     <div className="flex justify-end border-b border-gray-400 px-5 py-1">
       <div className="flex flex-row items-center justify-end">
@@ -60,12 +68,29 @@ function NavBars() {
           </MenuHandler>
           <MenuList className="text-black">
             <MenuItem>Hi, <span className="capitalize font-medium">{adminName}</span></MenuItem>
-            <MenuItem>Thông tin admin</MenuItem>
+            <MenuItem onClick={() => handleOpen("lg")}>Thông tin admin</MenuItem>
             <MenuItem>Đổi mật khẩu</MenuItem>
             <MenuItem onClick={handleLogout}>Đăng xuất</MenuItem>
             
           </MenuList>
         </Menu>
+        <Dialog
+              open={size === "lg"}
+              size={size || "lg"}
+              handler={handleOpen}
+              style={{ borderRadius: "0px" }}
+            >
+              <DialogHeader>
+                <h2 className="text-sm lg:text-[17px] text-[#c40404] font-bold">
+                  THÔNG TIN ADMINISTATOR
+                </h2>
+              </DialogHeader>
+              <DialogBody divider>
+                <div className="mb-5 w-full">
+                  <AdminForm handleOpen={handleOpen}/>
+                </div>
+              </DialogBody>
+            </Dialog>
       </div>
     </div>
   );
