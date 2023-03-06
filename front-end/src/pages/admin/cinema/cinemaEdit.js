@@ -4,7 +4,7 @@ import { Formik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useEffect } from "react";
+import { useEffect, memo} from "react";
 import CinemaForm from "./cinemaForm";
 import {
   getOneCinema,
@@ -100,4 +100,4 @@ function CinemaEdit() {
   );
 }
 
-export default CinemaEdit;
+export default memo(CinemaEdit);

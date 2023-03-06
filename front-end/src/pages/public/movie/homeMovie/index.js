@@ -7,6 +7,7 @@ import { Breadcrumbs } from "@material-tailwind/react";
 import { getAllMovie } from "../../../../redux/actions/movieActions";
 import { getAllMovieSoon } from "../../../../redux/actions/movieSoonActions";
 import FooterPublic from "../../components/footerPublic";
+import Data from "../../components/TranslationEnglish/Data.json";
 
 function HomeMovie() {
   const dispatch = useDispatch();
@@ -14,6 +15,8 @@ function HomeMovie() {
   const movies = useSelector((state) => state.movies.movies);
   const movieSoons = useSelector((state) => state.movieSoons.movieSoons);
   const [isActive, setIsActive] = useState("1");
+  const [content, setContent] = useState("");
+  const language = useSelector((state) => state.language.language);
   const handleClickActive = (e) => {
     setIsActive(e.target.value);
   };
@@ -29,6 +32,14 @@ function HomeMovie() {
       clearTimeout(timeOut);
     };
   }, [dispatch]);
+
+  useEffect(() => {
+    if (language === "English") {
+      setContent(Data.english);
+    } else {
+      setContent("");
+    }
+  }, [language]);
   return (
     <>
       <div className="bg-black min-h-screen max-h-full">
@@ -40,29 +51,39 @@ function HomeMovie() {
             <div className="md:my-16 md:mx-16 my-10 mx-5">
               <Breadcrumbs className="bg-transparen p-0 my-5">
                 <Link to="/home" className="text-gray-400">
-                  Trang chủ
+                  {
+                    content === ""? "Trang chủ": content.movie.linkHome
+                  }
                 </Link>
                 <Link to="/movie" className="text-gray-400">
-                  Phim
+                {
+                    content === ""? "Trang chủ": content.movie.linkMovie
+                  }
                 </Link>
-                <Link className="text-gray-200">Phim đang chiếu</Link>
+                <Link className="text-gray-200">{
+                    content === ""? "Trang chủ": content.movie.titleMovieNow
+                  }</Link>
               </Breadcrumbs>
               <div>
                 <button
                   style={{ background: isActive === "1" ? "#E50914" : "" }}
                   value="1"
                   onClick={handleClickActive}
-                  className="py-2 px-4 text-sm  text-white rounded-md ease-in-out duration-500"
+                  className="py-2 px-4 text-sm  uppercase text-white rounded-md ease-in-out duration-500"
                 >
-                  PHIM ĐANG CHIẾU
+                  {
+                    content === ""? "phim đang chiếu": content.movie.titleMovieNow
+                  }
                 </button>
                 <button
                   value="2"
                   style={{ background: isActive === "2" ? "#E50914" : "" }}
                   onClick={handleClickActive}
-                  className="py-2 px-4 text-sm text-white rounded-md ease-in-out duration-500"
+                  className="py-2 px-4 text-sm uppercase text-white rounded-md ease-in-out duration-500"
                 >
-                  PHIM SẮP CHIẾU
+                  {
+                    content === ""? "phim sắp chiếu": content.movie.titleMovieSoon
+                  }
                 </button>
               </div>
               <div>

@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import UserForm from "./userForm";
+import { memo } from "react";
 import { authRegister } from "../../../redux/actions/authActions";
 
 function CreateUser() {
@@ -90,4 +91,4 @@ function CreateUser() {
   );
 }
 
-export default CreateUser;
+export default memo(CreateUser);

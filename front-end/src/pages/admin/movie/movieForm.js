@@ -1,3 +1,4 @@
+import { memo } from "react";
 function MovieForm({
   values,
   touched,
@@ -373,4 +374,4 @@ function MovieForm({
   );
 }
 
-export default MovieForm;
+export default memo(MovieForm);

@@ -1,0 +1,75 @@
+{
+    "english": {
+        "navbar": {
+            "nav1": "Buy ticket",
+            "nav2": "movie",
+            "nav3": "Cinema",
+            "nav4": "movie review & event",
+            "nav5": "support",
+            "nav6": "search"
+        },
+        "title": {
+            "titleMovieNow": "now showing",
+            "titleMovieSoon": "comming soon",
+            "blogfilm": "movie review",
+            "event": "promotion news",
+            "actor": "actor",
+            "search": "Searching Something"
+        },
+        "booking":{
+            "titleMovie": "select cinema & movie",
+            "linkHome": "Homepage",
+            "link": "Buy Ticket",
+            "selectFilm": "SELECT MOVIE",
+            "selectCinema": "SELECT CINEMA",
+            "selectSession": "select session",
+            "selectOption": "select kind of tickets & foods"
+        },
+        "movie": {
+            "linkHome": "Homepage",
+            "link": "Now Showing",
+            "linkMovie": "Movie",
+            "titleMovieNow": "Now Showing",
+            "titleMovieSoon": "comming soon"
+        },
+        "movieDetail": {
+            "titleDetail": "detail information of movie",
+            "year": "Year",
+            "country": "Country",
+            "director": "Director",
+            "duration": "Duration",
+            "type": "Type",
+            "actors": "Actors",
+            "date": "Realeased",
+            "titleContent": "Movie Content",
+            "startDate": "Sessions",
+            "titleMovieNow": "Now Showing",
+            "limit": "Limit Age",
+            "titleBtn": "Buy Ticket"
+        },
+        "cinema": {
+            "title": "cinema system",
+            "image": "images",
+            "price": "ticket price",
+            "detail": "detail information"
+        },
+        "blog": {
+            "linkHome": "Homepage",
+            "link": "Movie Review & Event",
+            "event": "promotion news",
+            "blog": "Review Movie"
+        },
+        "support": {
+            "linkHome": "Homepage",
+            "linkSp": "Support",
+            "feedback": "Feedback",
+            "answer": "answer",
+            "title": "Please Send React Flix your Feedback",
+            "name": "Full Name",
+            "email": "Email",
+            "phone": "Phone",
+            "message": "Message"
+        }
+        
+    }
+}

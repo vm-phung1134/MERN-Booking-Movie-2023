@@ -1,3 +1,5 @@
+import { memo } from "react";
+
 function UserForm({
   values,
   touched,
@@ -190,4 +192,4 @@ function UserForm({
   );
 }
 
-export default UserForm;
+export default memo(UserForm);

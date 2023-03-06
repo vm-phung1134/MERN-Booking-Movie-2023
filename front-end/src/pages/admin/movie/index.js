@@ -25,15 +25,16 @@ function ManageMovie() {
   const [id, setId] = useState("");
   const [idSoon, setIdSoon] = useState("");
   const [size, setSize] = useState(null);
-  const [sizeSoon, setSizeSoon] = useState(null);
-  const [newMovies, setNewMovies] = useState([]);
+  const [sizeSoon, setSizeSoon] = useState(null); 
   const [newMovieSoons, setNewMovieSoons] = useState([]);
-  const movies = useSelector((state) => state.movies.movies);
-  const movieSoons = useSelector((state) => state.movieSoons.movieSoons);
+  const [isSearching, setIsSearching] = useState("");
+  const [searchCurrentMovie, setSearchCurrentMovie] = useState([]); // SEARCH FILTER
+  const movies = useSelector((state) => state.movies.movies)
+  const movieSoons = useSelector((state) => state.movieSoons.movieSoons)
   const handleDeleteMovie = () => {
     dispatch(deleteOneMovie(id));
     setSize(null); //DISMISS MODAL
-    setNewMovies(movies.filter((item) => item._id !== id)); //AFTER DELETE SAVE INTO NEW RESERVATION
+    setSearchCurrentMovie(movies.filter((item) => item._id !== id)); //AFTER DELETE SAVE INTO NEW RESERVATION
     toast.success("Đã xóa 1 phim đang chiếu!", {
       position: toast.POSITION.BOTTOM_LEFT,
       className: "text-black",
@@ -56,13 +57,25 @@ function ManageMovie() {
     setSizeSoon(value);
     setIdSoon(id);
   }, []);
+  const handleFilter = (e) => {
+    setIsSearching(e.target.value);
+    setSearchCurrentMovie(
+      movies.filter((entry) =>
+        Object.values(entry).some(
+          (val) =>
+            typeof val === "string" &&
+            val.toLowerCase().includes(isSearching.toLowerCase())
+        )
+      )
+    );
+  }
   useEffect(() => {
     dispatch(getAllMovie());
     dispatch(getAllMovieSoon());
   }, [dispatch]);
   useEffect(() => {
-    setNewMovies(movies);
     setNewMovieSoons(movieSoons);
+    setSearchCurrentMovie(movies);
   }, [movies, movieSoons]);
   return (
     <div>
@@ -80,7 +93,7 @@ function ManageMovie() {
                 <div className="rounded-lg shadow-2xl text-center mr-2 p-3">
                   <h1>PHIM ĐANG CHIẾU</h1>
                   <p className="text-[35px] py-4 font-bold">
-                    {newMovies.length}
+                    {searchCurrentMovie.length}
                   </p>
                   <Link to="add-movie-now">
                     <button className="p-2 text-green-500">
@@ -102,7 +115,10 @@ function ManageMovie() {
               </div>
               {/* PHIM ĐANG CHIẾU */}
               <div className="mt-5 px-2 py-4 rounded-lg shadow-xl">
-                <h2 className="py-3 font-medium">Danh sách phim đang chiếu</h2>
+                <div className="flex justify-between">
+                  <h2 className="py-2 font-medium">Danh sách phim đang chiếu</h2>
+                  <input type="text" onChange={handleFilter} className="px-2 border focus:outline-none text-sm border-gray-700 text-black placeholder:text-gray-400" placeholder="Tìm kiếm phim"/>
+                </div>
                 <div className="mt-3 shadow-2xl">
                   <div className="overflow-x-auto">
                     <div className="w-full inline-block align-middle">
@@ -149,7 +165,7 @@ function ManageMovie() {
                             </tr>
                           </thead>
                           <tbody className="divide-y divide-gray-200">
-                            {newMovies
+                            {searchCurrentMovie
                               .slice()
                               .reverse()
                               .map((movie, index) => (

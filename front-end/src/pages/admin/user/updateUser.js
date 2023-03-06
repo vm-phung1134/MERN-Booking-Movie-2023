@@ -13,7 +13,6 @@ function UpdateUser() {
   const dispatch = useDispatch();
   const userId = useParams();
   const user = useSelector((state) => state.userInfo.userInfo)
-  console.log(user)
   const initialValues = {
     name: user.name,
     phone: user.phone,

@@ -40,7 +40,7 @@ function CalendarEvent() {
    setSize(null)
   }
   const handleOpen = useCallback((e) => {
-    setSize("lg");
+    setSize("sm");
     setId(e.id);
   }, []);
   const initialValues = {
@@ -97,8 +97,8 @@ function CalendarEvent() {
           />
         </div>
         <Dialog
-              open={size === "lg"}
-              size={size || "lg"}
+              open={size === "sm"}
+              size={size || "sm"}
               handler={handleOpen}
               style={{ borderRadius: "0px" }}
             >

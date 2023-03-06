@@ -1,3 +1,4 @@
+import { memo } from "react";
 function CinemaForm({
   values,
   touched,
@@ -93,4 +94,4 @@ function CinemaForm({
   );
 }
 
-export default CinemaForm;
+export default memo(CinemaForm);

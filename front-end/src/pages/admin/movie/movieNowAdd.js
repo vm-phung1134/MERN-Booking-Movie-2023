@@ -2,6 +2,7 @@ import SideBars from "../components/sideBars";
 import NavBars from "../components/navBars";
 import { Formik } from "formik";
 import { useDispatch } from "react-redux";
+import { memo } from "react";
 import { createMovie } from "../../../redux/actions/movieActions";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -142,4 +143,4 @@ function MovieNowAdd() {
   );
 }
 
-export default MovieNowAdd;
+export default memo(MovieNowAdd);

@@ -10,15 +10,19 @@ import {
   MenuItem,
   Button,
 } from "@material-tailwind/react";
+import Data from "./TranslationEnglish/Data.json"
 
 import Logo from "../login/mylogo.png";
 import { authLogout } from "../../../redux/actions/authActions";
+import { changeLanguage } from "../../../redux/actions/languageAction";
 function HeaderPublic() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
+  const [isActive, setIsActive] = useState(true)
+  const [content, setContent] = useState("")
+  const language = useSelector(state => state.language.language)
   const userName = localStorage.getItem("user");
-
   const handleLogout = () => {
     dispatch(authLogout());
     localStorage.removeItem("user");
@@ -30,7 +34,12 @@ function HeaderPublic() {
     if (isAuthenticated === false) {
       navigate("/");
     }
-  }, [dispatch, isAuthenticated, navigate, user]);
+    if(language === "English"){
+      setContent(Data.english)
+    }else{
+      setContent("")
+    }
+  }, [dispatch, isAuthenticated, language, navigate, user]);
   return (
     <div>
       <nav className="bg-transparent">
@@ -48,47 +57,79 @@ function HeaderPublic() {
                 <div className="ml-10 flex items-baseline space-x-3">
                   <Link
                     to="/booking"
-                    className="text-white hover:bg-[#E50914] hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                    className="text-white hover:bg-[#E50914] hover:text-white px-3 py-2 rounded-md text-sm font-medium uppercase"
                   >
-                    MUA VÉ
+                    { 
+                      content === "" ? 'Mua vé' : content.navbar.nav1
+                    }
                   </Link>
                   <Link
                     to="/movie"
-                    className="text-white hover:bg-[#E50914] hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                    className="text-white hover:bg-[#E50914] hover:text-white px-3 py-2 rounded-md text-sm font-medium uppercase"
                   >
-                    PHIM
+                    { 
+                      content === "" ? 'phim' : content.navbar.nav2
+                    }
                   </Link>
                   <Link
                     to="/cinema"
-                    className="text-white hover:bg-[#E50914] hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                    className="text-white hover:bg-[#E50914] hover:text-white px-3 py-2 rounded-md text-sm font-medium uppercase"
                   >
-                    RẠP CHIẾU
+                    { 
+                      content === "" ? 'rạp chiếu' : content.navbar.nav3
+                    }
                   </Link>
                   <Link
                     to="/blog&event"
-                    className="text-white hover:bg-[#E50914] hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                    className="text-white hover:bg-[#E50914] hover:text-white px-3 py-2 rounded-md text-sm font-medium uppercase"
                   >
-                    GÓC ĐIỆN ẢNH & SỰ KIỆN
+                    { 
+                      content === "" ? 'góc điện ảnh và sự kiện' : content.navbar.nav4
+                    }
                   </Link>
                   <Link
                     to="/support"
-                    className="text-white hover:bg-[#E50914] hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                    className="text-white hover:bg-[#E50914] hover:text-white px-3 py-2 rounded-md text-sm font-medium uppercase"
                   >
-                    HỖ TRỢ
+                    { 
+                      content === "" ? 'hỗ trợ' : content.navbar.nav5
+                    }
                   </Link>
                   <Link
                     to="/search"
-                    className="text-white hover:bg-[#E50914] hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                    className="text-white hover:bg-[#E50914] hover:text-white px-3 py-2 rounded-md text-sm font-medium uppercase"
                   >
-                    TÌM KIẾM
+                    { 
+                      content === "" ? 'Mua vé' : content.navbar.nav6
+                    }
                   </Link>
                 </div>
               </div>
             </div>
             <div className="flex justify-between">
-              <button className="text-white text-[11px] md:text-[12px]">
+              <button 
+                style={{color: isActive === true ? "red" : ""}}
+                onClick={() => {
+                  dispatch(changeLanguage("Vietnamese"))
+                  setIsActive(!isActive)
+                }
+              }
+              className="text-white text-[11px] md:text-[12px]">
                 <i className="fas fa-globe"></i>
-                &ensp;VN
+                &ensp;VN &ensp;
+              </button>
+              <button 
+               
+                onClick={() => {
+                  dispatch(changeLanguage("English"))
+                  setIsActive(!isActive)
+                }
+              }  
+              className="text-white text-[11px] md:text-[12px]">
+                | &ensp; 
+                <span style={{color: isActive === false ? "red" : ""}}>
+                  EN
+                </span>
               </button>
               <Menu>
                 <MenuHandler>

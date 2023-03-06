@@ -1,3 +1,5 @@
+import { memo } from "react";
+
 function ShowTimeForm({
   values,
   touched,
@@ -241,4 +243,4 @@ function ShowTimeForm({
   );
 }
 
-export default ShowTimeForm;
+export default memo(ShowTimeForm);

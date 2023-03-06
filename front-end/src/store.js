@@ -27,6 +27,7 @@ import { feedBackReducer } from './redux/reducer/feedBackReducer'
 import { blogDetailReducer, blogReducer } from './redux/reducer/blogReducer'
 import { eventDetailReducer, eventReducer } from './redux/reducer/eventReducer'
 import { getAllMovieSoonReducer, getOneMovieSoonReducer } from './redux/reducer/movieSoonReducer'
+import { changeLanguageReducer } from './redux/reducer/languageReducer'
 
 
 const reducer = combineReducers({
@@ -55,7 +56,8 @@ const reducer = combineReducers({
     events: eventReducer,
     event: eventDetailReducer,
     movieSoons: getAllMovieSoonReducer,
-    movieSoon: getOneMovieSoonReducer
+    movieSoon: getOneMovieSoonReducer,
+    language: changeLanguageReducer
 })
 
 let initialState = {}

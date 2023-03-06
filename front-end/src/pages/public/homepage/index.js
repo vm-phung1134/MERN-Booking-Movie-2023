@@ -13,14 +13,17 @@ import Events from "../blog&event/events";
 import slide1 from "./assets/slide_1.webp";
 import slide2 from "./assets/slide_2.jpg";
 import slide3 from "./assets/slide_3.png";
+import Data from "../components/TranslationEnglish/Data.json";
 
 function HomePage() {
   const dispatch = useDispatch();
-  const blogs = useSelector((state) => state.blogs.blogs);
-  const events = useSelector((state) => state.events.events);
+  const blogs = useSelector((state) => state.blogs.blogs) || "";
+  const events = useSelector((state) => state.events.events) || "";
   const [loadingPage, setLoadingPage] = useState(false);
   const [stateMovie, setStateMovie] = useState(true);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [content, setContent] = useState("");
+  const language = useSelector((state) => state.language.language);
 
   const handleClickMovie = useCallback(() => {
     setStateMovie(!stateMovie);
@@ -88,6 +91,14 @@ function HomePage() {
     };
   }, [dispatch]);
 
+  useEffect(() => {
+    if (language === "English") {
+      setContent(Data.english);
+    } else {
+      setContent("");
+    }
+  }, [language]);
+
   // useEffect(() => {
   //   setTimeout(() => {
   //     const isLastSlide = currentIndex === slides.length - 1;
@@ -130,7 +141,7 @@ function HomePage() {
                         <i className="fas fa-star"></i>
                       </button>
                     ) : (
-                      <button hidden></button>
+                      <></>
                     )}
                     <p className="lg:block md:text-[13px] lg:text-[16px] font-thin text-[12px] text-justify">
                       {slides[currentIndex].content.discription}
@@ -164,24 +175,28 @@ function HomePage() {
               <div className="flex justify-between">
                 <div className="text-white">
                   <button
-                    className="md:mx-3 mx-2 text-[13px] lg:text-[15px] py-[20px] border-[#E50914]"
+                    className="md:mx-3 mx-2 text-[13px] lg:text-[15px] py-[20px] uppercase border-[#E50914]"
                     onClick={handleClickMovie}
                     style={{
                       borderBottom:
                         stateMovie === true ? "3px solid #E50914" : "none",
                     }}
                   >
-                    PHIM ĐANG CHIẾU
+                    {content === ""
+                      ? "phim đang chiếu"
+                      : content.title.titleMovieNow}
                   </button>
                   <button
-                    className="md:mx-3 ml-2 py-[20px] text-[13px] lg:text-[15px]"
+                    className="md:mx-3 ml-2 py-[20px] text-[13px] lg:text-[15px] uppercase"
                     onClick={handleClickMovie}
                     style={{
                       borderBottom:
                         stateMovie === false ? "3px solid #E50914" : "none",
                     }}
                   >
-                    PHIM SẮP CHIẾU
+                    {content === ""
+                      ? "phim sắp chiếu"
+                      : content.title.titleMovieSoon}
                   </button>
                 </div>
                 <div className="py-[5px] text-white">
@@ -198,9 +213,9 @@ function HomePage() {
               <div className="pt-20">
                 <button
                   disabled
-                  className="text-white py-[17px] text-[15px] border-b-[3px] border-[#E50914]"
+                  className="text-white py-[17px] uppercase text-[15px] border-b-[3px] border-[#E50914]"
                 >
-                  BÌNH LUẬN PHIM
+                  {content === "" ? "review phim" : content.title.blogfilm}
                 </button>
                 <div className="grid lg:grid-cols-2 grid-cols-1 py-10 gap-4">
                   {blogs.map((blog) => (
@@ -212,9 +227,9 @@ function HomePage() {
               <div className="pt-5">
                 <button
                   disabled
-                  className="text-white py-[17px] text-[15px] border-b-[3px] mb-10 border-[#E50914]"
+                  className="text-white py-[17px] uppercase text-[15px] border-b-[3px] mb-10 border-[#E50914]"
                 >
-                  TIN KHUYẾN MÃI
+                  {content === "" ? "tin khuyến mãi" : content.title.event}
                 </button>
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 pb-10">
                   {events.map((event) => (

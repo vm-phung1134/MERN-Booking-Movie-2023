@@ -12,11 +12,14 @@ import {
   Breadcrumbs,
 } from "@material-tailwind/react";
 import SupportForm from "./SupportForm";
+import Data from "../components/TranslationEnglish/Data.json";
 
 function Support() {
   const dispatch = useDispatch();
   const movies = useSelector((state) => state.movies.movies);
   const [isActive, setIsActive] = useState("1");
+  const [content, setContent] = useState("");
+  const language = useSelector((state) => state.language.language);
   const [loadingPage, setLoadingPage] = useState(false);
   const handleClickActive = (e) => {
     setIsActive(e.target.value);
@@ -37,6 +40,13 @@ function Support() {
       clearTimeout(timeOut);
     };
   }, [dispatch]);
+  useEffect(() => {
+    if (language === "English") {
+      setContent(Data.english);
+    } else {
+      setContent("");
+    }
+  }, [language]);
   return (
     <>
       <div className="bg-black min-h-screen max-h-full">
@@ -49,29 +59,44 @@ function Support() {
               <div className="lg:col-span-2 mr-3">
                 <Breadcrumbs className="bg-transparen p-0 my-5">
                   <Link to="/home" className="text-gray-400">
-                    Trang chủ
+                    {content === ""
+                        ? "Trang chủ"
+                        : content.support.linkHome
+                    }
                   </Link>
                   <Link className="text-gray-400">
-                    Hỗ trợ
+                  {content === ""
+                        ? "Hỗ trợ lấy ý kiến"
+                        : content.support.linkSp
+                    }
                   </Link>
-                  <Link className="text-gray-200">Góp ý</Link>
+                  <Link className="text-gray-200">{content === ""
+                        ? "Góp ý"
+                        : content.support.feedback
+                    }</Link>
                 </Breadcrumbs>
                 <div>
                   <button
                     style={{ background: isActive === "1" ? "#E50914" : "" }}
                     value="1"
                     onClick={handleClickActive}
-                    className="py-2 px-4 text-sm  text-white rounded-md ease-in-out duration-500"
+                    className="py-2 px-4 text-sm uppercase text-white rounded-md ease-in-out duration-500"
                   >
-                    GÓP Ý
+                    {content === ""
+                        ? "góp ý"
+                        : content.support.feedback
+                    }
                   </button>
                   <button
                     value="2"
                     style={{ background: isActive === "2" ? "#E50914" : "" }}
                     onClick={handleClickActive}
-                    className="py-2 px-4 text-sm text-white rounded-md ease-in-out duration-500"
+                    className="py-2 px-4 text-sm uppercase text-white rounded-md ease-in-out duration-500"
                   >
-                    GIẢI ĐÁP
+                    {content === ""
+                        ? "giải đáp"
+                        : content.support.answer
+                    }
                   </button>
                 </div>
                 {isActive === "1" && <SupportForm />}
@@ -150,8 +175,11 @@ function Support() {
                 )}
               </div>
               <div>
-                <button className="mb-3 lg:mt-0 mt-5 lg:ml-8 text-white text-sm lg:text-[15px] py-[10px] border-b-[3px] border-[#E50914]">
-                  PHIM ĐANG CHIẾU
+                <button className="mb-3 uppercase lg:mt-0 mt-5 lg:ml-8 text-white text-sm lg:text-[15px] py-[10px] border-b-[3px] border-[#E50914]">
+                {content === ""
+                        ? "phim đang chiếu"
+                        : content.movie.titleMovieNow
+                    }
                 </button>
                 <div className="grid grid-cols-1 gap-5 lg:px-8 pt-5">
                   {movies.map((movie, index) => (
@@ -177,7 +205,7 @@ function Support() {
                           </div>
                         </div>
                       ) : (
-                        <div hidden></div>
+                        <></>
                       )}
                     </div>
                   ))}

@@ -4,7 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllMovie } from "../../../redux/actions/movieActions";
 import { getAllMovieSoon } from "../../../redux/actions/movieSoonActions";
 import { Link } from "react-router-dom";
-import FooterPublic from "../components/footerPublic"
+import FooterPublic from "../components/footerPublic";
+import Data from "../components/TranslationEnglish/Data.json";
 
 function SearchPage() {
   const dispatch = useDispatch();
@@ -14,6 +15,8 @@ function SearchPage() {
   const [isSearching, setIsSearching] = useState("");
   const [searchCurrentMovie, setSearchCurrentMovie] = useState([]);
   const [searchSoonMovie, setSearchSoonMovie] = useState([]);
+  const [content, setContent] = useState("");
+  const language = useSelector((state) => state.language.language);
   const handleClickActive = (e) => {
     setIsActive(e.target.value);
   };
@@ -41,7 +44,12 @@ function SearchPage() {
   useEffect(() => {
     dispatch(getAllMovie());
     dispatch(getAllMovieSoon());
-  }, [dispatch]);
+    if (language === "English") {
+      setContent(Data.english);
+    } else {
+      setContent("");
+    }
+  }, [dispatch, language]);
   useEffect(() => {
     setSearchCurrentMovie(movies);
     setSearchSoonMovie(movieSoons);
@@ -56,25 +64,25 @@ function SearchPage() {
               style={{ background: isActive === "1" ? "#E50914" : "" }}
               value="1"
               onClick={handleClickActive}
-              className="py-2 px-4 text-[13px] lg:text-sm  text-white rounded-md ease-in-out duration-500"
+              className="py-2 px-4 text-[13px] uppercase lg:text-sm  text-white rounded-md ease-in-out duration-500"
             >
-              PHIM ĐANG CHIẾU
+              {content === "" ? "phim đang chiếu" : content.title.titleMovieNow}
             </button>
             <button
               value="2"
               style={{ background: isActive === "2" ? "#E50914" : "" }}
               onClick={handleClickActive}
-              className="py-2 px-4 text-[13px] lg:text-sm text-white rounded-md ease-in-out duration-500"
+              className="py-2 px-4 text-[13px] uppercase lg:text-sm text-white rounded-md ease-in-out duration-500"
             >
-              PHIM SẮP CHIẾU
+              {content === "" ? "phim sắp chiếu" : content.title.titleMovieSoon}
             </button>
             <button
               value="3"
               style={{ background: isActive === "3" ? "#E50914" : "" }}
               onClick={handleClickActive}
-              className="py-2 px-4 text-[13px] lg:text-sm text-white rounded-md ease-in-out duration-500"
+              className="py-2 px-4 text-[13px] uppercase lg:text-sm text-white rounded-md ease-in-out duration-500"
             >
-              DIỄN VIÊN
+              {content === "" ? "diễn viên" : content.support.actor}
             </button>
           </div>
         </div>
@@ -82,7 +90,10 @@ function SearchPage() {
           <input
             type="text"
             onChange={handleSearch}
-            placeholder="Tìm kiếm React Flix"
+            placeholder={content === ""
+            ? "Tìm kiếm React Flix"
+            : content.title.search
+        }
             className=" placeholder:text-gray-600 focus:outline-none focus:border-2 focus:border-green-700 text-white border px-5 border-gray-700 w-full py-4 bg-transparent"
           />
         </div>
@@ -150,7 +161,7 @@ function SearchPage() {
         </div>
         <div className="py-20"></div>
       </div>
-      <FooterPublic/>
+      <FooterPublic />
     </>
   );
 }

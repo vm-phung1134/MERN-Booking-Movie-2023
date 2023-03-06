@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import MovieForm from "./movieForm";
+import { memo } from "react";
 import { createMovieSoon } from "../../../redux/actions/movieSoonActions";
 function MovieSoonAdd() {
   const dispatch = useDispatch();
@@ -141,4 +142,4 @@ function MovieSoonAdd() {
   );
 }
 
-export default MovieSoonAdd;
+export default memo(MovieSoonAdd);

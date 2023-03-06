@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Breadcrumbs } from "@material-tailwind/react";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import HeaderPublic from "../components/headerPublic";
-import FooterPublic from "../components/footerPublic"
+import FooterPublic from "../components/footerPublic";
 import SpinnerLoading from "../components/spinnerLoading";
 import { Select, Option } from "@material-tailwind/react";
 import {
@@ -34,21 +34,22 @@ import {
   Tooltip,
 } from "@material-tailwind/react";
 import { isCheckQuanlitySeat } from "../middleware";
+import Data from "../components/TranslationEnglish/Data.json";
 
 function Booking() {
   const dispatch = useDispatch();
   // CALL STORE FROM GET API
-  const baseURL = "http://localhost:5000"
-  const cinemas = useSelector((state) => state.cinemas.cinemas);
-  const movies = useSelector((state) => state.movies.movies);
-  const showtimes = useSelector((state) => state.showtimes.showtimes);
-  const tickets = useSelector((state) => state.tickets.tickets);
-  const foods = useSelector((state) => state.foods.foods);
-  const movie = useSelector((state) => state.movie.movie);
-  const cinema = useSelector((state) => state.cinema.cinema);
-  const showtime = useSelector((state) => state.showtime.showtime);
-  const seats = useSelector((state) => state.seats.seats);
-
+  const baseURL = "http://localhost:5000";
+  const cinemas = useSelector((state) => state.cinemas.cinemas) || "";
+  const movies = useSelector((state) => state.movies.movies) || "";
+  const showtimes = useSelector((state) => state.showtimes.showtimes) || "";
+  const tickets = useSelector((state) => state.tickets.tickets) || "";
+  const foods = useSelector((state) => state.foods.foods) || "";
+  const movie = useSelector((state) => state.movie.movie) || "";
+  const cinema = useSelector((state) => state.cinema.cinema) || "";
+  const showtime = useSelector((state) => state.showtime.showtime) || "";
+  const seats = useSelector((state) => state.seats.seats) || "";
+  const language = useSelector((state) => state.language.language) || "";
   // COUNT SỐ VÉ KHÁCH HÀNG ĐÃ CHỌN
   let countTicket = 0;
   tickets.map((ticket) => (countTicket = countTicket + ticket.quantity));
@@ -57,6 +58,7 @@ function Booking() {
   const [stateLoadingLogin, setStateLoadingLogin] = useState({
     loading: false,
   });
+  const [content, setContent] = useState("");
   const [valueCinema, setValueCinema] = useState("");
   const [valueMovie, setValueMovie] = useState("");
   const [valueSeats, setValueSeats] = useState("");
@@ -150,6 +152,14 @@ function Booking() {
       clearTimeout(timeOut);
     };
   }, [dispatch]);
+
+  useEffect(() => {
+    if (language === "English") {
+      setContent(Data.english);
+    } else {
+      setContent("");
+    }
+  }, [language]);
   return (
     <>
       <div className=" bg-cover bg-center bg-[url('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/020e1179-46f8-43ff-9c44-4280cde630ec/ddbudat-bb20107b-044e-432d-92a1-fbc5951f40ec.jpg/v1/fill/w_1280,h_776,q_75,strp/avatar_2__2022__wallpaper_hd_4k_by_sahibdm_ddbudat-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9Nzc2IiwicGF0aCI6IlwvZlwvMDIwZTExNzktNDZmOC00M2ZmLTljNDQtNDI4MGNkZTYzMGVjXC9kZGJ1ZGF0LWJiMjAxMDdiLTA0NGUtNDMyZC05MmExLWZiYzU5NTFmNDBlYy5qcGciLCJ3aWR0aCI6Ijw9MTI4MCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.3ObOA_bTMLdoT1zr019ZY0bQrLSsTQy6YYZKdyGLGg0')]">
@@ -161,26 +171,30 @@ function Booking() {
             <div className="lg:px-14 md:px-12 px-6 md:py-16 py-14 lg:py-20 min-h-screen max-h-full bg-transparent">
               <Breadcrumbs className="bg-transparen p-0">
                 <Link to="/home" className="text-gray-400">
-                  Trang chủ
+                  {content === "" ? "Trang chủ" : content.booking.linkHome}
                 </Link>
                 <Link to="/booking" className="text-gray-200">
-                  Đặt vé xem phim
+                  {content === "" ? "Đặt vé xem phim" : content.booking.link}
                 </Link>
               </Breadcrumbs>
               <div className="flex justify-between">
                 <button
                   disabled
-                  className="text-white lg:mb-0 mb-3 text-sm lg:text-[15px] pr-6 py-[17px] border-b-[3px] border-[#E50914]"
+                  className="text-white uppercase lg:mb-0 mb-3 text-sm lg:text-[15px] pr-6 py-[17px] border-b-[3px] border-[#E50914]"
                 >
-                  CHỌN RẠP & PHIM
+                  {content === "" ? "Trang chủ" : content.booking.titleMovie}
                 </button>
               </div>
 
               <div className="grid lg:grid-cols-2 lg:gap-x-5 lg:my-10 gap-y-3 grid-cols-1">
                 <div>
                   <Select
-                    className="text-white"
-                    label="CHỌN RẠP CHIẾU"
+                    className="text-white uppercase"
+                    label={
+                      content === ""
+                        ? "CHỌN RẠP CHIẾU"
+                        : content.booking.selectCinema
+                    }
                     onChange={handleChangeCinema}
                     animate={{
                       mount: { y: 0 },
@@ -200,8 +214,10 @@ function Booking() {
                 </div>
                 <div>
                   <Select
-                    className="text-white"
-                    label="CHỌN PHIM"
+                    className="text-white uppercase"
+                    label={
+                      content === "" ? "CHỌN PHIM" : content.booking.selectFilm
+                    }
                     animate={{
                       mount: { y: 0 },
                       unmount: { y: 30 },
@@ -217,7 +233,8 @@ function Booking() {
                         >
                           <div className="flex justify-between">
                             <div>
-                              <span className="capitalize">{movie.name}</span> - {movie.namevn}
+                              <span className="capitalize">{movie.name}</span> -{" "}
+                              {movie.namevn}
                             </div>
                             <p className="text-[13px] ml-5 text-[#c40404] rounded">
                               C{movie.limitAge}
@@ -225,13 +242,7 @@ function Booking() {
                           </div>
                         </Option>
                       ) : (
-                        <Option
-                          className="text-black focus:text-white focus:bg-blue-gray-600"
-                          key={movie._id}
-                          hidden
-                        >
-                          Vui lòng chọn rạp chiếu !
-                        </Option>
+                        <></>
                       )
                     )}
                   </Select>
@@ -241,12 +252,14 @@ function Booking() {
                 {valueCinema !== "" && valueMovie !== "" ? (
                   <button
                     disabled
-                    className="text-white text-sm lg:text-[15px] pr-6 py-[17px] border-b-2 border-[#E50914]"
+                    className="text-white uppercase text-sm lg:text-[15px] pr-6 py-[17px] border-b-2 border-[#E50914]"
                   >
-                    CHỌN SUẤT CHIẾU
+                    {content === ""
+                      ? "CHỌN SUẤT CHIẾU"
+                      : content.booking.selectSession}
                   </button>
                 ) : (
-                  <button hidden></button>
+                  <></>
                 )}
               </div>
 
@@ -272,9 +285,11 @@ function Booking() {
                     <>
                       <button
                         disabled
-                        className="text-white text-sm lg:text-[15px] mb-5 pr-6 py-[17px] border-b-[3px] border-[#E50914]"
+                        className="text-white uppercase text-sm lg:text-[15px] mb-5 pr-6 py-[17px] border-b-[3px] border-[#E50914]"
                       >
-                        CHỌN LOẠI VÉ & GÓI TIỆN ÍCH
+                        {content === ""
+                          ? "CHỌN LOẠI VÉ & GÓI TIỆN ÍCH"
+                          : content.booking.selectOption}
                       </button>
                       <div className="grid grid-cols-1 lg:grid-cols-3 gap-x-5">
                         <div className="lg:col-span-2">
@@ -422,9 +437,24 @@ function Booking() {
                                               <p className="border-2 border-black"></p>
                                             </div>
                                             <div className="flex mt-5 text-[12px] md:text-sm text-black">
-                                              <p className=" mr-2 md:mx-2"><span className="bg-red-600 px-2"> </span>&ensp; Đã đặt</p>
-                                              <p className=" mx-1 md:mx-2"><span className="bg-green-600 px-2" > </span>&ensp; Đang chọn</p>
-                                              <p className=" ml-2 md:mx-2"><span className="bg-gray-400 px-2"> </span>&ensp; Còn trống</p>
+                                              <p className=" mr-2 md:mx-2">
+                                                <span className="bg-red-600 px-2">
+                                                  {" "}
+                                                </span>
+                                                &ensp; Đã đặt
+                                              </p>
+                                              <p className=" mx-1 md:mx-2">
+                                                <span className="bg-green-600 px-2">
+                                                  {" "}
+                                                </span>
+                                                &ensp; Đang chọn
+                                              </p>
+                                              <p className=" ml-2 md:mx-2">
+                                                <span className="bg-gray-400 px-2">
+                                                  {" "}
+                                                </span>
+                                                &ensp; Còn trống
+                                              </p>
                                             </div>
                                           </div>
                                         )}
@@ -496,7 +526,7 @@ function Booking() {
           )}
         </div>
       </div>
-      <FooterPublic/>
+      <FooterPublic />
     </>
   );
 }

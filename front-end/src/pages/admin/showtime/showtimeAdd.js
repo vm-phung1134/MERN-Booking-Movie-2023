@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ShowTimeForm from "./showtimeForm";
-import { useEffect, useState } from "react";
+import { useEffect, useState, memo } from "react";
 import { getAllCinema } from "../../../redux/actions/cinemaActions";
 import { getAllMovie } from "../../../redux/actions/movieActions";
 import { createShowTime } from "../../../redux/actions/showTimeActions";
@@ -110,4 +110,4 @@ function ShowTimeAdd() {
   );
 }
 
-export default ShowTimeAdd;
+export default memo(ShowTimeAdd);

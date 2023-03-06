@@ -23,9 +23,9 @@ function MovieSoon({movie}) {
             </Link>
           </div>
 
-          <div className="text-sm lg:text-[16px]">
+          <div className="text-sm mt-2 lg:text-[15px]">
             <p className="text-white uppercase">{movie.name}</p>
-            <p className="text-gray-500 uppercase">{movie.namevn}</p>
+            <p className="text-gray-500 font-thin uppercase">{movie.namevn}</p>
           </div>
         </div>
         </>

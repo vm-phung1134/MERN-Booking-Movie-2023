@@ -11,6 +11,7 @@ import FooterPublic from "../components/footerPublic";
 import { getAllCinema } from "../../../redux/actions/cinemaActions";
 import { getAllShowTime } from "../../../redux/actions/showTimeActions";
 import { getAllMovie } from "../../../redux/actions/movieActions";
+import Data from "../components/TranslationEnglish/Data.json";
 
 function Cinema() {
   const dispatch = useDispatch();
@@ -19,13 +20,13 @@ function Cinema() {
   const movies = useSelector((state) => state.movies.movies);
   const showtimes = useSelector((state) => state.showtimes.showtimes);
   const [vlCinema, setVlCinema] = useState("");
-  //const [vlMovie, setMovie] = useState("")
+  const [content, setContent] = useState("");
+  const language = useSelector((state) => state.language.language);
+
   const handleChangeCinema = (value) => {
     setVlCinema(value);
   };
-  // const handleChangeMovie = (value) => {
-  //   setMovie(value)
-  // };
+
   useEffect(() => {
     window.scrollTo(0, 0);
     setLoadingPage(true);
@@ -39,6 +40,13 @@ function Cinema() {
       clearTimeout(timeOut);
     };
   }, [dispatch]);
+  useEffect(() => {
+    if (language === "English") {
+      setContent(Data.english);
+    } else {
+      setContent("");
+    }
+  }, [language]);
   return (
     <>
       <div className="bg-black min-h-screen max-h-full">
@@ -51,25 +59,34 @@ function Cinema() {
               <div className="lg:m-[40px] 2xl:m-[60px] m-[20px] max-h-full">
                 <Breadcrumbs className="bg-transparen p-0">
                   <Link to="/home" className="text-gray-400">
-                    Trang chủ
+                  {content === ""
+                      ? "Trang chủ"
+                      : content.booking.linkHome
+                  }
                   </Link>
                   <Link to="/cinema" className="text-gray-200">
-                    Rạp chiếu phim
+                  {content === ""
+                      ? "Rạp chiếu phim"
+                      : content.navbar.nav3}
                   </Link>
                 </Breadcrumbs>
                 <div className="grid lg:grid-cols-2 grid-cols-1 gap-x-10 lg:gap-x-5 ">
                   <div>
                     <button
                       disabled
-                      className="text-white text-sm lg:text-[16px] pr-6 py-[15px]  border-b-[3px] border-[#E50914]"
+                      className="text-white uppercase text-sm lg:text-[16px] pr-6 py-[15px]  border-b-[3px] border-[#E50914]"
                     >
-                      HỆ THỐNG RẠP CHIẾU
+                      {content === ""
+                      ? "hệ thống rạp chiếu"
+                      : content.cinema.title}
                     </button>
                     <div className="mt-10">
                       <div className="mb-2">
                         <Select
                           className="text-white"
-                          label="CHỌN RẠP CHIẾU"
+                          label= {content === ""
+                          ? "CHỌN RẠP CHIẾU"
+                          : content.booking.selectCinema}
                           onChange={handleChangeCinema}
                           animate={{
                             mount: { y: 0 },
@@ -92,7 +109,7 @@ function Cinema() {
                           {movies.map((movie) => (
                             <div
                               key={movie._id}
-                              className="border-gray-400 border grid grid-cols-2 lg:gap-x-2 xl:gap-x-3"
+                              className="border-gray-400 border grid grid-cols-2 lg:gap-x-1 xl:gap-x-2"
                             >
                               <div>
                                 <img
@@ -102,33 +119,36 @@ function Cinema() {
                                 />
                               </div>
                               <div className="p-2 leading-6">
-                                <h1 className="text-gray-400">
-                                  Tên phim:
-                                  <span className="uppercase text-white">
-                                    {" "}
-                                    {movie.name}
-                                  </span>
-                                </h1>
-                                <p className="text-gray-400">
-                                  <i className="fas fa-clock"></i>
-                                  <span className="text-white">
-                                    {" "}
-                                    {movie.duration} phút
-                                  </span>
-                                </p>
+                                <div className="flex justify-between">
+                                  <h1 className="text-gray-400">
+                                    Tên phim:
+                                    <span className="uppercase text-white">
+                                      {" "}
+                                      {movie.name}
+                                    </span>
+                                  </h1>
+                                  <p className="text-gray-400">
+                                    <i className="fas fa-clock"></i>
+                                    <span className="text-white">
+                                      {" "}
+                                      {movie.duration} phút
+                                    </span>
+                                  </p>
+                                </div>
+
                                 <p>2D - Phụ đề</p>
                                 <div>
                                   {showtimes.map(
                                     (showtime) =>
                                       showtime.movieId === movie._id &&
                                       showtime.cinemaId === vlCinema && (
-                                        <div className="flex justify-between items-center">
+                                        <div className="">
                                           <p className="">
-                                            {showtime.startDate}{" "}
+                                            Ngày {showtime.startDate}{" "}
                                           </p>
                                           <div className="flex w-full">
                                             {showtime.startTime.map((time) => (
-                                              <button className="px-2 py-1 my-2 mx-2 border-2 border-gray-600">
+                                              <button className="px-2 py-1 my-2 mx-1 border-2 border-gray-600">
                                                 {time.time}
                                               </button>
                                             ))}
@@ -145,9 +165,11 @@ function Cinema() {
                     </div>
                     <button
                       disabled
-                      className="text-white text-sm lg:text-[16px] pr-6 py-[15px] my-3  border-b-[3px] border-[#E50914]"
+                      className="text-white uppercase text-sm lg:text-[16px] pr-6 py-[15px] my-3  border-b-[3px] border-[#E50914]"
                     >
-                      MỘT SỐ HÌNH ẢNH
+                       {content === ""
+                      ? "Một số hình ảnh"
+                      : content.cinema.image}
                     </button>
                     <div>
                       <Carousel>
@@ -170,9 +192,11 @@ function Cinema() {
                     <div className="">
                       <button
                         disabled
-                        className="text-white text-sm lg:text-[16px] pr-6 py-[15px]  border-b-[3px] border-[#E50914]"
+                        className="text-white uppercase text-sm lg:text-[16px] pr-6 py-[15px]  border-b-[3px] border-[#E50914]"
                       >
-                        GIÁ VÉ
+                         {content === ""
+                      ? "giá vé"
+                      : content.cinema.price}
                       </button>
                       <img
                         src="https://cdn.galaxycine.vn/media/2023/1/18/ca-mau-100_1674015086453.jpg"
@@ -183,9 +207,11 @@ function Cinema() {
                     </div>
                     <button
                       disabled
-                      className="text-white text-sm lg:text-[16px] pr-6 py-[15px] mt-5  border-b-[3px] border-[#E50914]"
+                      className="text-white uppercase text-sm lg:text-[16px] pr-6 py-[15px] mt-5  border-b-[3px] border-[#E50914]"
                     >
-                      THÔNG TIN CHI TIẾT
+                       {content === ""
+                      ? "thông tin chi tiết"
+                      : content.cinema.title}
                     </button>
                     <div className="py-5 text-sm">
                       <p className="text-gray-500">

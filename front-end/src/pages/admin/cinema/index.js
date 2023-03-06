@@ -3,7 +3,7 @@ import SideBars from "../components/sideBars";
 import { Link } from "react-router-dom";
 import { getAllCinema, deleteOneCinema } from "../../../redux/actions/cinemaActions";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, memo } from "react";
 import {
   Dialog,
   DialogHeader,
@@ -387,4 +387,4 @@ function ManageCinema() {
   );
 }
 
-export default ManageCinema;
+export default memo(ManageCinema);
