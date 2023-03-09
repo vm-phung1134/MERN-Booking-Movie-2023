@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 //import logic
 import React, {useCallback, useState, useEffect} from 'react'
 import { Link } from "react-router-dom";
@@ -32,14 +33,12 @@ const [size, setSize] = useState(null);
   useEffect(() => {
     window.scrollTo(0, 0);
     setLoadingPage(true);
-    
-    
     setTimeout(async () => {
       await dispatch(getOneMovieSoon(movieSoonId.id));
       dispatch(getAllCinema());
       setLoadingPage(false);
     }, 1300);
-  }, [dispatch, movieSoonId.id, setLoadingPage]);
+  }, []);
   return (
     <>
       <div className="max-h-full min-h-screen w-full">

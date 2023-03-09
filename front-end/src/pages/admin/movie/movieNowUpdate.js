@@ -1,21 +1,39 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import SideBars from "../components/sideBars";
 import NavBars from "../components/navBars";
 import { Formik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
-import { getOneMovie } from "../../../redux/actions/movieActions";
+import { getOneMovie, updateOneMovie } from "../../../redux/actions/movieActions";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useEffect, memo } from "react";
 import { useParams } from "react-router-dom";
 import MovieForm from "./movieForm";
-import axios from "axios";
-const baseURL = "http://localhost:5000";
 
 function MovieNowUpdate() {
   const dispatch = useDispatch();
   const movieId = useParams();
   const id = movieId.id;
-  const movie = useSelector((state) => state.movie.movie);
+  const {movie} = useSelector((state) => state.movie);
+  const {isUpdated} = useSelector((state) => state.editMovie)
+  
+  const initialValues = {
+    name: movie.name,
+    namevn: movie.namevn,
+    year: movie.year,
+    country: movie.country,
+    type: movie.type,
+    released: movie.released,
+    duration: movie.duration,
+    poster: movie.poster,
+    image: movie.image,
+    bg: movie.bg,
+    director: movie.director,
+    limitAge: movie.limitAge,
+    actors: movie.actors,
+    discription: movie.discription,
+    trailer: movie.trailer,
+  };
   const validate = (values) => {
     let errors = {};
     // tên người dùng
@@ -70,40 +88,19 @@ function MovieNowUpdate() {
   };
 
   const submitForm = async (values) => {
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
-    await axios
-      .put(`${baseURL}/api/v1/movies/${id}`, values, config)
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err.message));
-    toast.success("Một bộ phim đã được cập nhật vào mục đang chiếu !", {
-      position: toast.POSITION.BOTTOM_LEFT,
-      className: "text-black",
-    });
-  };
-  const initialValues = {
-    name: movie.name,
-    namevn: movie.namevn,
-    year: movie.year,
-    country: movie.country,
-    type: movie.type,
-    released: movie.released,
-    duration: movie.duration,
-    poster: movie.poster,
-    image: movie.image,
-    bg: movie.bg,
-    director: movie.director,
-    limitAge: movie.limitAge,
-    actors: movie.actors,
-    discription: movie.discription,
-    trailer: movie.trailer,
+    dispatch(updateOneMovie(movie._id, values))
   };
   useEffect(() => {
     dispatch(getOneMovie(id));
-  }, [dispatch, id]);
+  }, []);
+
+  useEffect(() => {
+    if(isUpdated){
+      toast.success("Một bộ phim đã được cập nhật vào mục đang chiếu !", {
+      position: toast.POSITION.BOTTOM_LEFT,
+      className: "text-black",
+    })}
+  },[isUpdated])
   return (
     <Formik
       initialValues={initialValues}

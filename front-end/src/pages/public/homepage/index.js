@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useCallback, useEffect, useState } from "react";
 import HeaderPublic from "../components/headerPublic";
 import MovieNow from "../movie/homeMovie/movieNowList";
@@ -17,8 +18,8 @@ import Data from "../components/TranslationEnglish/Data.json";
 
 function HomePage() {
   const dispatch = useDispatch();
-  const blogs = useSelector((state) => state.blogs.blogs) || "";
-  const events = useSelector((state) => state.events.events) || "";
+  const blogs = useSelector((state) => state.blogs.blogs);
+  const events = useSelector((state) => state.events.events);
   const [loadingPage, setLoadingPage] = useState(false);
   const [stateMovie, setStateMovie] = useState(true);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -89,7 +90,7 @@ function HomePage() {
     return () => {
       clearTimeout(timeOut);
     };
-  }, [dispatch]);
+  }, []);
 
   useEffect(() => {
     if (language === "English") {

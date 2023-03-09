@@ -108,6 +108,7 @@ export const ticketDetailReducer = (
       };
     case CREATE_TICKET_REQUEST:
       return {
+        ...state,
         loading: true,
         isCreated: false,
       };
@@ -119,6 +120,7 @@ export const ticketDetailReducer = (
       };
     case CREATE_TICKET_FAIL:
       return {
+        ...state,
         loading: false,
         isCreated: false,
       };

@@ -2,7 +2,7 @@ import HeaderPublic from "../components/headerPublic";
 import { useParams } from "react-router-dom";
 import { Breadcrumbs } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
-import FooterPublic from "../components/footerPublic"
+import FooterPublic from "../components/footerPublic";
 import { useSelector, useDispatch } from "react-redux";
 import {
   getOneBlog,
@@ -22,37 +22,57 @@ function BlogDetail() {
   const userName = localStorage.getItem("user");
   const [loadMore, setLoadMore] = useState(5);
   const [comment, setComment] = useState(""); // set value input form
-  const [newBlog, setnewBlog] = useState([]); // get comment from blogs
+  const [like, setLike] = useState(blog.like);
+  const [listComment, setListComment] = useState([]);
+  //define new cmt user
   let cmt = {
-    //define new cmt user
     userName: userName,
     date: date,
     content: comment,
   };
-
-  const blogs = useSelector((state) => state.blogs.blogs);
+  const { blogs } = useSelector((state) => state.blogs);
   useEffect(() => {
-    blogs.map((blog) => blog._id === blogId.id && setnewBlog(blog.comments));
+    blogs.map((bg) => bg._id === blogId.id && setListComment(bg.comments)); // get comment from blogs
   }, [blogId.id, blogs]);
 
+  // Content in user's port
   const handlePostComment = (e) => {
     setComment(e.target.value);
   };
-  const values = {
-    ...blog,
-    comments: [cmt, ...newBlog],
-  };
+
+  // Handle Submit comment
   const onSubmit = async (e) => {
     e.preventDefault();
-    await dispatch(updateOneBlog(blogId.id, values));
-    setnewBlog((prev) => [cmt, ...prev]); //set lại array render
-    setComment(""); //xóa input text
+    await dispatch(
+      updateOneBlog(blogId.id, {
+        // lưu comment vào db
+        ...blog,
+        comments: [cmt, ...listComment],
+      })
+    );
+    setListComment((prev) => [cmt, ...prev]); //hiển thị list comments
+    setComment(""); //xóa input comment
+  };
+
+  const handleLike = () => {
+    dispatch(
+      updateOneBlog(blogId.id, {
+        ...blog,
+        like: blog.like + 1,
+      })
+    );
+    setLike((prev) => prev + 1);
   };
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     dispatch(getOneBlog(blogId.id));
     dispatch(getAllBlog());
   }, [blogId.id, dispatch]);
+
+  useEffect(() => {
+    setLike(blog.like);
+  }, [blog.like]);
   return (
     <>
       <div
@@ -76,11 +96,15 @@ function BlogDetail() {
                 {blog.name}
               </h1>
               <div className="leading-7">
-                <button className="bg-blue-500 my-5 text-[12px] md:text-[15px] mr-1 py-1 px-3 text-sm">
-                  <i className="fas fa-thumbs-up"></i> Thích {blog.like}
+                <button
+                  onClick={handleLike}
+                  className="bg-blue-500 font-thin my-5 text-[12px] md:text-[15px] mr-1 py-1 px-3 text-sm"
+                >
+                  <i className="fas fa-thumbs-up"></i> Thích {like}
                 </button>
-                <button className="bg-[#d4491f] text-[12px] md:text-[15px]  ml-1 my-5 py-1 px-3 text-sm">
-                  ĐÁNH GIÁ
+                <button className="bg-[#d4491f] font-thin text-[12px] md:text-[15px]  ml-1 my-5 py-1 px-3 text-sm">
+                  <i className="fas fa-star"></i> Đánh giá &#40;{" "}
+                  {listComment.length} &#41;
                 </button>
                 <p className="text-justify text-sm md:text-[15px] font-thin">
                   {blog.mainContent}
@@ -110,29 +134,31 @@ function BlogDetail() {
       <div className="md:px-16 px-5 md:py-10 py-5 text-white bg-black w-full">
         <button
           disabled
-          className="text-white text-[15px] pr-6 py-[15px] mb-5  border-b-[3px] border-[#E50914]"
+          className="text-white pb-3 text-[13px] md:text-[15px] md:pr-6 md:py-[15px] mb-3 md:mb-5  border-b-[3px] border-[#E50914]"
         >
-          GÓC BÌNH LUẬN BÀI VIẾT
+          GÓC BÌNH LUẬN
         </button>
         <div>
-          <p className="text-sm">{newBlog.length} bình luận</p>
+          <p className="md:text-sm text-[13px]">
+            {listComment.length} bình luận
+          </p>
         </div>
-        <div className="grid grid-cols-12 mt-5 gap-x-5">
-          <div>
-            <p className="bg-[#E50914] mx-5 text-white p-3 text-center rounded-full text-sm">
+        <div className="grid md:grid-cols-9 grid-cols-7 lg:grid-cols-11 xl:grid-cols-12 my-6 lg:my-7 gap-x-2 md:gap-x-3 lg:gap-x-3 2xl:gap-x-5">
+          <div className="col-span-1">
+            <p className="bg-[#E50914] xl:mx-5 md:mx-3 mx-2 text-white px-3 py-3 text-center rounded-full text-[12px] md:text-sm">
               RF
             </p>
           </div>
-          <div className="col-span-11">
+          <div className="lg:col-span-9 xl:col-span-11 md:col-span-8 col-span-6">
             <form onSubmit={onSubmit}>
               <input
                 value={comment}
                 onChange={handlePostComment}
                 type="text"
-                className="border-b w-[90%] focus:outline-none bg-transparent placeholder:text-gray-300 py-2"
+                className="border-b w-[90%] placeholder:text-[12px] placeholder:md:text-sm  focus:outline-none bg-transparent placeholder:text-gray-300 py-2"
                 placeholder="Viết bình luận..."
               />
-              <button type="submit" className="px-4">
+              <button type="submit" className="lg:px-4 md:px-3 px-2">
                 <i className="fas fa-paper-plane"></i>
               </button>
             </form>
@@ -143,52 +169,57 @@ function BlogDetail() {
           <div key={blog._id}>
             {blog._id === blogId.id ? (
               <div>
-                {newBlog.map(
-                  (bg, index) =>
-                    index < loadMore ? (
-                      <div key={bg._id}>
-                        <div className="grid text-sm my-16 grid-cols-12 gap-x-5">
-                          <div>
-                            <p className="bg-[#E50914] mx-5 text-white p-3 text-center rounded-full text-sm">
-                              RF
-                            </p>
-                          </div>
-                          <div className="col-span-11">
-                            <p className="capitalize font-medium">
-                              {bg.userName}{" "}
-                              <span className="font-thin text-[12px]">
-                                {bg.date}
-                              </span>{" "}
-                            </p>
-                            <p className="py-2">{bg.content}</p>
-                            <button className="mr-2 text-xl">
-                              <i className="fas fa-thumbs-up"></i>
-                            </button>
-                            <button className="ml-2 text-xl">
-                              <i className="fas fa-thumbs-down"></i>
-                            </button>
-                            <button className="ml-4">Phản hồi</button>
-                          </div>
+                {listComment.map((bg, index) =>
+                  index < loadMore ? (
+                    <div key={bg._id}>
+                      <div className="grid md:grid-cols-9 grid-cols-7 lg:grid-cols-11 xl:grid-cols-12 my-6 lg:my-7 gap-x-2 md:gap-x-3 lg:gap-x-3 2xl:gap-x-5">
+                        <div>
+                          <p className="bg-[#E50914] xl:mx-5 md:mx-3 mx-2 text-white px-3 py-3 text-center rounded-full text-[12px] md:text-sm">
+                            RF
+                          </p>
+                        </div>
+                        <div className="lg:col-span-9 xl:col-span-11 md:col-span-8 col-span-6">
+                          <p className="capitalize font-medium text-[13px] md:text-sm lg:text-[15px]">
+                            {bg.userName}{" "}
+                            <span className="font-thin text-[12px]">
+                              {bg.date}
+                            </span>{" "}
+                          </p>
+                          <p className="py-2 text-[12px] md:text-sm lg:text-[15px]">
+                            {bg.content}
+                          </p>
+                          <button className="mr-2 text-[12px] md:text-sm lg:text-xl">
+                            <i className="fas fa-thumbs-up"></i>
+                          </button>
+                          <button className="ml-2 text-[12px] md:text-sm lg:text-xl">
+                            <i className="fas fa-thumbs-down"></i>
+                          </button>
+                          <button className="ml-4 text-[12px] md:text-sm lg:text-[15px]">
+                            Phản hồi
+                          </button>
                         </div>
                       </div>
-                    ) : (<div></div>)
+                    </div>
+                  ) : (
+                    <></>
+                  )
                 )}
               </div>
             ) : (
-              <div></div>
+              <></>
             )}
           </div>
         ))}
-        <div className="flex justify-center my-5">
+        <div className="flex justify-center lg:my-[8rem] md:my-[6rem] my-[4rem]">
           <button
             onClick={() => setLoadMore(10)}
-            className="p-3 text-sm text-white bg-[#ce0000]"
+            className="md:p-3 p-2 text-[13px]  md:text-sm text-white bg-[#ce0000]"
           >
             TÀI THÊM BÌNH LUẬN
           </button>
         </div>
       </div>
-      <FooterPublic/>
+      <FooterPublic />
     </>
   );
 }

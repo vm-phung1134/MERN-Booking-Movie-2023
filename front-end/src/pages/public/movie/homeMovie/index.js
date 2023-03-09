@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import HeaderPublic from "../../components/headerPublic";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
@@ -31,7 +32,7 @@ function HomeMovie() {
     return () => {
       clearTimeout(timeOut);
     };
-  }, [dispatch]);
+  }, []);
 
   useEffect(() => {
     if (language === "English") {

@@ -28,6 +28,8 @@ export const seatsReducer = (
       };
     case ALL_SEAT_FAIL:
       return {
+        ...state,
+        seatsCount: 0,
         loading: false,
         error: action.payload,
       };
@@ -57,6 +59,7 @@ export const seatDetailReducer = (
       };
     case ONE_SEAT_FAIL:
       return {
+        ...state,
         loading: false,
         error: action.payload,
       };

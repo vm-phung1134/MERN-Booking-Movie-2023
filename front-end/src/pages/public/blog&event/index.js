@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import HeaderPublic from "../components/headerPublic";
 import { getAllBlog } from "../../../redux/actions/blogActions";
 import { getAllEvent } from "../../../redux/actions/eventActions";
@@ -30,7 +31,7 @@ function BlogAndEvent() {
     return () => {
       clearTimeout(timeOut);
     };
-  }, [dispatch]);
+  }, []);
 
   useEffect(() => {
     if (language === "English") {

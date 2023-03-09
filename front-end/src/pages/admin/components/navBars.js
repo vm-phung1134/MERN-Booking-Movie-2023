@@ -19,7 +19,7 @@ function NavBars() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { user, isAuthenticated } = useSelector((state) => state.user);
-  const adminName = localStorage.getItem("user");
+  const adminName = localStorage.getItem("admin");
   const [size, setSize] = useState(null);
   const handleOpen = useCallback((value) => {
     setSize(value);
@@ -30,9 +30,9 @@ function NavBars() {
   }, []);
   const handleLogout = async () => {
     await dispatch(authLogout());
-    localStorage.removeItem("user");
-    localStorage.removeItem("userId");
-    localStorage.removeItem("token");
+    localStorage.removeItem("admin");
+    localStorage.removeItem("adminId");
+    localStorage.removeItem("token-admin");
   };
   useEffect(() => {
     if (isAuthenticated === false) {

@@ -27,7 +27,7 @@ function HeaderPublic() {
     dispatch(authLogout());
     localStorage.removeItem("user");
     localStorage.removeItem("userId");
-    localStorage.removeItem("token");
+    localStorage.removeItem("token-user");
   };
   const { user, isAuthenticated } = useSelector((state) => state.user);
   useEffect(() => {
@@ -100,7 +100,7 @@ function HeaderPublic() {
                     className="text-white hover:bg-[#E50914] hover:text-white px-3 py-2 rounded-md text-sm font-medium uppercase"
                   >
                     { 
-                      content === "" ? 'Mua vé' : content.navbar.nav6
+                      content === "" ? 'tìm kiếm' : content.navbar.nav6
                     }
                   </Link>
                 </div>

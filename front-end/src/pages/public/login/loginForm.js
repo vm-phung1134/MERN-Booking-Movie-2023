@@ -28,20 +28,22 @@ function LoginForm() {
   const { user, errorLogin, isAuthenticated } = useSelector(
     (state) => state.user
   );
-  console.log(user)
   useEffect(() => {
     if (errorLogin) {
       setStateError(errorLogin);
       dispatch(clearErrors(errorLogin));
     }
     if (isAuthenticated === true) {
-      localStorage.setItem("user", user.userName);
-      localStorage.setItem("token", user.token);
-      localStorage.setItem("userId", user.userId);
       if(user.userPosition!==""){
         navigate("/admin/dashboard")
+        localStorage.setItem("admin", user.userName);
+        localStorage.setItem("token-admin", user.token);
+        localStorage.setItem("adminId", user.userId);
       }else{
         navigate("/home");
+        localStorage.setItem("user", user.userName);
+        localStorage.setItem("token-user", user.token);
+        localStorage.setItem("userId", user.userId);
       }
     }
   }, [dispatch, errorLogin, isAuthenticated, navigate, stateError, user]);

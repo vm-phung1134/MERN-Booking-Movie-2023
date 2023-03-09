@@ -8,6 +8,9 @@ import {
   CREATE_MOVIESOON_REQUEST,
   CREATE_MOVIESOON_SUCCESS,
   CREATE_MOVIESOON_FAIL,
+  UPDATE_MOVIESOON_REQUEST,
+  UPDATE_MOVIESOON_SUCCESS,
+  UPDATE_MOVIESOON_FAIL,
 } from "../constants/movieSoonConstants";
 
 //REDUCER GET ALL MOVIESOONS
@@ -26,11 +29,13 @@ export const getAllMovieSoonReducer = (
     case ALL_MOVIESOON_SUCCESS:
       return {
         loading: false,
-        movieSoons: action.payload.movieSoons,
+        movieSoons: action.payload.movieSoons === undefined ? [] : action.payload.movieSoons,
         movieSoonsCount: action.payload.productsCount,
       };
     case ALL_MOVIESOON_FAIL:
       return {
+        ...state,
+        movieSoonsCount: 0,
         loading: false,
         error: action.payload,
       };
@@ -56,7 +61,7 @@ export const getOneMovieSoonReducer = (
     case ONE_MOVIESOON_SUCCESS:
       return {
         loading: false,
-        movieSoon: action.payload,
+        movieSoon: action.payload === undefined ? {} : action.payload,
       };
     case ONE_MOVIESOON_FAIL:
       return {
@@ -71,13 +76,41 @@ export const getOneMovieSoonReducer = (
     case CREATE_MOVIESOON_SUCCESS:
       return {
         loading: false,
-        movie: action.payload,
+        movieSoon: action.payload,
         isCreated: true,
       };
     case CREATE_MOVIESOON_FAIL:
       return {
         loading: false,
         isCreated: false,
+      };
+    default:
+      return state;
+  }
+};
+
+export const movieSoonEditReducer = (
+  state = {}, 
+  action
+  ) => {
+  switch (action.type) {
+    // UPDATE MOVIE INFOMATION REDUCER
+    case UPDATE_MOVIESOON_REQUEST:
+      return {
+        ...state,
+        loading: true,
+        isUpdated: false
+      };
+    case UPDATE_MOVIESOON_SUCCESS:
+      return {
+        loading: false,
+        isUpdated: true,
+      };
+    case UPDATE_MOVIESOON_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
       };
     default:
       return state;

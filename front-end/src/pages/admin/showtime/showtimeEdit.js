@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import SideBars from "../components/sideBars";
 import NavBars from "../components/navBars";
 import { Formik } from "formik";
@@ -8,18 +9,17 @@ import ShowTimeForm from "./showtimeForm";
 import { useEffect, useState, memo } from "react";
 import { getAllCinema } from "../../../redux/actions/cinemaActions";
 import { getAllMovie } from "../../../redux/actions/movieActions";
-import { getOneShowTime } from "../../../redux/actions/showTimeActions";
+import { getOneShowTime, updateOneShowTime } from "../../../redux/actions/showTimeActions";
 import { useParams } from "react-router-dom";
-import axios from "axios";
-const baseURL = "http://localhost:5000";
 
 function ShowTimeEdit() {
   const dispatch = useDispatch();
   const showTimeId = useParams();
-  const cinemas = useSelector((state) => state.cinemas.cinemas);
-  const movies = useSelector((state) => state.movies.movies);
-  const showtime = useSelector((state) =>state.showtime.showtime);
+  const {cinemas} = useSelector((state) => state.cinemas);
+  const {movies} = useSelector((state) => state.movies);
+  const {showtime} = useSelector((state) =>state.showtime);
   const [arrTime, setArrTime] = useState(null);
+  const {isUpdated} = useSelector(state => state.editShowtime)
   const initialValues = {
     typeMovie: showtime.typeMovie,
     startDate: showtime.startDate,
@@ -29,27 +29,13 @@ function ShowTimeEdit() {
     cinemaId: showtime.cinemaId,
   };
   const submitForm = async (values) => {
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
-    await axios
-      .put(
-        `${baseURL}/api/v1/showtimes/${showTimeId.id}`,
-        {
-          typeMovie: values.typeMovie,
-          startTime: arrTime,
-          startDate: values.startDate,
-        },
-        config
-      )
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err.message));
-    toast.success("Cập nhật suất chiếu thành công", {
-      position: toast.POSITION.BOTTOM_LEFT,
-      className: "text-black",
-    });
+    dispatch(updateOneShowTime(showtime._id, 
+      {
+        typeMovie: values.typeMovie,
+        startTime: arrTime,
+        startDate: values.startDate,
+      })
+    )
   };
   const handleAddTime = (screen, time) => {
     setArrTime((prev) => [{ nameScreen: screen, time: time }, ...prev]);
@@ -66,11 +52,20 @@ function ShowTimeEdit() {
     dispatch(getAllCinema());
     dispatch(getAllMovie());
     dispatch(getOneShowTime(showTimeId.id));
-  }, [dispatch, showTimeId.id]);
+  }, []);
 
   useEffect(() => {
     setArrTime(showtime.startTime);
   }, [showtime.startTime]);
+
+  useEffect(() => {
+    if(isUpdated){
+      toast.success("Cập nhật suất chiếu thành công", {
+        position: toast.POSITION.BOTTOM_LEFT,
+        className: "text-black",
+      });
+    }
+  },[isUpdated])
   return (
     <Formik
       initialValues={initialValues}

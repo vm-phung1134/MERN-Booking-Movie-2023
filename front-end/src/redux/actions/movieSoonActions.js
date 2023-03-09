@@ -13,6 +13,9 @@ import {
     DELETE_MOVIESOON_REQUEST,
     DELETE_MOVIESOON_SUCCESS,
     DELETE_MOVIESOON_FAIL,
+    UPDATE_MOVIESOON_REQUEST,
+    UPDATE_MOVIESOON_SUCCESS,
+    UPDATE_MOVIESOON_FAIL,
 } from '../constants/movieSoonConstants'
 const baseURL = "http://localhost:5000"
 
@@ -90,3 +93,24 @@ export const deleteOneMovieSoon = (id) => async (dispatch) => {
         })
     }
 }
+
+export const updateOneMovieSoon = (id, values) => async (dispatch) => {
+    try {
+      dispatch({ type: UPDATE_MOVIESOON_REQUEST });
+      const config = { headers: { "Content-Type": "application/json" } };
+      const { data } = await axios.put(
+        `${baseURL}/api/v1/moviesoons/${id}`,
+        values,
+        config
+      );
+      dispatch({
+        type: UPDATE_MOVIESOON_SUCCESS,
+        payload: data,
+      });
+    } catch (error) {
+      dispatch({
+        type: UPDATE_MOVIESOON_FAIL,
+        payload: error.response.data.message,
+      });
+    }
+  };

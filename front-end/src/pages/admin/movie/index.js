@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import NavBars from "../components/navBars";
 import SideBars from "../components/sideBars";
 import {
@@ -72,7 +73,7 @@ function ManageMovie() {
   useEffect(() => {
     dispatch(getAllMovie());
     dispatch(getAllMovieSoon());
-  }, [dispatch]);
+  }, []);
   useEffect(() => {
     setNewMovieSoons(movieSoons);
     setSearchCurrentMovie(movies);

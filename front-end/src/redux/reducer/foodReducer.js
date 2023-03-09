@@ -9,7 +9,10 @@ import {
   ONE_FOOD_FAIL,
   CREATE_FOOD_REQUEST,
   CREATE_FOOD_SUCCESS,
-  CREATE_FOOD_FAIL
+  CREATE_FOOD_FAIL,
+  UPDATE_FOOD_REQUEST,
+  UPDATE_FOOD_SUCCESS,
+  UPDATE_FOOD_FAIL
 } from "../constants/foodConstants";
 
 //REDUCER GET ALL FOODS
@@ -99,6 +102,34 @@ export const foodDetailReducer = (
       return {
         loading: false,
         isCreated: false,
+      };
+    default:
+      return state;
+  }
+};
+
+export const foodEditReducer = (
+  state = {}, 
+  action
+  ) => {
+  switch (action.type) {
+    // UPDATE FOOD INFOMATION REDUCER
+    case UPDATE_FOOD_REQUEST:
+      return {
+        ...state,
+        loading: true,
+        isUpdated: false
+      };
+    case UPDATE_FOOD_SUCCESS:
+      return {
+        loading: false,
+        isUpdated: true,
+      };
+    case UPDATE_FOOD_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
       };
     default:
       return state;

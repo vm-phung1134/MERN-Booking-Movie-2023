@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect,memo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllShowTime } from "../../../../redux/actions/showTimeActions";
@@ -9,7 +10,7 @@ function Cinema({ cinema }) {
   const showtimes = useSelector((state) => state.showtimes.showtimes);
   useEffect(() => {
     dispatch(getAllShowTime());
-  }, [dispatch]);
+  }, []);
   return (
     <>
       <div className="text-white">

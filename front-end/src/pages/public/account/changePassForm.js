@@ -36,8 +36,7 @@ function ChangePassForm({ userInfo }) {
     }
     dispatch(authLogout());
     localStorage.removeItem("user");
-    localStorage.removeItem("userId");
-    localStorage.removeItem("token");
+    localStorage.removeItem("token-user");
   };
   const validate = (values) => {
     let errors = {};

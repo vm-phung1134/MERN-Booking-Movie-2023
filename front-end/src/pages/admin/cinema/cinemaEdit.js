@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import SideBars from "../components/sideBars";
 import NavBars from "../components/navBars";
 import { Formik } from "formik";
@@ -7,40 +8,23 @@ import "react-toastify/dist/ReactToastify.css";
 import { useEffect, memo} from "react";
 import CinemaForm from "./cinemaForm";
 import {
-  getOneCinema,
+  getOneCinema, updateOneCinema,
 } from "../../../redux/actions/cinemaActions";
-import axios from "axios";
 import { useParams } from "react-router-dom";
 
-const baseURL="http://localhost:5000"
 function CinemaEdit() {
   const dispatch = useDispatch();
   const cinemaId = useParams();
-  const cinema = useSelector((state) => state.cinema.cinema || null)|| null;
+  const {cinema} = useSelector((state) => state.cinema);
+  const {isUpdated} = useSelector((state) => state.editCinema)
   const initialValues = {
     name: cinema.name,
     area: cinema.area,
     address: cinema.address,
   };
   const submitForm = async (values) => {
-    const config = {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      };
-    await axios
-        .put(
-          `${baseURL}/api/v1/cinemas/${cinemaId.id}`,
-          values,
-          config
-        )
-        .then((res) => console.log(res))
-        .catch((err) => console.log(err.message));
-      toast.success("Cập nhật rạp chiếu thành công", {
-        position: toast.POSITION.BOTTOM_LEFT,
-        className: "text-black",
-      });
-    };
+      dispatch(updateOneCinema(cinema._id, values))
+  }
   const validate = (values) => {
     let errors = {};
     // tên người dùng
@@ -49,7 +33,15 @@ function CinemaEdit() {
 
   useEffect(() => {
     dispatch(getOneCinema(cinemaId.id));
-  }, [cinemaId.id, dispatch]);
+  }, []);
+
+  useEffect(() => {
+    if(isUpdated){
+      toast.success("Cập nhật rạp chiếu thành công", {
+      position: toast.POSITION.BOTTOM_LEFT,
+      className: "text-black",
+    })}
+  },[isUpdated])
 
   return (
     <Formik

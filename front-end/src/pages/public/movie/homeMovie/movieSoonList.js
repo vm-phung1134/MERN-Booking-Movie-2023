@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from "react";
 import MovieSoon from "./movieSoon";
 import { Link } from "react-router-dom";
@@ -10,7 +11,7 @@ function MovieSoonList() {
   const movieSoons = useSelector((state) => state.movieSoons.movieSoons) || "";
   useEffect(() => {
     dispatch(getAllMovieSoon());
-  }, [dispatch]);
+  }, []);
   return (
     <>
       <div

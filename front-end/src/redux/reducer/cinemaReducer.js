@@ -8,6 +8,9 @@ import {
   CREATE_CINEMA_REQUEST,
   CREATE_CINEMA_SUCCESS,
   CREATE_CINEMA_FAIL,
+  UPDATE_CINEMA_FAIL,
+  UPDATE_CINEMA_REQUEST,
+  UPDATE_CINEMA_SUCCESS,
 } from "../constants/cinemaConstants";
 
 //REDUCER GET ALL CINEMAS
@@ -26,10 +29,11 @@ export const cinemaReducer = (
     case ALL_CINEMA_SUCCESS:
       return {
         loading: false,
-        cinemas: action.payload,
+        cinemas: action.payload === undefined ? {} : action.payload,
       };
     case ALL_CINEMA_FAIL:
       return {
+        ...state,
         loading: false,
         error: action.payload,
       };
@@ -53,26 +57,29 @@ export const cinemaDetailReducer = (
     case ONE_CINEMA_SUCCESS:
       return {
         loading: false,
-        cinema: action.payload,
+        cinema: action.payload === undefined ? {} : action.payload,
       };
     case ONE_CINEMA_FAIL:
       return {
+        ...state,
         loading: false,
         error: action.payload,
       };
     case CREATE_CINEMA_REQUEST:
       return {
+        ...state,
         loading: true,
         isCreated: false,
       };
     case CREATE_CINEMA_SUCCESS:
       return {
+        ...state,
         loading: false,
-        movie: action.payload,
         isCreated: true,
       };
     case CREATE_CINEMA_FAIL:
       return {
+        ...state,
         loading: false,
         isCreated: false,
       };
@@ -80,3 +87,33 @@ export const cinemaDetailReducer = (
       return state;
   }
 };
+
+export const cinemaEditReducer = (
+  state = {}, 
+  action
+  ) => {
+  switch (action.type) {
+    // UPDATE CINEMA INFOMATION REDUCER
+    case UPDATE_CINEMA_REQUEST:
+      return {
+        ...state,
+        loading: true,
+        isUpdated: false
+      };
+    case UPDATE_CINEMA_SUCCESS:
+      return {
+        loading: false,
+        isUpdated: true,
+      };
+    case UPDATE_CINEMA_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+    default:
+      return state;
+  }
+};
+
+

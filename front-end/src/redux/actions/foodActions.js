@@ -14,7 +14,10 @@ import {
     DELETE_FOOD_FAIL,
     ONE_FOOD_REQUEST,
     ONE_FOOD_SUCCESS,
-    ONE_FOOD_FAIL
+    ONE_FOOD_FAIL,
+    UPDATE_FOOD_REQUEST,
+    UPDATE_FOOD_SUCCESS,
+    UPDATE_FOOD_FAIL
 } from '../constants/foodConstants'
 const baseURL = "http://localhost:5000"
 
@@ -104,3 +107,24 @@ export const deleteOneFood = (id) => async (dispatch) => {
         })
     }
 }
+
+export const updateOneFood = (id, values) => async (dispatch) => {
+    try {
+      dispatch({ type: UPDATE_FOOD_REQUEST });
+      const config = { headers: { "Content-Type": "application/json" } };
+      const { data } = await axios.put(
+        `${baseURL}/api/v1/foods/${id}`,
+        values,
+        config
+      );
+      dispatch({
+        type: UPDATE_FOOD_SUCCESS,
+        payload: data,
+      });
+    } catch (error) {
+      dispatch({
+        type: UPDATE_FOOD_FAIL,
+        payload: error.response.data.message,
+      });
+    }
+  };

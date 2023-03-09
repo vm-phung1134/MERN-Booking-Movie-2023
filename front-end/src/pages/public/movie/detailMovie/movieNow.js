@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 //import logic
 import React, { useEffect, useState, useCallback } from "react";
 import { Link } from "react-router-dom";
@@ -36,7 +37,7 @@ const DetailMovie = () => {
       dispatch(getAllCinema());
       setLoadingPage(false);
     }, 1300);
-  }, [dispatch, movieId, setLoadingPage]);
+  }, []);
   useEffect(() => {
     if (language === "English") {
       setContent(Data.english);
@@ -195,7 +196,7 @@ const DetailMovie = () => {
                 <div className="p-10">
                   <button className="mb-5 uppercase text-sm lg:text-[16px] py-[10px] text-white border-b-2 border-[#E50914]">
                     {content === ""
-                      ? "lịch chiếu"
+                      ? "Nội dung phim"
                       : content.movieDetail.titleContent}
                   </button>
                   <p className="text-white font-thin text-sm md:text-[15px] lg:text-[16px] text-justify">

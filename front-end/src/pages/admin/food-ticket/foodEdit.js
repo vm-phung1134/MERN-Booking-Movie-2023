@@ -6,15 +6,14 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useEffect } from "react";
 import FoodForm from "./foodForm";
-import { getOneFood} from "../../../redux/actions/foodActions";
+import { getOneFood, updateOneFood } from "../../../redux/actions/foodActions";
 import { useParams } from "react-router-dom";
-import axios from "axios";
 
-const baseURL="http://localhost:5000"
 function FoodEdit() {
   const dispatch = useDispatch();
   const foodId = useParams();
-  const food = useSelector((state) => state.food.food);
+  const { food } = useSelector((state) => state.food);
+  const { isUpdated } = useSelector((state) => state.editFood);
   const initialValues = {
     typeFood: food.typeFood,
     discription: food.discription,
@@ -23,19 +22,7 @@ function FoodEdit() {
     image: food.image,
   };
   const submitForm = async (values) => {
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
-    await axios
-      .put(`${baseURL}/api/v1/foods/${foodId.id}`, values, config)
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err.message));
-    toast.success("Cập nhật gói tiện ích thành công", {
-      position: toast.POSITION.BOTTOM_LEFT,
-      className: "text-black",
-    });
+    dispatch(updateOneFood(food._id, values));
   };
   const validate = (values) => {
     let errors = {};
@@ -47,6 +34,14 @@ function FoodEdit() {
     dispatch(getOneFood(foodId.id));
   }, [dispatch, foodId.id]);
 
+  useEffect(() => {
+    if (isUpdated) {
+      toast.success("Cập nhật gói tiện ích thành công", {
+        position: toast.POSITION.BOTTOM_LEFT,
+        className: "text-black",
+      });
+    }
+  }, [isUpdated]);
   return (
     <Formik
       initialValues={initialValues}

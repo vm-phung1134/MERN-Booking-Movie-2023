@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import NavBars from "../components/navBars";
 import SideBars from "../components/sideBars";
 import { Link } from "react-router-dom";
@@ -34,7 +35,7 @@ function ManageCinema() {
   };
   useEffect(() => {
     dispatch(getAllCinema());
-  }, [dispatch]);
+  }, []);
   useEffect(() => {
     setNewCinemas(cinemas);
   }, [cinemas]);

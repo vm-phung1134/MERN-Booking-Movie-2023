@@ -8,6 +8,9 @@ import {
   CREATE_SHOWTIME_REQUEST,
   CREATE_SHOWTIME_SUCCESS,
   CREATE_SHOWTIME_FAIL,
+  UPDATE_SHOWTIME_REQUEST,
+  UPDATE_SHOWTIME_SUCCESS,
+  UPDATE_SHOWTIME_FAIL,
 } from "../constants/showTimeConstants";
 
 //REDUCER GET ALL SHOWTIMES
@@ -30,6 +33,7 @@ export const showTimeReducer = (
       };
     case ALL_SHOWTIME_FAIL:
       return {
+        ...state,
         loading: false,
         error: action.payload,
       };
@@ -62,17 +66,19 @@ export const showtimeDetailReducer = (
       };
     case CREATE_SHOWTIME_REQUEST:
       return {
+        ...state,
         loading: true,
         isCreated: false,
       };
     case CREATE_SHOWTIME_SUCCESS:
       return {
         loading: false,
-        movie: action.payload,
+        showtime: action.payload,
         isCreated: true,
       };
     case CREATE_SHOWTIME_FAIL:
       return {
+        ...state,
         loading: false,
         isCreated: false,
       };
@@ -80,3 +86,32 @@ export const showtimeDetailReducer = (
       return state;
   }
 };
+
+export const showTimeEditReducer = (
+  state = {}, 
+  action
+  ) => {
+  switch (action.type) {
+    // UPDATE CINEMA INFOMATION REDUCER
+    case UPDATE_SHOWTIME_REQUEST:
+      return {
+        ...state,
+        loading: true,
+        isUpdated: false
+      };
+    case UPDATE_SHOWTIME_SUCCESS:
+      return {
+        loading: false,
+        isUpdated: true,
+      };
+    case UPDATE_SHOWTIME_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+    default:
+      return state;
+  }
+};
+

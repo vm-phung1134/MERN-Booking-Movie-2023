@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import SideBars from "../components/sideBars";
 import NavBars from "../components/navBars";
 import { Formik } from "formik";
@@ -12,22 +13,19 @@ import { useParams } from "react-router-dom";
 function UpdateUser() {
   const dispatch = useDispatch();
   const userId = useParams();
-  const user = useSelector((state) => state.userInfo.userInfo)
+  const { userInfo } = useSelector((state) => state.userInfo);
+  const { isUpdated } = useSelector((state) => state.editUser);
   const initialValues = {
-    name: user.name,
-    phone: user.phone,
-    email: user.email,
-    password: user.password,
-    cardId: user.cardId,
-    position: user.position,
-    gender: user.gender,
+    name: userInfo.name,
+    phone: userInfo.phone,
+    email: userInfo.email,
+    password: userInfo.password,
+    cardId: userInfo.cardId,
+    position: userInfo.position,
+    gender: userInfo.gender,
   };
   const submitForm = async (values) => {
-    dispatch(updateOneUser(userId.id, values));
-    toast.success("Cập nhật người dùng thành công !", {
-      position: toast.POSITION.BOTTOM_LEFT,
-      className: "text-black",
-    });
+    dispatch(updateOneUser(userInfo._id, values));
   };
   const validate = (values) => {
     let errors = {};
@@ -37,8 +35,16 @@ function UpdateUser() {
 
   useEffect(() => {
     dispatch(getOneUser(userId.id));
-  }, [dispatch, userId.id]);
+  }, []);
 
+  useEffect(() => {
+    if (isUpdated) {
+      toast.success("Cập nhật người dùng thành công !", {
+        position: toast.POSITION.BOTTOM_LEFT,
+        className: "text-black",
+      });
+    }
+  }, [isUpdated]);
   return (
     <Formik
       initialValues={initialValues}

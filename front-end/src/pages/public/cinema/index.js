@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import HeaderPublic from "../components/headerPublic";
 import { Select, Option } from "@material-tailwind/react";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
@@ -39,7 +40,7 @@ function Cinema() {
     return () => {
       clearTimeout(timeOut);
     };
-  }, [dispatch]);
+  }, []);
   useEffect(() => {
     if (language === "English") {
       setContent(Data.english);

@@ -13,6 +13,9 @@ import {
   DELETE_SHOWTIME_REQUEST,
   DELETE_SHOWTIME_SUCCESS,
   DELETE_SHOWTIME_FAIL,
+  UPDATE_SHOWTIME_REQUEST,
+  UPDATE_SHOWTIME_SUCCESS,
+  UPDATE_SHOWTIME_FAIL,
 } from "../constants/showTimeConstants";
 const baseURL = "http://localhost:5000";
 
@@ -86,6 +89,27 @@ export const deleteOneShowTime = (id) => async (dispatch) => {
     dispatch({
       type: DELETE_SHOWTIME_FAIL,
       payload: error,
+    });
+  }
+};
+
+export const updateOneShowTime = (id, values) => async (dispatch) => {
+  try {
+    dispatch({ type: UPDATE_SHOWTIME_REQUEST });
+    const config = { headers: { "Content-Type": "application/json" } };
+    const { data } = await axios.put(
+      `${baseURL}/api/v1/showtimes/${id}`,
+      values,
+      config
+    );
+    dispatch({
+      type: UPDATE_SHOWTIME_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: UPDATE_SHOWTIME_FAIL,
+      payload: error.response.data.message,
     });
   }
 };

@@ -30,21 +30,27 @@ export const userReducer = (
   action
 ) => {
   switch (action.type) {
-    // USER LOGIN
+    // USER LOGIN & USER REGISTER
     case AUTH_LOGIN_REQUEST:
+    case AUTH_REGISTER_REQUEST:
       return {
+        ...state,
         loading: true,
         isAuthenticated: false,
       };
     case AUTH_LOGIN_SUCCESS:
+    case AUTH_REGISTER_SUCCESS:
       return {
         loading: false,
         user: action.payload,
         isAuthenticated: true,
       };
     case AUTH_LOGIN_FAIL:
+    case AUTH_REGISTER_FAIL:
       return {
+        user: null,
         loading: false,
+        isAuthenticated: false,
         errorLogin: action.payload,
       };
     // USER LOGOUT
@@ -60,30 +66,13 @@ export const userReducer = (
         loading: false,
         error: action.payload,
       };
-    // USER REGISTER
-    case AUTH_REGISTER_REQUEST:
-      return {
-        loading: true,
-        isRegister: false,
-      };
-    case AUTH_REGISTER_SUCCESS:
-      return {
-        loading: false,
-        user: action.payload,
-        isRegister: true,
-      };
-    case AUTH_REGISTER_FAIL:
-      return {
-        loading: false,
-        error: action.payload,
-      };
     // CLEAR ERRORS
     case CLEAR_ERRORS:
       return {
         ...state,
         error: null,
         errorLogin: null,
-        success: false
+        success: false,
       };
     default:
       return state;
@@ -110,6 +99,7 @@ export const getAllReducer = (
       };
     case AUTH_GETALLUSER_FAIL:
       return {
+        ...state,
         loading: false,
         error: action.payload,
       };
@@ -138,6 +128,7 @@ export const userInfoReducer = (
       };
     case AUTH_GETONEUSER_FAIL:
       return {
+        user: null,
         loading: false,
         error: action.payload,
       };
@@ -178,9 +169,9 @@ export const userChangeReducer = (
   action
 ) => {
   switch (action.type) {
-    // USER LOGIN
     case AUTH_CHANGEPW_REQUEST:
       return {
+        ...state,
         loading: true,
         isChanged: false,
       };
@@ -189,10 +180,11 @@ export const userChangeReducer = (
         loading: false,
         user: action.payload,
         isChanged: true,
-        success: true
       };
     case AUTH_CHANGEPW_FAIL:
       return {
+        ...state,
+        isChanged: false,
         loading: false,
         error: action.payload,
       };

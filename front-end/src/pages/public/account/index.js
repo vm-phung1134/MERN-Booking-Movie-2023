@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, memo, useState } from "react";
 import { getAllMovie } from "../../../redux/actions/movieActions";
 import { useSelector, useDispatch } from "react-redux";
@@ -13,7 +14,7 @@ import FooterPublic from "../components/footerPublic";
 
 function Account() {
   const dispatch = useDispatch();
-  const id = localStorage.getItem("userId");
+  const userId = localStorage.getItem("userId");
   const movies = useSelector((state) => state.movies.movies);
   const userInfo = useSelector((state) => state.userInfo.userInfo);
   const reservations = useSelector((state) => state.reservations.reservations);
@@ -27,7 +28,7 @@ function Account() {
     window.scrollTo(0, 0);
     setLoadingPage(true);
     let timeOut = setTimeout(async () => {
-      await dispatch(getOneUser(id));
+      await dispatch(getOneUser(userId));
       await dispatch(getAllMovie());
       await dispatch(getAllReservation());
       setLoadingPage(false);
@@ -35,7 +36,7 @@ function Account() {
     return () => {
       clearTimeout(timeOut);
     };
-  }, [dispatch, id]);
+  }, []);
   useEffect(() => {
     let total = 0;
     reservations.map((reservation) => (total = total + reservation.total));

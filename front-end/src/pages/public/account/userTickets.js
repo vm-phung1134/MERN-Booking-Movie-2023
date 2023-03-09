@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState, memo, useCallback } from "react";
 import { Link } from "react-router-dom";
 import QRCode from "react-qr-code";
@@ -61,7 +62,7 @@ function UserTickets() {
     return () => {
       clearTimeout(timeOut);
     };
-  }, [dispatch]);
+  }, []);
   useEffect(() => {
     setNewReservations(reservations); //INIT NEW ARRAY IS CURRENT ARRAY
   }, [reservations]);

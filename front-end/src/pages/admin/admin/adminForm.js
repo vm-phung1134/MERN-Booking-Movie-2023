@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Formik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { toast, ToastContainer } from "react-toastify";
@@ -7,7 +8,7 @@ import { getOneUser, updateOneUser } from "../../../redux/actions/authActions";
 
 function AdminForm({ handleOpen }) {
   const dispatch = useDispatch();
-  const userId = localStorage.getItem("userId");
+  const adminId = localStorage.getItem("adminId");
   const user = useSelector((state) => state.userInfo.userInfo);
   const initialValues = {
     name: user.name,
@@ -19,7 +20,7 @@ function AdminForm({ handleOpen }) {
     gender: user.gender,
   };
   const submitForm = async (values) => {
-    dispatch(updateOneUser(userId, values));
+    dispatch(updateOneUser(user._id, values));
     toast.success("Cập nhật thông tin admin thành công !", {
       position: toast.POSITION.BOTTOM_LEFT,
       className: "text-black",
@@ -27,13 +28,12 @@ function AdminForm({ handleOpen }) {
   };
   const validate = (values) => {
     let errors = {};
-    // tên người dùng
     return errors;
   };
 
   useEffect(() => {
-    dispatch(getOneUser(userId));
-  }, [dispatch, userId]);
+    dispatch(getOneUser(adminId));
+  }, []);
 
   return (
     <Formik

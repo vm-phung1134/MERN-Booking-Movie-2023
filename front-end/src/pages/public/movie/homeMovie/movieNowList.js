@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect} from "react";
 import Movie from "./movieNow";
 import { Link } from "react-router-dom";
@@ -10,7 +11,7 @@ function MovieNow() {
   const movies = useSelector((state) => state.movies.movies) || "";
   useEffect(() => {
     dispatch(getAllMovie());
-  }, [dispatch]);
+  }, []);
 
   return (
     <>

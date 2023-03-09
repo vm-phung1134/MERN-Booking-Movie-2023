@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import SideBars from "../components/sideBars";
 import NavBars from "../components/navBars";
 import { Formik } from "formik";
@@ -6,17 +7,15 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useEffect, memo } from "react";
 import { useParams } from "react-router-dom";
-import axios from "axios";
 import MovieForm from "./movieForm";
-import { getOneMovieSoon } from "../../../redux/actions/movieSoonActions";
-
-const baseURL = "http://localhost:5000";
+import { updateOneMovieSoon, getOneMovieSoon } from "../../../redux/actions/movieSoonActions";
 
 function MovieSoonUpdate() {
   const dispatch = useDispatch();
-  const movieId = useParams();
-  const id = movieId.id;
-  const movie = useSelector((state) => state.movieSoon.movieSoon);
+  const movieSoonId = useParams();
+  const id = movieSoonId.id;
+  const {movieSoon} = useSelector((state) => state.movieSoon);
+  const {isUpdated} = useSelector((state) => state.editMovieSoon)
   const validate = (values) => {
     let errors = {};
     // tên người dùng
@@ -71,40 +70,37 @@ function MovieSoonUpdate() {
   };
 
   const submitForm = async (values) => {
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
-    await axios
-      .put(`${baseURL}/api/v1/moviesoons/${id}`, values, config)
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err.message));
-    toast.success("Một bộ phim đã được cập nhật vào mục sắp chiếu !", {
-      position: toast.POSITION.BOTTOM_LEFT,
-      className: "text-black",
-    });
+    dispatch(updateOneMovieSoon(movieSoon._id, values))
   };
   const initialValues = {
-    name: movie.name,
-    namevn: movie.namevn,
-    year: movie.year,
-    country: movie.country,
-    type: movie.type,
-    released: movie.released,
-    duration: movie.duration,
-    poster: movie.poster,
-    image: movie.image,
-    bg: movie.bg,
-    director: movie.director,
-    limitAge: movie.limitAge,
-    actors: movie.actors,
-    discription: movie.discription,
-    trailer: movie.trailer,
+    name: movieSoon.name,
+    namevn: movieSoon.namevn,
+    year: movieSoon.year,
+    country: movieSoon.country,
+    type: movieSoon.type,
+    released: movieSoon.released,
+    duration: movieSoon.duration,
+    poster: movieSoon.poster,
+    image: movieSoon.image,
+    bg: movieSoon.bg,
+    director: movieSoon.director,
+    limitAge: movieSoon.limitAge,
+    actors: movieSoon.actors,
+    discription: movieSoon.discription,
+    trailer: movieSoon.trailer,
   };
   useEffect(() => {
     dispatch(getOneMovieSoon(id));
-  }, [dispatch, id]);
+  }, []);
+
+  useEffect(() => {
+    if(isUpdated){
+      toast.success("Một bộ phim đã được cập nhật vào mục sắp chiếu !", {
+      position: toast.POSITION.BOTTOM_LEFT,
+      className: "text-black",
+    })}
+  },[isUpdated])
+
   return (
     <Formik
       initialValues={initialValues}

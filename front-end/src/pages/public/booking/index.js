@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { Breadcrumbs } from "@material-tailwind/react";
@@ -40,16 +41,16 @@ function Booking() {
   const dispatch = useDispatch();
   // CALL STORE FROM GET API
   const baseURL = "http://localhost:5000";
-  const cinemas = useSelector((state) => state.cinemas.cinemas) || "";
-  const movies = useSelector((state) => state.movies.movies) || "";
-  const showtimes = useSelector((state) => state.showtimes.showtimes) || "";
-  const tickets = useSelector((state) => state.tickets.tickets) || "";
-  const foods = useSelector((state) => state.foods.foods) || "";
-  const movie = useSelector((state) => state.movie.movie) || "";
-  const cinema = useSelector((state) => state.cinema.cinema) || "";
-  const showtime = useSelector((state) => state.showtime.showtime) || "";
-  const seats = useSelector((state) => state.seats.seats) || "";
-  const language = useSelector((state) => state.language.language) || "";
+  const cinemas = useSelector((state) => state.cinemas.cinemas);
+  const movies = useSelector((state) => state.movies.movies);
+  const showtimes = useSelector((state) => state.showtimes.showtimes);
+  const tickets = useSelector((state) => state.tickets.tickets);
+  const foods = useSelector((state) => state.foods.foods);
+  const movie = useSelector((state) => state.movie.movie);
+  const cinema = useSelector((state) => state.cinema.cinema);
+  const showtime = useSelector((state) => state.showtime.showtime);
+  const seats = useSelector((state) => state.seats.seats);
+  const language = useSelector((state) => state.language.language);
   // COUNT SỐ VÉ KHÁCH HÀNG ĐÃ CHỌN
   let countTicket = 0;
   tickets.map((ticket) => (countTicket = countTicket + ticket.quantity));
@@ -151,7 +152,7 @@ function Booking() {
     return () => {
       clearTimeout(timeOut);
     };
-  }, [dispatch]);
+  }, []);
 
   useEffect(() => {
     if (language === "English") {

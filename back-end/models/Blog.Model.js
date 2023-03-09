@@ -5,7 +5,7 @@ const blogSchema = new mongoose.Schema({
         required: true
     },
     like: {
-        type: String,
+        type: Number,
     },
     topContent: {
         type: String,

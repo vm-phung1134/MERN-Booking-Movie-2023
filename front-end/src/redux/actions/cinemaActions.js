@@ -12,7 +12,10 @@ import {
     DELETE_CINEMA_SUCCESS,
     ONE_CINEMA_FAIL,
     ONE_CINEMA_REQUEST,
-    ONE_CINEMA_SUCCESS
+    ONE_CINEMA_SUCCESS,
+    UPDATE_CINEMA_FAIL,
+    UPDATE_CINEMA_REQUEST,
+    UPDATE_CINEMA_SUCCESS
 } from '../constants/cinemaConstants'
 const baseURL = "http://localhost:5000"
 
@@ -88,3 +91,24 @@ export const deleteOneCinema = (id) => async (dispatch) => {
         })
     }
 }
+
+export const updateOneCinema = (id, values) => async (dispatch) => {
+    try {
+      dispatch({ type: UPDATE_CINEMA_REQUEST });
+      const config = { headers: { "Content-Type": "application/json" } };
+      const { data } = await axios.put(
+        `${baseURL}/api/v1/cinemas/${id}`,
+        values,
+        config
+      );
+      dispatch({
+        type: UPDATE_CINEMA_SUCCESS,
+        payload: data,
+      });
+    } catch (error) {
+      dispatch({
+        type: UPDATE_CINEMA_FAIL,
+        payload: error.response.data.message,
+      });
+    }
+  };

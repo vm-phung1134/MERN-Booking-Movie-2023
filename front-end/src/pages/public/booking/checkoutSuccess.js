@@ -12,7 +12,6 @@ import { getAllMovieSoon } from "../../../redux/actions/movieSoonActions";
 function CheckoutSuccess() {
   const dispatch = useDispatch();
   const [loadingPage, setLoadingPage] = useState(false);
-  //const movieSoons = useSelector((state) => state.movieSoons.movieSoons);
   useEffect(() => {
     window.scrollTo(0, 0);
     setLoadingPage(true);

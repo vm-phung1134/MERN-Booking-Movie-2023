@@ -12,7 +12,10 @@ import {
     CREATE_MOVIE_FAIL,
     DELETE_MOVIE_REQUEST,
     DELETE_MOVIE_SUCCESS,
-    DELETE_MOVIE_FAIL
+    DELETE_MOVIE_FAIL,
+    UPDATE_MOVIE_REQUEST,
+    UPDATE_MOVIE_SUCCESS,
+    UPDATE_MOVIE_FAIL
 } from '../constants/movieConstants'
 const baseURL = "http://localhost:5000"
 
@@ -91,3 +94,23 @@ export const deleteOneMovie = (id) => async (dispatch) => {
     }
 }
 
+export const updateOneMovie = (id, values) => async (dispatch) => {
+    try {
+      dispatch({ type: UPDATE_MOVIE_REQUEST });
+      const config = { headers: { "Content-Type": "application/json" } };
+      const { data } = await axios.put(
+        `${baseURL}/api/v1/movies/${id}`,
+        values,
+        config
+      );
+      dispatch({
+        type: UPDATE_MOVIE_SUCCESS,
+        payload: data,
+      });
+    } catch (error) {
+      dispatch({
+        type: UPDATE_MOVIE_FAIL,
+        payload: error.response.data.message,
+      });
+    }
+  };

@@ -52,7 +52,6 @@ export const updateOneBlog = (id, values) => async (dispatch) => {
         values,
         config
       );
-      console.log(data)
       dispatch({
         type: UPDATE_ONE_BLOG_SUCCESS,
         payload: data,
