@@ -13,8 +13,8 @@ import Data from "../../components/TranslationEnglish/Data.json";
 function HomeMovie() {
   const dispatch = useDispatch();
   const [loadingPage, setLoadingPage] = useState(false);
-  const movies = useSelector((state) => state.movies.movies);
-  const movieSoons = useSelector((state) => state.movieSoons.movieSoons);
+  const {movies} = useSelector((state) => state.movies);
+  const {movieSoons} = useSelector((state) => state.movieSoons);
   const [isActive, setIsActive] = useState("1");
   const [content, setContent] = useState("");
   const language = useSelector((state) => state.language.language);
@@ -102,7 +102,7 @@ function HomeMovie() {
                                   alt=""
                                 ></img>
                                 <Link to={`/movie-now/${movie._id}`}>
-                                  <div className="absolute opacity-0 hover:opacity-100 transition duration-400 ease-in-out top-0 right-0 left-0 bottom-0 w-full h-full overflow-hidden bg-fixed bg-black/50">
+                                  <div className="absolute opacity-0 hover:opacity-100 transition duration-500 ease-in-out top-0 right-0 left-0 bottom-0 w-full h-full overflow-hidden bg-fixed bg-black/50">
                                     <Link to="/booking">
                                       <button
                                         className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] text-gray-200
@@ -156,7 +156,7 @@ function HomeMovie() {
                                   alt=""
                                 ></img>
                                 <Link to={`/movie-soon/${movie._id}`}>
-                                  <div className="absolute opacity-0 hover:opacity-100 transition duration-400 ease-in-out top-0 right-0 left-0 bottom-0 w-full h-full overflow-hidden bg-fixed bg-black/50">
+                                  <div className="absolute opacity-0 hover:opacity-100 transition duration-500 ease-in-out top-0 right-0 left-0 bottom-0 w-full h-full overflow-hidden bg-fixed bg-black/50">
                                     <Link to="/booking">
                                       <button
                                         className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] text-gray-200

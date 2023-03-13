@@ -68,7 +68,7 @@ function UserTickets() {
   }, [reservations]);
   return (
     <>
-      <div className="bg-[#11161d]">
+      <div className="bg-[#030303]">
         <HeaderPublic />
         <ToastContainer toastStyle={{ color: "black" }} />
         {loadingPage === true ? (
@@ -88,7 +88,7 @@ function UserTickets() {
               VÉ CỦA BẠN
             </button>
             <div data-aos="fade-left" data-aos-duration="1000">
-              {newReservations.reverse().map(
+              {newReservations.slice().reverse().map(
                 (
                   reservation // GET LASTEST ITEM IN ARRAY
                 ) => (
@@ -100,26 +100,32 @@ function UserTickets() {
                         }}
                         className="bg-center bg-cover rounded-lg"
                       >
-                        <div className="bg-gradient-to-r from-black/60 to-black/20 text-sm w-full text-white mt-5 px-2 lg:px-3 py-1 lg:py-3">
+                        <div className="bg-gradient-to-r from-black/90 to-black/50 text-sm w-full text-white mt-5 px-2 lg:px-3 py-1 lg:py-3">
                           <div className="bg-transparent">
                             <div className="grid grid-cols-3 lg:px-2">
                               <div className="lg:flex lg:items-center justify-start col-span-2">
-                                <h1 className="lg:mr-5 mr-0 lg:ml-3 ml-0 pt-2 text-sm lg:text-[15px] text-gray-500">
+                                <h1 className="lg:mr-5 mr-0 lg:ml-3 ml-0 pt-2 text-sm lg:text-[15px] ">
                                   Phim:{" "}
                                   <span className="text-white font-thin text-[12px] lg:text-[15px] uppercase">
                                     {reservation.nameMovie}
                                   </span>
                                 </h1>
-                                <h2 className="lg:ml-5 lg:pt-2 text-sm lg:text-[15px] text-gray-500">
+                                <h2 className="lg:ml-5 lg:pt-2 text-sm lg:text-[15px] ">
                                   Rạp chiếu:{" "}
                                   <span className="text-white font-thin">
                                     {reservation.nameCinema}
                                   </span>
                                 </h2>
+                                <h2 className="lg:ml-5 lg:pt-2 text-sm lg:text-[15px] ">
+                                  Ngày đặt:{" "}
+                                  <span className="text-white font-thin">
+                                    {reservation.createdAt}
+                                  </span>
+                                </h2>
                               </div>
                               <div className="flex items-center justify-end">
                                 <h1 className="mx-2 text-sm lg:text-[15px] hidden lg:block">
-                                  Mã vé QR
+                                  QR Code
                                 </h1>
                                 <button
                                   onClick={() =>
@@ -251,6 +257,12 @@ function UserTickets() {
                 <Input color="gray" variant="standard" label="khác" />
               </DialogBody>
               <DialogFooter>
+              <button
+                  className="px-6 my-5 py-2 text-sm text-black font-medium"
+                  onClick={() => setSize(null)}
+                >
+                  Hủy
+                </button>
                 <button
                   className="px-6 my-5 py-2 text-sm text-white bg-[#c40404]"
                   onClick={() => handleDeleteTicket(id)}
@@ -319,7 +331,7 @@ function UserTickets() {
                           alt=""
                         ></img>
                         <Link to={`/movie-now/${movie._id}`}>
-                          <div className="absolute opacity-0 hover:opacity-100 transition duration-400 ease-in-out top-0 right-0 left-0 bottom-0 w-full h-full overflow-hidden bg-fixed bg-black/50">
+                          <div className="absolute opacity-0 hover:opacity-100 transition duration-500 ease-in-out top-0 right-0 left-0 bottom-0 w-full h-full overflow-hidden bg-fixed bg-black/50">
                             <Link to="/booking">
                               <button
                                 className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] text-gray-200

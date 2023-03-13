@@ -1,6 +1,9 @@
 import axios from 'axios'
 
 import {
+    ALL_RESERVATION_FAIL,
+    ALL_RESERVATION_REQUEST,
+    ALL_RESERVATION_SUCCESS,
     CREATE_RESERVATION_FAIL,
     CREATE_RESERVATION_REQUEST,
     CREATE_RESERVATION_SUCCESS,
@@ -9,7 +12,10 @@ import {
     DELETE_RESERVATION_SUCCESS,
     ONE_RESERVATION_FAIL,
     ONE_RESERVATION_REQUEST,
-    ONE_RESERVATION_SUCCESS
+    ONE_RESERVATION_SUCCESS,
+    UPDATE_RESERVATION_FAIL,
+    UPDATE_RESERVATION_REQUEST,
+    UPDATE_RESERVATION_SUCCESS
 } from '../constants/reservationConstants'
 const baseURL = "http://localhost:5000"
 
@@ -19,7 +25,7 @@ export const createReservation = (reservation) => async (dispatch) => {
         const config = {
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": localStorage.getItem('token')
+                "Authorization": localStorage.getItem('token-user')
             },
         }
         const {data} = await axios.post(
@@ -41,8 +47,24 @@ export const createReservation = (reservation) => async (dispatch) => {
 
 export const getAllReservation = () => async (dispatch) => {
     try{
-        dispatch({type: ONE_RESERVATION_REQUEST})
+        dispatch({type: ALL_RESERVATION_REQUEST})
         const {data} = await axios.get(`${baseURL}/api/v1/reservations`)
+        dispatch({
+            type: ALL_RESERVATION_SUCCESS,
+            payload: data
+        })
+    }catch(error){
+        dispatch({
+            type: ALL_RESERVATION_FAIL,
+            payload: error
+        })
+    }
+}
+
+export const getOneReservation = (id) => async (dispatch) => {
+    try{
+        dispatch({type: ONE_RESERVATION_REQUEST})
+        const {data} = await axios.get(`${baseURL}/api/v1/reservations/${id}`)
         dispatch({
             type: ONE_RESERVATION_SUCCESS,
             payload: data
@@ -54,6 +76,7 @@ export const getAllReservation = () => async (dispatch) => {
         })
     }
 }
+
 
 export const deleteTicket = (id) => async (dispatch) => {
     try{
@@ -71,3 +94,24 @@ export const deleteTicket = (id) => async (dispatch) => {
         })
     }
 }
+
+export const updateOneReservation = (id, values) => async (dispatch) => {
+    try {
+      dispatch({ type: UPDATE_RESERVATION_REQUEST });
+      const config = { headers: { "Content-Type": "application/json" } };
+      const { data } = await axios.put(
+        `${baseURL}/api/v1/reservations/${id}`,
+        values,
+        config
+      );
+      dispatch({
+        type: UPDATE_RESERVATION_SUCCESS,
+        payload: data,
+      });
+    } catch (error) {
+      dispatch({
+        type: UPDATE_RESERVATION_FAIL,
+        payload: error.response.data.message,
+      });
+    }
+  };

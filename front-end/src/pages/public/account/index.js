@@ -80,7 +80,7 @@ function Account() {
                   onClick={handleClickActive}
                   className="text-white text-sm lg:text-[15px] py-5 my-[15px]"
                 >
-                  LICH SỬ TÀI KHOẢN
+                  LICH SỬ GIAO DỊCH
                 </button>
                 <div>
                   {isActive === "2" && (
@@ -103,7 +103,7 @@ function Account() {
                       </div>
                       <div className="lg:my-5 my-2 p-5 text-black text-left rounded-lg bg-white">
                         <h1 className="text-sm">Lịch sử tài khoản</h1>
-                        <p className="font-bold"></p>
+                        
                       </div>
                     </div>
                   )}

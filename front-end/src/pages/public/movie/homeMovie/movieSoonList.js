@@ -8,7 +8,7 @@ import { memo } from "react";
 
 function MovieSoonList() {
   const dispatch = useDispatch();
-  const movieSoons = useSelector((state) => state.movieSoons.movieSoons) || "";
+  const {movieSoons} = useSelector((state) => state.movieSoons);
   useEffect(() => {
     dispatch(getAllMovieSoon());
   }, []);

@@ -73,11 +73,13 @@ function SideBars() {
             <i className="fas fa-users"></i>&ensp;Quản lý tài khoản
           </button>
           </Link>
-          
-          <button className="py-1 pl-8 hover:bg-gray-800 hover:text-white hover:w-full">
+          <Link to="/admin/receipts">
+            <button className="py-1 pl-8 hover:bg-gray-800 hover:text-white hover:w-full">
             <i className="fas fa-solid fa-file-invoice"></i>&emsp;Quản lý hóa
             đơn
           </button>
+          </Link>
+          
           <button className="py-1 pl-8 hover:bg-gray-800 hover:text-white hover:w-full">
             <i className="fas fa-solid fa-comments"></i>&ensp;Phản hồi
           </button>

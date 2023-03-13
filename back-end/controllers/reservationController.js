@@ -13,6 +13,18 @@ exports.getAllReservations = async (req, res, next) => {
     }
 }
 
+exports.getOneReservation = async (req, res, next) => {
+    try {
+        const {reservationId} = req.params;
+        const reservation = await Reservation.findById(reservationId)
+        res.status(200).json(
+            reservation
+        )
+    } catch (error) {
+        next(error)
+    }
+}
+
 exports.createReservation = async (req, res, next) => {
     try {
         const {userId} = req.user;

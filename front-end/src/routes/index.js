@@ -34,6 +34,8 @@ import Calendar from "../pages/admin/calendar";
 import ManageUser from "../pages/admin/user";
 import CreateUser from "../pages/admin/user/createUser";
 import UpdateUser from "../pages/admin/user/updateUser";
+import ManageReceipt from "../pages/admin/receipt";
+import UpdateReceipt from "../pages/admin/receipt/editReceipt"
 
 const publicRoutes = [
   {
@@ -174,7 +176,15 @@ const privateRoutes = [
   {
     path: "/admin/users/update-user/:id",
     component: UpdateUser
-  }
+  },
+  {
+    path: "/admin/receipts",
+    component: ManageReceipt
+  },
+  {
+    path: "/admin/receipts/update-receipt/:id",
+    component: UpdateReceipt
+  },
 
 ];
 

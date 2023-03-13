@@ -8,7 +8,7 @@ import { memo } from "react";
 
 function MovieNow() {
   const dispatch = useDispatch();
-  const movies = useSelector((state) => state.movies.movies) || "";
+  const {movies} = useSelector((state) => state.movies);
   useEffect(() => {
     dispatch(getAllMovie());
   }, []);

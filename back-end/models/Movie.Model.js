@@ -52,11 +52,12 @@ const movieSchema = new mongoose.Schema({
     trailer: {
         type: String,
         require: true
+    },
+    status: {
+        type: String,
+        require: true
     }
-    // cinemaId: {
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     required: true,
-    // }
+    
 }, {timestamps: true})
 
 const Movie = mongoose.model('Movie', movieSchema)
