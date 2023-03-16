@@ -25,6 +25,12 @@ import {
   AUTH_DELETE_REQUEST,
   AUTH_DELETE_SUCCESS,
   AUTH_DELETE_FAIL,
+  AUTH_FORGOTPW_REQUEST,
+  AUTH_FORGOTPW_SUCCESS,
+  AUTH_FORGOTPW_FAIL,
+  AUTH_UPDATENEWPW_REQUEST,
+  AUTH_UPDATENEWPW_SUCCESS,
+  AUTH_UPDATENEWPW_FAIL,
 } from "../constants/authConstants";
 
 const baseURL = "http://localhost:5000"
@@ -176,6 +182,49 @@ export const changePasswordUser =
     } catch (error) {
       dispatch({
         type: AUTH_CHANGEPW_FAIL,
+        payload: error.response.data.message,
+      });
+    }
+  };
+
+  export const forgotPassword = (values) => async (dispatch) => {
+    try {
+      dispatch({ type: AUTH_FORGOTPW_REQUEST });
+      const config = { headers: { "Content-Type": "application/json" } };
+      const { data } = await axios.post(
+        `${baseURL}/api/v1/auth/forgot-password`,
+        values,
+        config
+      );
+      dispatch({
+        type: AUTH_FORGOTPW_SUCCESS,
+        payload: data,
+      });
+    } catch (error) {
+      dispatch({
+        type: AUTH_FORGOTPW_FAIL,
+        payload: error.response.data.message,
+      });
+    }
+  };
+
+  export const updateNewPasswordUser =
+  (email, password, code) => async (dispatch) => {
+    try {
+      dispatch({ type: AUTH_UPDATENEWPW_REQUEST });
+      const config = { headers: { "Content-Type": "application/json" } };
+      const { data } = await axios.patch(
+        `${baseURL}/api/v1/auth/forgot-password`,
+        { email, password, code},
+        config
+      );
+      dispatch({
+        type: AUTH_UPDATENEWPW_SUCCESS,
+        payload: data,
+      });
+    } catch (error) {
+      dispatch({
+        type: AUTH_UPDATENEWPW_FAIL,
         payload: error.response.data.message,
       });
     }

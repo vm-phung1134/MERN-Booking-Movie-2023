@@ -81,7 +81,7 @@ const DetailMovie = () => {
                       </div>
                     </div>
                     <div className="px-0 pt-3 text-white justify-end">
-                      <button className="mb-3 uppercase text-sm lg:text-[16px] py-[10px] border-b-[3px] border-[#E50914]">
+                      <button className="mb-3 uppercase text-sm lg:text-[15px] py-[10px] border-b-[3px] border-[#E50914]">
                         {content === ""
                           ? "thông tin chi tiết"
                           : content.movieDetail.titleDetail}
@@ -194,17 +194,17 @@ const DetailMovie = () => {
               </Dialog>
               <div>
                 <div className="p-10">
-                  <button className="mb-5 uppercase text-sm lg:text-[16px] py-[10px] text-white border-b-2 border-[#E50914]">
+                  <button className="mb-5 uppercase text-sm lg:text-[15px] py-[10px] text-white border-b-2 border-[#E50914]">
                     {content === ""
                       ? "Nội dung phim"
                       : content.movieDetail.titleContent}
                   </button>
-                  <p className="text-white font-thin text-sm md:text-[15px] lg:text-[16px] text-justify">
+                  <p className="text-white font-thin text-sm md:text-[15px] lg:text-[15px] text-justify">
                     &emsp;{movie.discription}
                   </p>
                 </div>
                 <div className="p-10">
-                  <button className="mb-5 uppercase text-sm lg:text-[16px] py-[10px] text-white border-b-2 border-[#E50914]">
+                  <button className="mb-5 uppercase text-sm lg:text-[15px] py-[10px] text-white border-b-2 border-[#E50914]">
                     {content === ""
                       ? "lịch chiếu"
                       : content.movieDetail.startDate}
@@ -216,9 +216,9 @@ const DetailMovie = () => {
                   </div>
                 </div>
                 <div className="p-10">
-                  <button className="mb-5 uppercase text-sm lg:text-[16px] py-[10px] text-white border-b-2 border-[#E50914]">
+                  <button className="mb-5 uppercase text-sm lg:text-[15px] py-[10px] text-white border-b-2 border-[#E50914]">
                     {content === ""
-                      ? "Ngày khởi chiếu"
+                      ? "phim đang chiếu"
                       : content.movieDetail.titleMovieNow}
                   </button>
                   <div>

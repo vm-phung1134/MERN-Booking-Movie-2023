@@ -75,7 +75,7 @@ const [size, setSize] = useState(null);
                       </div>
                     </div>
                     <div className="px-0 pt-3 text-white justify-end">
-                      <button className="mb-3 text-sm lg:text-[16px] py-[10px] border-b-[3px] border-[#E50914]">
+                      <button className="mb-3 text-sm lg:text-[15px] py-[10px] border-b-[3px] border-[#E50914]">
                         THÔNG TIN CHI TIẾT PHIM
                       </button>
                       <h1 className="lg:text-[40px] text-[30px]  font-medium uppercase">
@@ -145,15 +145,15 @@ const [size, setSize] = useState(null);
               </Dialog>
               <div>
                 <div className="p-10">
-                  <button className="mb-5 text-sm lg:text-[16px] py-[10px] text-white border-b-2 border-[#E50914]">
+                  <button className="mb-5 text-sm lg:text-[15px] py-[10px] text-white border-b-2 border-[#E50914]">
                     NỘI DUNG PHIM
                   </button>
-                  <p className="text-white font-thin text-sm md:text-[15px] lg:text-[16px] text-justify">
+                  <p className="text-white font-thin text-sm md:text-[15px] lg:text-[15px] text-justify">
                     &emsp;{movieSoon.discription}
                   </p>
                 </div>
                 <div className="p-10">
-                  <button className="mb-5 text-sm lg:text-[16px] py-[10px] text-white border-b-2 border-[#E50914]">
+                  <button className="mb-5 text-sm lg:text-[15px] py-[10px] text-white border-b-2 border-[#E50914]">
                     LỊCH CHIẾU
                   </button>
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 lg:gap-5">
@@ -163,7 +163,7 @@ const [size, setSize] = useState(null);
                   </div>
                 </div>
                 <div className="p-10">
-                  <button className="mb-5 text-sm lg:text-[16px] py-[10px] text-white border-b-2 border-[#E50914]">
+                  <button className="mb-5 text-sm lg:text-[15px] py-[10px] text-white border-b-2 border-[#E50914]">
                     PHIM SẮP CHIẾU
                   </button>
                   <div>

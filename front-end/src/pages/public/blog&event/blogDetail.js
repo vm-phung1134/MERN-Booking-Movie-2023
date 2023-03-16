@@ -194,7 +194,7 @@ function BlogDetail() {
                           <button className="ml-2 text-[12px] md:text-sm lg:text-xl">
                             <i className="fas fa-thumbs-down"></i>
                           </button>
-                          <button className="ml-4 text-[12px] md:text-sm lg:text-[15px]">
+                          <button className="ml-4 font-thin text-[12px] md:text-sm lg:text-[15px]">
                             Phản hồi
                           </button>
                         </div>

@@ -4,11 +4,21 @@ import RegisterForm from "./RegisterForm";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useEffect } from "react";
+import { useEffect, useState, useCallback } from "react";
+import { Dialog, DialogBody } from "@material-tailwind/react";
+import ForgetForm from "./forgetPasswordForm";
+import UpdateNewPassForm from "./updateNewPassForm";
 
 export default function Login() {
   const { isChanged } = useSelector((state) => state.newUser);
-
+  const {code} = useSelector((state) => state.user);
+  const [size, setSize] = useState(null);
+  const [isActive, setIsActive] = useState(true)
+  const [codeConfirm, setCodeConfirm] = useState("")
+  const [email, setEmail] = useState("")
+  const handleOpen = useCallback((value) => {
+    setSize(value);
+  }, []);
   useEffect(() => {
     window.scrollTo(0, 0);
     if (isChanged === true) {
@@ -21,7 +31,10 @@ export default function Login() {
       );
     }
   }, [isChanged]);
-
+  
+  useEffect(() => {
+    setCodeConfirm(code)
+  },[code])
   return (
     <>
       <div className="bg-[url('https://assets.nflxext.com/ffe/siteui/vlv3/5e48e7b6-350d-48d9-96d6-de8ca173c89f/e39414f0-9714-4480-8e82-119dc943cfc1/VN-vi-20221219-popsignuptwoweeks-perspective_alpha_website_medium.jpg')] bg-cover w-full h-screen relative">
@@ -106,7 +119,7 @@ export default function Login() {
             </button>
           </div>
         </div>
-        <LoginForm />
+        <LoginForm handleOpen={handleOpen} />
       </div>
       {/*-----------------FORM ĐĂNG KÝ---------------- */}
       <div className="grid lg:grid-cols-2 grid-cols-1  gap-x-4 p-4  text-white bg-black h-full">
@@ -132,6 +145,29 @@ export default function Login() {
           </div>
         </div>
       </div>
+      <Dialog
+        open={size === "lg"}
+        size={size || "lg"}
+        handler={handleOpen}
+        style={{ borderRadius: "0px" }}
+      >
+        <DialogBody>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-x-2 lg:gap-x-3">
+            <div>
+              <img
+                className="h-[200px] w-full md:w-[300px] lg:w-[400px]"
+                src="https://img.freepik.com/free-vector/forgot-password-concept-illustration_114360-1123.jpg?w=2000"
+                alt=""
+              />
+            </div>
+              {
+                isActive === true 
+                ?  <ForgetForm setEmail={setEmail} setSize={setSize} setCodeConfirm={setCodeConfirm} isActive={isActive} setIsActive={setIsActive} />
+                : <UpdateNewPassForm setSize={setSize} email={email} setCodeConfirm={setCodeConfirm}  isActive={isActive} setIsActive={setIsActive} codeConfirm={codeConfirm} />
+              }
+        </div>
+        </DialogBody>
+      </Dialog>
     </>
   );
 }

@@ -326,7 +326,7 @@ function UserTickets() {
                     <div className="">
                       <div className="relative">
                         <img
-                          className="w-[370px] bg-cover"
+                          className="w-[370px] lg:h-[470px] bg-cover"
                           src={movie.poster}
                           alt=""
                         ></img>

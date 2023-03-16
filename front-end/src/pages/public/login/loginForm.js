@@ -4,7 +4,7 @@ import { authLogin, clearErrors } from "../../../redux/actions/authActions";
 import { useNavigate } from "react-router-dom";
 import { Formik } from "formik";
 import { Link } from "react-router-dom";
-function LoginForm() {
+function LoginForm({handleOpen}) {
   const initialValues = {
     email: "",
     password: "",
@@ -141,7 +141,7 @@ function LoginForm() {
                     </span>
                   )}
                 </div>
-                <Link className="text-[13px] text-green-500 hover:underline">
+                <Link onClick={() => handleOpen("lg")} className="text-[13px] text-green-500 hover:underline">
                   Quên mật khẩu?
                 </Link>
                 <div className="mt-6">

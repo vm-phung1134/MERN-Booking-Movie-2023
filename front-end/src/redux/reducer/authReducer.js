@@ -20,6 +20,9 @@ import {
   AUTH_CHANGEPW_REQUEST,
   AUTH_CHANGEPW_SUCCESS,
   AUTH_CHANGEPW_FAIL,
+  AUTH_FORGOTPW_REQUEST,
+  AUTH_FORGOTPW_SUCCESS,
+  AUTH_FORGOTPW_FAIL,
 } from "../constants/authConstants";
 
 //REDUCER GET USER
@@ -65,6 +68,23 @@ export const userReducer = (
         ...state,
         loading: false,
         error: action.payload,
+      };
+    // GET CODE TO UPDATE NEW PASSWORD
+    case AUTH_FORGOTPW_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case AUTH_FORGOTPW_SUCCESS:
+      return {
+        loading: false,
+        code: action.payload,
+      };
+    case AUTH_FORGOTPW_FAIL:
+      return {
+        ...state,
+        loading: false,
+        errorChangePw: action.payload,
       };
     // CLEAR ERRORS
     case CLEAR_ERRORS:

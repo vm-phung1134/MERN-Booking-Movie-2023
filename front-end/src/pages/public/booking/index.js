@@ -52,7 +52,7 @@ function Booking() {
   const seats = useSelector((state) => state.seats.seats);
   const language = useSelector((state) => state.language.language);
   // COUNT SỐ VÉ KHÁCH HÀNG ĐÃ CHỌN
-  let countTicket = 0;
+  let [countTicket, setCountTicket] = useState(0);
   tickets.map((ticket) => (countTicket = countTicket + ticket.quantity));
   const [size, setSize] = useState(null);
   const [loadingPage, setLoadingPage] = useState(false);
@@ -96,6 +96,9 @@ function Booking() {
   const handleSeat = (e, seat, seats_id) => {
     setValueSeats(seats_id);
     setSelectSeats((prev) => [...prev, seat.name]);
+    if (selectSeats.includes(seat.name) === true) {
+      setCountTicket(countTicket - 1);
+    }
   };
   const tokenId = localStorage.getItem("userId");
   const ticketPayment = {
@@ -163,8 +166,8 @@ function Booking() {
   }, [language]);
   return (
     <>
-      <div className=" bg-cover bg-center bg-[url('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/020e1179-46f8-43ff-9c44-4280cde630ec/ddbudat-bb20107b-044e-432d-92a1-fbc5951f40ec.jpg/v1/fill/w_1280,h_776,q_75,strp/avatar_2__2022__wallpaper_hd_4k_by_sahibdm_ddbudat-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9Nzc2IiwicGF0aCI6IlwvZlwvMDIwZTExNzktNDZmOC00M2ZmLTljNDQtNDI4MGNkZTYzMGVjXC9kZGJ1ZGF0LWJiMjAxMDdiLTA0NGUtNDMyZC05MmExLWZiYzU5NTFmNDBlYy5qcGciLCJ3aWR0aCI6Ijw9MTI4MCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.3ObOA_bTMLdoT1zr019ZY0bQrLSsTQy6YYZKdyGLGg0')]">
-        <div className="bg-black/90">
+      <div className=" bg-cover bg-center bg-[url('https://wallpaperaccess.com/full/435988.jpg')]">
+        <div className="bg-black/70">
           <HeaderPublic />
           {loadingPage === true ? (
             <SpinnerLoading />
@@ -272,6 +275,7 @@ function Booking() {
                     valueMovie === showtime.movieId &&
                     valueCinema === showtime.cinemaId && (
                       <Session
+                        seats={seats}
                         key={showtime._id}
                         showtime={showtime}
                         setValueShowTime={setValueShowTime}
@@ -408,6 +412,10 @@ function Booking() {
                                                 <div key={seat._id}>
                                                   {seat.status === true ? (
                                                     <li
+                                                      style={{
+                                                        backgroundColor: newSelectSeats.includes(seat.name) === true ? "green" : "", 
+                                                        color: newSelectSeats.includes(seat.name) === true ? "white" : ""
+                                                      }}
                                                       value={seat.name}
                                                       onClick={(e) =>
                                                         handleSeat(
@@ -463,6 +471,13 @@ function Booking() {
                                     ))}
                                   </DialogBody>
                                   <DialogFooter>
+                                    <p className="text-black mx-0 md:mx-5 text-sm">
+                                      Bạn hiện có thể chọn{" "}
+                                      <span className="text-green-500">
+                                        {countTicket}
+                                      </span>{" "}
+                                      vị trí ghế
+                                    </p>
                                     <button
                                       className="px-6 my-5 py-2 text-sm text-white bg-[#E51409]"
                                       onClick={() => handleOpen(null)}

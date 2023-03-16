@@ -8,7 +8,7 @@ import { updateOneUser } from "../../../redux/actions/authActions";
 function InfoForm({ userInfo }) {
   const dispatch = useDispatch();
   const initialValues = {
-    userName: userInfo.name,
+    name: userInfo.name,
     phone: userInfo.phone,
     gender: userInfo.gender,
     cardId: userInfo.cardId,
@@ -61,16 +61,16 @@ function InfoForm({ userInfo }) {
             </h1>
             <div className="mb-4">
               <label
-                htmlFor="userName"
+                htmlFor="name"
                 className="block mb-2 text-sm font-medium text-gray-300 dark:text-white"
               >
                 Họ tên thành viên
               </label>
               <input
-                type="userName"
-                name="userName"
-                id="userName"
-                value={values.userName}
+                type=""
+                name="name"
+                id="name"
+                value={values.name}
                 onChange={handleChange}
                 onBlur={handleBlur}
                 className=" block w-full px-4 py-2 mt-2 text-white bg-transparent border rounded-md focus:border-white focus:ring-white focus:outline-none "

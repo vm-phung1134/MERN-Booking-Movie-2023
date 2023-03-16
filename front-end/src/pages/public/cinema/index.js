@@ -110,7 +110,7 @@ function Cinema() {
                           {movies.map((movie) => (
                             <div
                               key={movie._id}
-                              className="border-gray-400 border grid grid-cols-2 lg:gap-x-1 xl:gap-x-2"
+                              className="border-gray-400 border grid grid-cols-2 lg:gap-x-1 xl:gap-x-1"
                             >
                               <div>
                                 <img
@@ -121,18 +121,18 @@ function Cinema() {
                               </div>
                               <div className="p-2 leading-6">
                                 <div className="flex justify-between">
-                                  <h1 className="text-gray-400">
+                                  <h1 className="text-gray-400 pr-5">
                                     Tên phim:
                                     <span className="uppercase text-white">
                                       {" "}
                                       {movie.name}
                                     </span>
                                   </h1>
-                                  <p className="text-gray-400">
+                                  <p className="text-gray-400 flex-shrink-0">
                                     <i className="fas fa-clock"></i>
                                     <span className="text-white">
                                       {" "}
-                                      {movie.duration} phút
+                                      {movie.duration} m
                                     </span>
                                   </p>
                                 </div>

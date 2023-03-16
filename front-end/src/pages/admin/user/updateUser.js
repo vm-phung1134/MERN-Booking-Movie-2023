@@ -44,7 +44,7 @@ function UpdateUser() {
         className: "text-black",
       });
     }
-  }, [isUpdated]);
+  }, []);
   return (
     <Formik
       initialValues={initialValues}
@@ -72,7 +72,7 @@ function UpdateUser() {
                 <div>
                   <div className="m-5">
                     <h1 className="font-bold text-[35px] uppercase">
-                      Thêm suất chiếu mới
+                      cập nhật người dùng hệ thống
                     </h1>
                   </div>
                   <UserForm
