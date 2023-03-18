@@ -103,8 +103,8 @@ function Dashboard() {
               <p className="text-sm">&#40; Đơn vị tính: Nghìn đồng &#41;</p>
               <div className="p-5" style={{ width: 200, height: 200 }}>
                 <CircularProgressbar
-                  value={((countTotal) / 20000) * 100}
-                  text={`${((countTotal) / 20000) * 100}%`}
+                  value={countTotal/20000 * 100}
+                  text={`${countTotal/20000 * 100}%`}
                   strokeWidth={2}
                 />
               </div>

@@ -209,13 +209,13 @@ export const changePasswordUser =
   };
 
   export const updateNewPasswordUser =
-  (email, password, code) => async (dispatch) => {
+  (email, password) => async (dispatch) => {
     try {
       dispatch({ type: AUTH_UPDATENEWPW_REQUEST });
       const config = { headers: { "Content-Type": "application/json" } };
       const { data } = await axios.patch(
         `${baseURL}/api/v1/auth/forgot-password`,
-        { email, password, code},
+        { email, password},
         config
       );
       dispatch({

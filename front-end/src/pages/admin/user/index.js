@@ -155,7 +155,7 @@ function ManageUser() {
                                   <td className="px-6 py-4 text-sm text-center capitalize whitespace-nowrap">
                                     {user.createdAt}
                                   </td>
-                                  <td className="px-4 py-4 text-sm text-center capitalize whitespace-nowrap">
+                                  <td className="px-4 py-4 text-sm text-center lowercase whitespace-nowrap">
                                     {user.email}
                                   </td>
                                   <td className="px-6 py-4 text-sm text-center capitalize whitespace-nowrap">
@@ -241,7 +241,7 @@ function ManageUser() {
                                   <td className="px-6 py-4 text-sm text-center capitalize whitespace-nowrap">
                                     {user.createdAt}
                                   </td>
-                                  <td className="px-4 py-4 text-sm text-center capitalize whitespace-nowrap">
+                                  <td className="px-4 py-4 text-sm text-center lowercase whitespace-nowrap">
                                     {user.email}
                                   </td>
                                   <td className="px-6 py-4 text-sm text-center capitalize whitespace-nowrap">

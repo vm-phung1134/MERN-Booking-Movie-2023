@@ -20,7 +20,7 @@ function UpdateNewPassForm({
     code: "",
   };
   const submitForm = async (values, { resetForm }) => {
-    dispatch(updateNewPasswordUser(email, values.password, codeConfirm.code));
+    dispatch(updateNewPasswordUser(email, values.password));
     resetForm({ password: "", confirmPassword: "", code: "" });
     toast.success("Cập nhật mật khẩu mới thành công!", {
       position: toast.POSITION.BOTTOM_LEFT,

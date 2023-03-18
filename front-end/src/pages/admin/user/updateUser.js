@@ -26,6 +26,12 @@ function UpdateUser() {
   };
   const submitForm = async (values) => {
     dispatch(updateOneUser(userInfo._id, values));
+    if (isUpdated) {
+      toast.success("Cập nhật người dùng thành công !", {
+        position: toast.POSITION.BOTTOM_LEFT,
+        className: "text-black",
+      });
+    }
   };
   const validate = (values) => {
     let errors = {};
@@ -35,15 +41,6 @@ function UpdateUser() {
 
   useEffect(() => {
     dispatch(getOneUser(userId.id));
-  }, []);
-
-  useEffect(() => {
-    if (isUpdated) {
-      toast.success("Cập nhật người dùng thành công !", {
-        position: toast.POSITION.BOTTOM_LEFT,
-        className: "text-black",
-      });
-    }
   }, []);
   return (
     <Formik

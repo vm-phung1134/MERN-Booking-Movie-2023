@@ -12,19 +12,20 @@ function ForgetForm({ setIsActive, isActive, setEmail, setSize }) {
   const initialValues = {
     email: "",
   };
-  const {errorChangePw } = useSelector((state) => state.user);
+
+  const {errorChangePw, code } = useSelector((state) => state.user);
   const submitForm = async (values) => {
     await dispatch(forgotPassword(values));
-    setEmail(values.email);
-    setIsActive(!isActive);
+    if(code){
+      setEmail(values.email);
+      setIsActive(!isActive);
+    }
   };
   const validate = (values) => {
     let errors = {};
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
     // email
-    if (!values.email) {
-      errors.email = "! Vui lòng nhập Email";
-    } else if (!regex.test(values.email)) {
+    if (!regex.test(values.email)) {
       errors.email = "! Email chưa chính xác";
     } else if (values.email.length > 30) {
       errors.email = "! Email không vượt quá 30 ký tự";
@@ -60,7 +61,7 @@ function ForgetForm({ setIsActive, isActive, setEmail, setSize }) {
           data-aos-duration="600"
           className="px-0 md:px-5 lg:px-10 py-3 col-span-2" onSubmit={handleSubmit}>
             <h1 className="text-[17px] font-medium mb-3">QUÊN MẬT KHẨU</h1>
-            <p className="pt-1 text-center font-medium text-[#e01414]">
+            <p className="pt-1 text-center text-sm font-medium text-[#e01414]">
               {stateError}
             </p>
             <div className="mb-3 ">

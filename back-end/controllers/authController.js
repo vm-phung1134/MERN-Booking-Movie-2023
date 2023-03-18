@@ -2,6 +2,7 @@ const User = require("../models/User.Model");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const nodemailer = require("nodemailer");
+const rn = require("random-number");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 exports.register = async (req, res, next) => {
   try {
@@ -119,7 +120,12 @@ exports.forgotPassword = async (req, res, next) => {
       err.statusCode = 400;
       return next(err);
     }
-    const code = 153679;
+    const options = {
+      min: 10000,
+      max: 99999,
+      integer: true,
+    };
+    const code = rn(options);
     let config = {
       service: "gmail",
       auth: {
@@ -129,14 +135,15 @@ exports.forgotPassword = async (req, res, next) => {
     };
     let transporter = nodemailer.createTransport(config);
     await transporter.sendMail({
-      from: "phucnguyen1134@gmail.com",
+      from: "reactflix.cinema@gmail.com",
       to: email,
-      subject: "React Flix Account", 
+      subject: "React Flix Account",
       text: `
-        Hãy sử dụng mã code này để cập nhật lại mật khẩu cho tài khoản ${email}\n
-        Đây là mã code của bạn: ${code}\n
-        Cảm ơn,\n
-        React Flix Cinema
+      Chào bạn! bạn có phải là người muốn reset password này không?\n
+      Hãy sử dụng mã code này để cập nhật lại mật khẩu cho tài khoản ${email}\n
+      Đây là mã code của bạn: ${code}\n
+      Cảm ơn,\n
+      React Flix Cinema
     `,
     });
     res.status(200).json({ code: code });
@@ -147,14 +154,8 @@ exports.forgotPassword = async (req, res, next) => {
 
 exports.updateNewPasswordUser = async (req, res, next) => {
   try {
-    const {code} = req.body
-    if(code!=153679){
-      const err = new Error("Mã xác thực không đúng!");
-      err.statusCode = 400;
-      return next(err);
-    }
     const user = await User.findOne({ email: req.body.email });
-    if(user){
+    if (user) {
       user.password = req.body.password;
       user.save();
       res.status(200).json(user);

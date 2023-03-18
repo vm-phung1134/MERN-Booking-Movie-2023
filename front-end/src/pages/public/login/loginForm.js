@@ -4,13 +4,14 @@ import { authLogin, clearErrors } from "../../../redux/actions/authActions";
 import { useNavigate } from "react-router-dom";
 import { Formik } from "formik";
 import { Link } from "react-router-dom";
-function LoginForm({handleOpen}) {
+function LoginForm({ handleOpen }) {
   const initialValues = {
     email: "",
     password: "",
   };
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [showOrHide, setShowOrHide] = useState(false)
   const [stateError, setStateError] = useState("");
   const [stateLoadingLogin, setStateLoadingLogin] = useState({
     loading: false,
@@ -34,12 +35,12 @@ function LoginForm({handleOpen}) {
       dispatch(clearErrors(errorLogin));
     }
     if (isAuthenticated === true) {
-      if(user.userPosition!==""){
-        navigate("/admin/dashboard")
+      if (user.userPosition !== "") {
+        navigate("/admin/dashboard");
         localStorage.setItem("admin", user.userName);
         localStorage.setItem("token-admin", user.token);
         localStorage.setItem("adminId", user.userId);
-      }else{
+      } else {
         navigate("/home");
         localStorage.setItem("user", user.userName);
         localStorage.setItem("token-user", user.token);
@@ -126,7 +127,7 @@ function LoginForm({handleOpen}) {
                 </div>
                 <div className="mb-4">
                   <input
-                    type="password"
+                    type={showOrHide === true ? "" : "password"}
                     name="password"
                     id="passwordLogin"
                     placeholder="Mật khẩu"
@@ -141,9 +142,28 @@ function LoginForm({handleOpen}) {
                     </span>
                   )}
                 </div>
-                <Link onClick={() => handleOpen("lg")} className="text-[13px] text-green-500 hover:underline">
-                  Quên mật khẩu?
-                </Link>
+                <div className="flex justify-between">
+                  <div >
+                    <input
+                      id="showPassword"
+                      type="checkbox"
+                      onClick={() => setShowOrHide(!showOrHide)}
+                      className="w-[12px] cursor-pointer h-[12px] accent-transparent mr-3"
+                    />
+                    <label
+                      className="text-gray-400 cursor-pointer text-[13px]"
+                      htmlFor="showPassword"
+                    >
+                      Hiển thị mật khẩu
+                    </label>
+                  </div>
+                  <Link
+                    onClick={() => handleOpen("lg")}
+                    className="text-[13px] text-green-500 hover:underline"
+                  >
+                    Quên mật khẩu?
+                  </Link>
+                </div>
                 <div className="mt-6">
                   {stateLoadingLogin.loading === true ? (
                     <button
