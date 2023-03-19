@@ -71,6 +71,11 @@ function MovieSoonUpdate() {
 
   const submitForm = async (values) => {
     dispatch(updateOneMovieSoon(movieSoon._id, values))
+    if(isUpdated){
+      toast.success("Một bộ phim đã được cập nhật vào mục sắp chiếu !", {
+      position: toast.POSITION.BOTTOM_LEFT,
+      className: "text-black",
+    })}
   };
   const initialValues = {
     name: movieSoon.name,
@@ -92,14 +97,6 @@ function MovieSoonUpdate() {
   useEffect(() => {
     dispatch(getOneMovieSoon(id));
   }, []);
-
-  useEffect(() => {
-    if(isUpdated){
-      toast.success("Một bộ phim đã được cập nhật vào mục sắp chiếu !", {
-      position: toast.POSITION.BOTTOM_LEFT,
-      className: "text-black",
-    })}
-  },[isUpdated])
 
   return (
     <Formik

@@ -128,7 +128,7 @@ function Booking() {
             dispatch(createReservation(ticketPayment));
             newSelectSeats.map((item) =>
               dispatch(updateStatusSeat(valueSeats, item))
-            );
+            )
           }
         })
         .catch((err) => console.log(err.message));

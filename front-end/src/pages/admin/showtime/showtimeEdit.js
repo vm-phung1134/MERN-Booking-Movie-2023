@@ -36,6 +36,12 @@ function ShowTimeEdit() {
         startDate: values.startDate,
       })
     )
+    if(isUpdated){
+      toast.success("Cập nhật suất chiếu thành công", {
+        position: toast.POSITION.BOTTOM_LEFT,
+        className: "text-black",
+      });
+    }
   };
   const handleAddTime = (screen, time) => {
     setArrTime((prev) => [{ nameScreen: screen, time: time }, ...prev]);
@@ -57,15 +63,6 @@ function ShowTimeEdit() {
   useEffect(() => {
     setArrTime(showtime.startTime);
   }, [showtime.startTime]);
-
-  useEffect(() => {
-    if(isUpdated){
-      toast.success("Cập nhật suất chiếu thành công", {
-        position: toast.POSITION.BOTTOM_LEFT,
-        className: "text-black",
-      });
-    }
-  },[isUpdated])
   return (
     <Formik
       initialValues={initialValues}

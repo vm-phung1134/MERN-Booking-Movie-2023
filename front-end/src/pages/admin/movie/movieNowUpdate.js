@@ -89,18 +89,15 @@ function MovieNowUpdate() {
 
   const submitForm = async (values) => {
     dispatch(updateOneMovie(movie._id, values))
-  };
-  useEffect(() => {
-    dispatch(getOneMovie(id));
-  }, []);
-
-  useEffect(() => {
     if(isUpdated){
       toast.success("Một bộ phim đã được cập nhật vào mục đang chiếu !", {
       position: toast.POSITION.BOTTOM_LEFT,
       className: "text-black",
     })}
-  },[isUpdated])
+  };
+  useEffect(() => {
+    dispatch(getOneMovie(id));
+  }, []);
   return (
     <Formik
       initialValues={initialValues}

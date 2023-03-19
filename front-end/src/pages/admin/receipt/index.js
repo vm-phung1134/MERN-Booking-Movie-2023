@@ -147,7 +147,7 @@ function ManageReceipt() {
                                   {receipt.createdAt}
                                 </td>
                                 <td className="px-4 py-4 text-sm text-center capitalize whitespace-nowrap">
-                                  {receipt.total}
+                                {(receipt.total*1000).toLocaleString('vi', {style : 'currency', currency : 'VND'})}
                                 </td>
                                 <td className="px-4 py-4 text-sm text-center capitalize whitespace-nowrap">
                                   Đã thanh toán

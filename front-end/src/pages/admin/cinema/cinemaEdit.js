@@ -24,6 +24,11 @@ function CinemaEdit() {
   };
   const submitForm = async (values) => {
       dispatch(updateOneCinema(cinema._id, values))
+      if(isUpdated){
+        toast.success("Cập nhật rạp chiếu thành công", {
+        position: toast.POSITION.BOTTOM_LEFT,
+        className: "text-black",
+      })}
   }
   const validate = (values) => {
     let errors = {};
@@ -35,13 +40,6 @@ function CinemaEdit() {
     dispatch(getOneCinema(cinemaId.id));
   }, []);
 
-  useEffect(() => {
-    if(isUpdated){
-      toast.success("Cập nhật rạp chiếu thành công", {
-      position: toast.POSITION.BOTTOM_LEFT,
-      className: "text-black",
-    })}
-  },[isUpdated])
 
   return (
     <Formik

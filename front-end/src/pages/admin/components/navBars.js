@@ -25,6 +25,7 @@ function NavBars() {
     setSize(value);
   }, []);
   const [sizePw, setSizePw] = useState(null);
+  const evt = JSON.parse(localStorage.getItem('eventDay'));
   const handleOpenPw = useCallback((value) => {
     setSizePw(value);
   }, []);
@@ -45,24 +46,24 @@ function NavBars() {
       <div className="flex flex-row items-center justify-end">
         <div className="mr-1">
           <div className="px-3">
-            <i className="fas fa-globe"></i> English
+            <i className="fas fa-globe"></i> En&ensp;|&ensp;Vn
           </div>
         </div>
         <div className="mr-1">
-          <div className="px-3">
+          <div className="px-1">
             <Link to="/admin/calendar">
-              <button>
-                <i className="fas fa-calendar-day"></i>
-              </button>
+              <div className="relative p-3">
+              <i className="fas fa-calendar-day"></i>
+              <span className="absolute top-0 text-[13px] right-0 px-[6px] rounded-full text-white bg-red-700">
+                {evt.length}
+              </span>
+          </div>
             </Link>
           </div>
         </div>
         <div className="mr-5">
-          <div className="relative p-3">
+          <div className="p-3">
             <i className="fas fa-bell"></i>
-            <span className="absolute top-0 text-sm right-0 px-[6px] rounded-full text-white bg-red-700">
-              3
-            </span>
           </div>
         </div>
         <Menu>

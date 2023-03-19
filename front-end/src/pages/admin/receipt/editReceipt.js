@@ -54,6 +54,12 @@ function UpdateReceipt() {
           : vlPriceFood + vlPriceTicket,
     };
     dispatch(updateOneReservation(reservation._id, newValues));
+    if (isUpdated) {
+      toast.success("Cập nhật hóa đơn thành công", {
+        position: toast.POSITION.BOTTOM_LEFT,
+        className: "text-black",
+      });
+    }
   };
   const validate = (values) => {
     let errors = {};
@@ -66,15 +72,6 @@ function UpdateReceipt() {
     dispatch(getAllTicket());
     dispatch(getAllFood());
   }, []);
-
-  useEffect(() => {
-    if (isUpdated) {
-      toast.success("Cập nhật hóa đơn thành công", {
-        position: toast.POSITION.BOTTOM_LEFT,
-        className: "text-black",
-      });
-    }
-  }, [isUpdated]);
 
   useEffect(() => {
     let totalTicket = 0;

@@ -1,57 +1,56 @@
 import { Link } from "react-router-dom";
+import Logo from "../../public/login/mylogo.png";
 
 function SideBars() {
   return (
-    <div className="px-3 fixed top-0">
-      <div>
-        <h1 className="text-center py-7 font-bold text-[30px]">React Flix</h1>
+    <div className="px-3 w-[20%] fixed top-0">
+      <div className="flex justify-center p-8">
+        <img className="lg:h-8 lg:w-[150px] h-5 w-[100px]" src={Logo} alt="Workflow" />
       </div>
       <div className="mt-2">
         <h2 className="font-medium text-sm text-gray-600">TRANG CHỦ</h2>
         <div className="flex flex-col items-start">
-          <Link className="py-1 pl-8 hover:bg-gray-800 hover:text-white hover:w-full"to="/admin/dashboard">
-            <button >
+          <button className="py-1 pl-8 hover:bg-gray-800 hover:text-white hover:w-full">
+            <Link to="/admin/dashboard">
               <i className="fas fa-chart-line"></i>&emsp;Dashboard
-            </button>
-          </Link>
+            </Link>
+          </button>
         </div>
       </div>
       <div className="mt-2">
         <h2 className="font-medium text-sm text-gray-600">PHIM</h2>
         <div className="flex flex-col items-start">
-          <Link className="py-1 pl-8 hover:bg-gray-800 hover:text-white hover:w-full" to="/admin/movie">
-            {" "}
-            <button>
+          <button className="py-1 pl-8 hover:bg-gray-800 hover:text-white hover:w-full">
+            <Link to="/admin/movie">
               <i className="fas fa-film"></i>&emsp; Quản lý phim
-            </button>
-          </Link>
+            </Link>
+          </button>
         </div>
       </div>
       <div className="mt-2">
         <h2 className="font-medium text-sm text-gray-600">RẠP CHIẾU</h2>
         <div className="flex flex-col items-start">
-          <Link to="/admin/cinema" className="py-1 pl-8 hover:bg-gray-800 hover:text-white hover:w-full">
-           <button >
-            <i className="fas fa-house-laptop"></i>&ensp;Quản lý rạp chiếu
+          <button className="py-1 pl-8 hover:bg-gray-800 hover:text-white hover:w-full">
+            <Link to="/admin/cinema">
+              <i className="fas fa-house-laptop"></i>&ensp;Quản lý rạp chiếu
+            </Link>
           </button>
-          </Link>
-          <Link to="/admin/food-ticket" className="py-1 pl-8 hover:bg-gray-800 hover:text-white hover:w-full">
-           <button >
-            <i className="fas fa-house-laptop"></i>&ensp;Gói combo & Vé
+          <button className="py-1 pl-8 hover:bg-gray-800 hover:text-white hover:w-full">
+            <Link to="/admin/food-ticket">
+              <i className="fas fa-house-laptop"></i>&ensp;Gói combo & Vé
+            </Link>
           </button>
-          </Link>
         </div>
       </div>
       <div className="mt-2">
         <h2 className="font-medium text-sm text-gray-600">SUẤT CHIẾU</h2>
         <div className="flex flex-col items-start">
-          <Link to="/admin/showtime">
           <button className="py-1 pl-8 hover:bg-gray-800 hover:text-white hover:w-full">
-            <i className="fas fa-solid fa-business-time"></i>&ensp;Quản lý suất
-            chiếu
+            <Link to="/admin/showtime">
+              <i className="fas fa-solid fa-business-time"></i>&ensp;Quản lý
+              suất chiếu
+            </Link>
           </button>
-          </Link>
-          
         </div>
       </div>
       <div className="mt-2">
@@ -68,18 +67,17 @@ function SideBars() {
       <div className="mt-2">
         <h2 className="font-medium text-sm text-gray-600">NGƯỜI DÙNG</h2>
         <div className="flex flex-col items-start">
-          <Link to="/admin/users">
           <button className="py-1 pl-8 hover:bg-gray-800 hover:text-white hover:w-full">
-            <i className="fas fa-users"></i>&ensp;Quản lý tài khoản
+            <Link to="/admin/users">
+              <i className="fas fa-users"></i>&ensp;Quản lý tài khoản
+            </Link>
           </button>
-          </Link>
-          <Link to="/admin/receipts">
-            <button className="py-1 pl-8 hover:bg-gray-800 hover:text-white hover:w-full">
-            <i className="fas fa-solid fa-file-invoice"></i>&emsp;Quản lý hóa
-            đơn
+          <button className="py-1 pl-8 hover:bg-gray-800 hover:text-white hover:w-full">
+            <Link to="/admin/receipts">
+              <i className="fas fa-solid fa-file-invoice"></i>&emsp;Quản lý hóa
+              đơn
+            </Link>
           </button>
-          </Link>
-          
           <button className="py-1 pl-8 hover:bg-gray-800 hover:text-white hover:w-full">
             <i className="fas fa-solid fa-comments"></i>&ensp;Phản hồi
           </button>

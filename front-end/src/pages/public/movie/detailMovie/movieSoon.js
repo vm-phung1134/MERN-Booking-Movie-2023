@@ -55,7 +55,7 @@ const [size, setSize] = useState(null);
                 className="bg-cover bg-center"
               >
                 <div className="bg-gradient-to-t from-black/100 to-black/40">
-                  <div className="grid lg:grid-cols-3 2xl:gap-x-0 md:gap-x-3 grid-cols-1 p-10">
+                  <div className="grid lg:grid-cols-3 2xl:gap-x-0 md:gap-x-3 grid-cols-1 p-6 lg:p-10">
                     <div className="mt-5 flex justify-center">
                       <div className="relative">
                         <img
@@ -143,28 +143,28 @@ const [size, setSize] = useState(null);
                   </button>
                 </DialogFooter>
               </Dialog>
-              <div>
-                <div className="p-10">
-                  <button className="mb-5 text-sm lg:text-[15px] py-[10px] text-white border-b-2 border-[#E50914]">
-                    NỘI DUNG PHIM
+              <div className="lg:p-10 p-6">
+                <div className="mb-5">
+                  <button className="uppercase text-sm lg:text-[15px] py-[10px] text-white border-b-2 border-[#E50914]">
+                    nội dung phim
                   </button>
-                  <p className="text-white font-thin text-sm md:text-[15px] lg:text-[15px] text-justify">
+                  <p className="text-white mt-5 font-thin text-sm md:text-[15px] lg:text-[15px] text-justify">
                     &emsp;{movieSoon.discription}
                   </p>
                 </div>
-                <div className="p-10">
-                  <button className="mb-5 text-sm lg:text-[15px] py-[10px] text-white border-b-2 border-[#E50914]">
-                    LỊCH CHIẾU
+                <div className="mb-5">
+                  <button className="uppercase text-sm lg:text-[15px] py-[10px] text-white border-b-2 border-[#E50914]">
+                    lịch chiếu
                   </button>
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 lg:gap-5">
+                  <div className="grid grid-cols-1 mt-5 lg:grid-cols-2 gap-3 lg:gap-5">
                     {cinemas.map((cinema) => (
                       <Cinema key={cinema._id} cinema={cinema} />
                     ))}
                   </div>
                 </div>
-                <div className="p-10">
-                  <button className="mb-5 text-sm lg:text-[15px] py-[10px] text-white border-b-2 border-[#E50914]">
-                    PHIM SẮP CHIẾU
+                <div className="mb-5">
+                  <button className="uppercase text-sm lg:text-[15px] py-[10px] text-white border-b-2 border-[#E50914]">
+                    phim sắp chiếu
                   </button>
                   <div>
                     <MovieSoonList />

@@ -319,7 +319,7 @@ function UserTickets() {
             >
               PHIM ĐANG CHIẾU
             </button>
-            <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 lg:gap-x-10 pt-10">
+            <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 lg:gap-x-5 pt-10">
               {movies.map((movie, index) => (
                 <div key={movie._id}>
                   {index < 4 && (

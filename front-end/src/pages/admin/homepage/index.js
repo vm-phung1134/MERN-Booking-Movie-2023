@@ -17,6 +17,7 @@ import {
 
 import { getAllUser } from "../../../redux/actions/authActions";
 import { getAllReservation } from "../../../redux/actions/reservationActions";
+import { Link } from "react-router-dom";
 function Dashboard() {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.users.users);
@@ -39,7 +40,7 @@ function Dashboard() {
   }, [reservations]);
   return (
     <div className="grid grid-cols-10">
-      <div className="col-span-2 border-r max-h-max border-gray-500 text-[15px]">
+      <div className="col-span-2 w-full border-r max-h-max border-gray-500 text-[15px]">
         <SideBars />
       </div>
       <div className="col-span-8">
@@ -58,7 +59,9 @@ function Dashboard() {
                 {1000 + users.length}
               </p>
               <div className="flex justify-between">
-                <p className="pt-2 border-b border-gray-700">Xem danh sách</p>
+                <Link to="/admin/user">
+                  <p className="pt-2 border-b border-gray-700">Xem danh sách</p>
+                </Link>
                 <div className="bg-red-400 p-2 rounded-lg">
                   <i className="fas fa-user"></i>
                 </div>
@@ -75,7 +78,9 @@ function Dashboard() {
                 {reservations.length}
               </p>
               <div className="flex justify-between">
-                <p className="pt-2 border-b border-gray-700">Xem danh sách</p>
+                <Link to="/admin/receipt">
+                  <p className="pt-2 border-b border-gray-700">Xem danh sách</p>
+                </Link>
                 <div className="bg-green-400 py-2 px-2 rounded-lg">
                   <i className="fas fa-ticket-simple"></i>
                 </div>
@@ -84,8 +89,7 @@ function Dashboard() {
             <div className="p-3 border-none shadow-xl rounded-xl">
               <h1>DOANH THU TRONG THÁNG 3</h1>
               <p className="text-[35px] py-4 font-bold">
-                {countTotal}
-                <span className="text-[20px] font-medium">.000 VNĐ</span>
+                {(countTotal*1000).toLocaleString('vi', {style : 'currency', currency : 'VND'})}
               </p>
               <div className="flex justify-between">
                 <p className="pt-2 border-b border-gray-700">Xem danh sách</p>
@@ -103,18 +107,18 @@ function Dashboard() {
               <p className="text-sm">&#40; Đơn vị tính: Nghìn đồng &#41;</p>
               <div className="p-5" style={{ width: 200, height: 200 }}>
                 <CircularProgressbar
-                  value={countTotal/20000 * 100}
-                  text={`${countTotal/20000 * 100}%`}
+                  value={(countTotal*1000/20000000 * 100)}
+                  text={`${countTotal*1000/20000000 * 100}%`}
                   strokeWidth={2}
                 />
               </div>
               <p className="text-sm">
                 Danh số hiện tại{" "}
-                <span className="font-medium">{countTotal+100}</span>
+                <span className="font-medium">{(countTotal*1000 + 100000).toLocaleString('vi', {style : 'currency', currency : 'VND'})}</span>
               </p>
               <p className="text-sm">
                 Mục tiêu đề ra{" "}
-                <span className="font-medium">20000</span>
+                <span className="font-medium">{(20000000).toLocaleString('vi', {style : 'currency', currency : 'VND'})}</span>
               </p>
               <p className="text-sm">
                 Tổng danh thu từ việc bán vé so với mục tiêu đặt ra
@@ -203,7 +207,7 @@ function Dashboard() {
                               {reservation.createdAt}
                             </td>
                             <td className="px-6 text-center py-4 text-sm whitespace-nowrap">
-                              {reservation.total}.000 đ
+                              {(reservation.total*1000).toLocaleString('vi', {style : 'currency', currency : 'VND'})}
                             </td>
                             <td className="px-6 text-center py-4 text-green-700 text-sm whitespace-nowrap">
                               Đã thanh toán

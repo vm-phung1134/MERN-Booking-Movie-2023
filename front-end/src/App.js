@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { publicRoutes, privateRoutes } from "./routes";
 import "aos/dist/aos.css";
 import Zendesk, { ZendeskAPI } from "./ZendexConfig";
-const ZENDESK_KEY = "1689d03d-8916-4d4c-b83d-b809a1f8e023"
+const ZENDESK_KEY = "1689d03d-8916-4d4c-b83d-b809a1f8e023";
 
 AOS.init();
 export default function App() {
@@ -18,7 +18,25 @@ export default function App() {
           <Routes>
             {publicRoutes.map((route, index) => {
               const Page = route.component;
-              return <Route key={index} path={route.path} element={<Page />} />;
+              return (
+                <>
+                  <Route
+                    key={index}
+                    path={route.path}
+                    element={
+                      <>
+                        <Page />
+                        <Zendesk
+                          defer
+                          zendeskKey={ZENDESK_KEY}
+                          onLoaded={handleLoaded}
+                        />
+                      </>
+                    }
+                  />
+                  ;
+                </>
+              );
             })}
 
             {privateRoutes.map((route, index) => {
@@ -27,7 +45,6 @@ export default function App() {
             })}
           </Routes>
         </div>
-        <Zendesk defer zendeskKey={ZENDESK_KEY} onLoaded={handleLoaded} />
       </div>
     </BrowserRouter>
   );
