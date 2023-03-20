@@ -37,7 +37,7 @@ const DetailMovie = () => {
       dispatch(getAllCinema());
       setLoadingPage(false);
     }, 1300);
-  }, []);
+  }, [movieId.id]);
   useEffect(() => {
     if (language === "English") {
       setContent(Data.english);
@@ -58,9 +58,9 @@ const DetailMovie = () => {
                 style={{
                   backgroundImage: `url("${movie.bg}")`,
                 }}
-                className="bg-cover bg-center"
+                className="bg-cover bg-top"
               >
-                <div className="bg-gradient-to-t from-black/100 to-black/40">
+                <div className="bg-gradient-to-t from-black/100 to-black/50">
                   <div className="grid lg:grid-cols-3 2xl:gap-x-0 md:gap-x-3 grid-cols-1 px-5 md:px-10 md:py-10 py-10">
                     <div className="mt-5 flex justify-center">
                       <div className="relative">

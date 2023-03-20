@@ -26,7 +26,7 @@ import {
 import { foodReducer,foodDetailReducer, foodEditReducer } from './redux/reducer/foodReducer'
 import { editReservationReducer, getAllReservationReducer, reservationReducer } from './redux/reducer/reservationReducer'
 import { seatsReducer } from './redux/reducer/seatReducer'
-import { feedBackReducer } from './redux/reducer/feedBackReducer'
+import { feedBackReducer, getAllFeedBackReducer } from './redux/reducer/feedBackReducer'
 import { blogDetailReducer, blogReducer } from './redux/reducer/blogReducer'
 import { eventDetailReducer, eventReducer } from './redux/reducer/eventReducer'
 import { getAllMovieSoonReducer, getOneMovieSoonReducer, movieSoonEditReducer } from './redux/reducer/movieSoonReducer'
@@ -58,6 +58,7 @@ const reducer = combineReducers({
     reservations: getAllReservationReducer,
     editReservation: editReservationReducer,
     feedBack: feedBackReducer,
+    feedBacks: getAllFeedBackReducer,
     blogs: blogReducer,
     blog: blogDetailReducer,
     events: eventReducer,

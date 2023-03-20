@@ -1,6 +1,7 @@
 const User = require("../models/User.Model");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
+require("dotenv").config();
 const nodemailer = require("nodemailer");
 const rn = require("random-number");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
@@ -129,8 +130,8 @@ exports.forgotPassword = async (req, res, next) => {
     let config = {
       service: "gmail",
       auth: {
-        user: "phucnguyen1134@gmail.com",
-        pass: "mxmzjcrpoqsxuxuc",
+        user: `${process.env.EMAIL}`,
+        pass: `${process.env.EMAILPASS}`,
       },
     };
     let transporter = nodemailer.createTransport(config);

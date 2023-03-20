@@ -8,6 +8,7 @@ import { useEffect, useState, useCallback } from "react";
 import { Dialog, DialogBody } from "@material-tailwind/react";
 import ForgetForm from "./forgetPasswordForm";
 import UpdateNewPassForm from "./updateNewPassForm";
+import FooterPublic from "../components/footerPublic";
 
 export default function Login() {
   const { isChanged } = useSelector((state) => state.newUser);
@@ -168,6 +169,7 @@ export default function Login() {
         </div>
         </DialogBody>
       </Dialog>
+      <FooterPublic/>
     </>
   );
 }

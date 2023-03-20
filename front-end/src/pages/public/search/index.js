@@ -101,7 +101,7 @@ function SearchPage() {
         <div data-aos="fade-up" data-aos-duration="1000">
           {isActive === "1" && (
             <div className="grid-cols-2 grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 my-10 md:mx-10 lg:mx-20">
-              {searchCurrentMovie.map((movie) => (
+              {searchCurrentMovie.slice().reverse().map((movie) => (
                 <div key={movie._id}>
                   <div className="">
                     <div className="relative">
@@ -132,7 +132,7 @@ function SearchPage() {
         <div data-aos="fade-up" data-aos-duration="1000">
           {isActive === "2" && (
             <div className="grid-cols-2 grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 my-10 md:mx-10 lg:mx-20">
-              {searchSoonMovie.map((movie) => (
+              {searchSoonMovie.slice().reverse().map((movie) => (
                 <div key={movie._id}>
                   <div className="">
                     <div className="relative">

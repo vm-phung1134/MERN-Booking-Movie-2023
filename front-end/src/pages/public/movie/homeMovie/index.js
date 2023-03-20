@@ -91,9 +91,9 @@ function HomeMovie() {
                 {isActive === "1" ? (
                   <div>
                     <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 my-10 gap-3">
-                      {movies.map((movie, index) => (
+                      {movies.slice().reverse().map((movie, index) => (
                         <div key={movie._id}>
-                          {index < 8 && (
+                          {index < 15 && (
                             <div className="">
                               <div className="relative">
                                 <img
@@ -115,10 +115,10 @@ function HomeMovie() {
                                 </Link>
                               </div>
                               <div className="text-[15px]">
-                                <p className="text-white uppercase">
+                                <p className="text-white truncate uppercase">
                                   {movie.name}
                                 </p>
-                                <p className="text-gray-500 uppercase">
+                                <p className="text-gray-500 truncate uppercase">
                                   {movie.namevn}
                                 </p>
                               </div>
@@ -145,9 +145,9 @@ function HomeMovie() {
                 ) : (
                   <div>
                     <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 my-10 gap-3">
-                      {movieSoons.map((movie, index) => (
+                      {movieSoons.slice().reverse().map((movie, index) => (
                         <div key={movie._id}>
-                          {index < 8 && (
+                          {index < 15 && (
                             <div className="">
                               <div className="relative">
                                 <img
@@ -169,10 +169,10 @@ function HomeMovie() {
                                 </Link>
                               </div>
                               <div className="text-[15px]">
-                                <p className="text-white uppercase">
+                                <p className="text-white truncate uppercase">
                                   {movie.name}
                                 </p>
-                                <p className="text-gray-500 uppercase">
+                                <p className="text-gray-500 truncate uppercase">
                                   {movie.namevn}
                                 </p>
                               </div>

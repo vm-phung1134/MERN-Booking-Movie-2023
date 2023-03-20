@@ -24,12 +24,17 @@ function Dashboard() {
   let [countTotal, setCountTotal] = useState(0);
   const reservations = useSelector((state) => state.reservations.reservations);
   const data = [
-    { name: "Tháng 1", Total: 0 },
-    { name: "Tháng 2", Total: 100 },
-    { name: "Tháng 3", Total: countTotal },
+    { name: "Tháng 1", Total: 0, User: 0 },
+    { name: "Tháng 2", Total: 100, User: 1000 },
+    { name: "Tháng 3", Total: countTotal, User: users.length },
   ];
-
+// const user = [
+//     { name: "Tháng 1", Total: 0 },
+//     { name: "Tháng 2", Total: 1000 },
+//     { name: "Tháng 3", Total: users.length },
+//   ];
   useEffect(() => {
+    window.scrollTo(0,0)
     dispatch(getAllUser());
     dispatch(getAllReservation());
   }, [dispatch]);
@@ -59,7 +64,7 @@ function Dashboard() {
                 {1000 + users.length}
               </p>
               <div className="flex justify-between">
-                <Link to="/admin/user">
+                <Link to="/admin/users">
                   <p className="pt-2 border-b border-gray-700">Xem danh sách</p>
                 </Link>
                 <div className="bg-red-400 p-2 rounded-lg">
@@ -78,7 +83,7 @@ function Dashboard() {
                 {reservations.length}
               </p>
               <div className="flex justify-between">
-                <Link to="/admin/receipt">
+                <Link to="/admin/receipts">
                   <p className="pt-2 border-b border-gray-700">Xem danh sách</p>
                 </Link>
                 <div className="bg-green-400 py-2 px-2 rounded-lg">
@@ -147,6 +152,12 @@ function Dashboard() {
                     type="monotone"
                     dataKey="Total"
                     stroke="#8884d8"
+                    activeDot={{ r: 8 }}
+                  />
+                  <Line
+                    type="monotone"
+                    dataKey="User"
+                    stroke="#82ca9d"
                     activeDot={{ r: 8 }}
                   />
                 </LineChart>

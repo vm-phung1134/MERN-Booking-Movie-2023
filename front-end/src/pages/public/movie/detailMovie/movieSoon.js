@@ -35,10 +35,10 @@ const [size, setSize] = useState(null);
     setLoadingPage(true);
     setTimeout(async () => {
       await dispatch(getOneMovieSoon(movieSoonId.id));
-      dispatch(getAllCinema());
+      dispatch(getAllCinema(movieSoonId.id));
       setLoadingPage(false);
     }, 1300);
-  }, []);
+  }, [movieSoonId.id]);
   return (
     <>
       <div className="max-h-full min-h-screen w-full">
@@ -52,9 +52,9 @@ const [size, setSize] = useState(null);
                 style={{
                   backgroundImage: `url("${movieSoon.bg}")`,
                 }}
-                className="bg-cover bg-center"
+                className="bg-cover bg-top"
               >
-                <div className="bg-gradient-to-t from-black/100 to-black/40">
+                <div className="bg-gradient-to-t from-black/100 to-black/50">
                   <div className="grid lg:grid-cols-3 2xl:gap-x-0 md:gap-x-3 grid-cols-1 p-6 lg:p-10">
                     <div className="mt-5 flex justify-center">
                       <div className="relative">

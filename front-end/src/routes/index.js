@@ -36,6 +36,7 @@ import CreateUser from "../pages/admin/user/createUser";
 import UpdateUser from "../pages/admin/user/updateUser";
 import ManageReceipt from "../pages/admin/receipt";
 import UpdateReceipt from "../pages/admin/receipt/editReceipt"
+import FeedBack from "../pages/admin/feedback";
 
 const publicRoutes = [
   {
@@ -185,7 +186,10 @@ const privateRoutes = [
     path: "/admin/receipts/update-receipt/:id",
     component: UpdateReceipt
   },
-
+  {
+    path: "/admin/feedback",
+    component: FeedBack
+  }
 ];
 
 export { publicRoutes, privateRoutes };

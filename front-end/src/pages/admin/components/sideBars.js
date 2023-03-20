@@ -79,7 +79,9 @@ function SideBars() {
             </Link>
           </button>
           <button className="py-1 pl-8 hover:bg-gray-800 hover:text-white hover:w-full">
-            <i className="fas fa-solid fa-comments"></i>&ensp;Phản hồi
+            <Link to="/admin/feedback">
+              <i className="fas fa-solid fa-comments"></i>&ensp;Phản hồi
+            </Link>
           </button>
         </div>
       </div>

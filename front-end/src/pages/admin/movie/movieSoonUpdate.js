@@ -21,23 +21,23 @@ function MovieSoonUpdate() {
     // tên người dùng
     if (!values.name) {
       errors.name = "! Vui lòng nhập tên phim";
-    } else if (values.name.length > 30) {
-      errors.name = "! Tên phim không vượt quá 30 ký tự";
+    } else if (values.name.length > 50) {
+      errors.name = "! Tên phim không vượt quá 50 ký tự";
     }
     if (!values.namevn) {
       errors.namevn = "! Vui lòng nhập tên việt hóa";
-    } else if (values.namevn.length > 30) {
-      errors.namevn = "! Tên phim không vượt quá 30 ký tự";
+    } else if (values.namevn.length > 50) {
+      errors.namevn = "! Tên phim không vượt quá 50 ký tự";
     }
     if (!values.country) {
       errors.country = "! Vui lòng nhập quốc gia sản xuất";
-    } else if (values.country.length > 30) {
-      errors.country = "! Tên quốc gia không vượt quá 30 ký tự";
+    } else if (values.country.length > 50) {
+      errors.country = "! Tên quốc gia không vượt quá 50 ký tự";
     }
     if (!values.type) {
       errors.type = "! Vui lòng nhập thể loại phim";
-    } else if (values.type.length > 30) {
-      errors.type = "! Tên thể loại không vượt quá 30 ký tự";
+    } else if (values.type.length > 50) {
+      errors.type = "! Tên thể loại không vượt quá 50 ký tự";
     }
     if (!values.released) {
       errors.released = "! Vui lòng chọn ngày khởi chiếu";
@@ -46,7 +46,7 @@ function MovieSoonUpdate() {
     }
     if (!values.director) {
       errors.director = "! Vui lòng nhập tên đạo diễn";
-    } else if (values.director > 30) {
+    } else if (values.director > 50) {
       errors.director = "! Vui lòng nhập tên khác";
     }
     if (!values.poster) {

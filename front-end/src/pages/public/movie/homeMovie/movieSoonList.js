@@ -20,7 +20,7 @@ function MovieSoonList() {
         className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 lg:gap-4 md:gap-3 gap-3 justify-items-center mt-10"
       >
         {movieSoons.slice().reverse().map((movie, index) => (
-          <div key={movie._id}>{index < 6 && <MovieSoon movie={movie} />}</div>
+          <div key={movie._id}>{index < 9 && <MovieSoon movie={movie} />}</div>
         ))}
       </div>
       <div>
