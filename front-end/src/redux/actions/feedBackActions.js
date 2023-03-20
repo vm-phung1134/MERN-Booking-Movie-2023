@@ -2,12 +2,12 @@ import axios from 'axios'
 import { ALL_FEEDBACK_FAIL, ALL_FEEDBACK_REQUIRED, ALL_FEEDBACK_SUCCESS, POST_FEEDBACK_FAIL, POST_FEEDBACK_REQUIRED, POST_FEEDBACK_SUCCESS, SEND_FEEDBACK_FAIL, SEND_FEEDBACK_REQUIRED, SEND_FEEDBACK_SUCCESS } from '../constants/feedBackConstants'
 
 
-const baseURL = "http://localhost:5000"
+const baseURL = 'https://react-flix-booking-movie-backend.vercel.app'
 
 export const getAllFeedBack = () => async (dispatch) => {
     try{
         dispatch({type: ALL_FEEDBACK_REQUIRED})
-        const {data} = await axios.get(`http://localhost:5000/api/v1/feedbacks`)
+        const {data} = await axios.get(`${baseURL}/api/v1/feedbacks`)
         dispatch({
             type: ALL_FEEDBACK_SUCCESS,
             payload: data

@@ -17,7 +17,7 @@ import {
   UPDATE_SHOWTIME_SUCCESS,
   UPDATE_SHOWTIME_FAIL,
 } from "../constants/showTimeConstants";
-const baseURL = "http://localhost:5000";
+const baseURL = 'https://react-flix-booking-movie-backend.vercel.app'
 
 export const getAllShowTime = () => async (dispatch) => {
   try {

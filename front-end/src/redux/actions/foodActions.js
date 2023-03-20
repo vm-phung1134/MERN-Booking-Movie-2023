@@ -19,7 +19,7 @@ import {
     UPDATE_FOOD_SUCCESS,
     UPDATE_FOOD_FAIL
 } from '../constants/foodConstants'
-const baseURL = "http://localhost:5000"
+const baseURL = 'https://react-flix-booking-movie-backend.vercel.app'
 
 export const getAllFood = () => async (dispatch) => {
     try{

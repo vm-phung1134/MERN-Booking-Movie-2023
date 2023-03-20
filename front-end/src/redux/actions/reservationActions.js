@@ -17,7 +17,7 @@ import {
     UPDATE_RESERVATION_REQUEST,
     UPDATE_RESERVATION_SUCCESS
 } from '../constants/reservationConstants'
-const baseURL = "http://localhost:5000"
+const baseURL = 'https://react-flix-booking-movie-backend.vercel.app'
 
 export const createReservation = (reservation) => async (dispatch) => {
     try {

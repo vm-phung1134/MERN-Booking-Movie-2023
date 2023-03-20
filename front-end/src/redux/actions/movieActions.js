@@ -17,7 +17,7 @@ import {
     UPDATE_MOVIE_SUCCESS,
     UPDATE_MOVIE_FAIL
 } from '../constants/movieConstants'
-const baseURL = "http://localhost:5000"
+const baseURL = 'https://react-flix-booking-movie-backend.vercel.app'
 
 export const getAllMovie = () => async (dispatch) => {
     try{

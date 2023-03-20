@@ -7,7 +7,7 @@ import {
     GET_ONE_EVENT_REQUIRED, 
     GET_ONE_EVENT_SUCCESS 
 } from "../constants/eventConstants"
-const baseURL = "http://localhost:5000"
+const baseURL = 'https://react-flix-booking-movie-backend.vercel.app'
 
 export const getAllEvent= () => async (dispatch) => {
     try{

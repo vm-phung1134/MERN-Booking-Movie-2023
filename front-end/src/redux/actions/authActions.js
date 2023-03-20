@@ -33,7 +33,7 @@ import {
   AUTH_UPDATENEWPW_FAIL,
 } from "../constants/authConstants";
 
-const baseURL = "http://localhost:5000"
+const baseURL = 'https://react-flix-booking-movie-backend.vercel.app'
 
 export const authLogin = (email, password) => async (dispatch) => {
   try {
