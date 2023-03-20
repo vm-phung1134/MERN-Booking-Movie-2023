@@ -58,11 +58,11 @@ function HomeMovie() {
                 </Link>
                 <Link to="/movie" className="text-gray-400">
                 {
-                    content === ""? "Trang chủ": content.movie.linkMovie
+                    content === ""? "Phim điện ảnh": content.movie.linkMovie
                   }
                 </Link>
                 <Link className="text-gray-200">{
-                    content === ""? "Trang chủ": content.movie.titleMovieNow
+                    content === ""? "Phim đang chiếu": content.movie.titleMovieNow
                   }</Link>
               </Breadcrumbs>
               <div>
