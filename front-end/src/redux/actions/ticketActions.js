@@ -16,7 +16,7 @@ import {
   DELETE_TICKET_SUCCESS,
   DELETE_TICKET_FAIL,
 } from "../constants/ticketConstants";
-const baseURL = 'https://react-flix-booking-movie-backend.vercel.app'
+const baseURL = 'https://mern-full-stack-booking-movie-backend.vercel.app'
 
 export const getAllTicket = () => async (dispatch) => {
   try {

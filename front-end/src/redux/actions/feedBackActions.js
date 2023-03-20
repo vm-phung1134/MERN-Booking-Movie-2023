@@ -2,7 +2,7 @@ import axios from 'axios'
 import { ALL_FEEDBACK_FAIL, ALL_FEEDBACK_REQUIRED, ALL_FEEDBACK_SUCCESS, POST_FEEDBACK_FAIL, POST_FEEDBACK_REQUIRED, POST_FEEDBACK_SUCCESS, SEND_FEEDBACK_FAIL, SEND_FEEDBACK_REQUIRED, SEND_FEEDBACK_SUCCESS } from '../constants/feedBackConstants'
 
 
-const baseURL = 'https://react-flix-booking-movie-backend.vercel.app'
+const baseURL = 'https://mern-full-stack-booking-movie-backend.vercel.app'
 
 export const getAllFeedBack = () => async (dispatch) => {
     try{

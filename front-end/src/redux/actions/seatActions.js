@@ -11,7 +11,7 @@ import {
   UPDATE_STATUS_SUCCESS,
   UPDATE_STATUS_FAIL,
 } from "../constants/seatConstants";
-const baseURL = 'https://react-flix-booking-movie-backend.vercel.app'
+const baseURL = 'https://mern-full-stack-booking-movie-backend.vercel.app'
 
 export const getAllSeat = () => async (dispatch) => {
   try {
