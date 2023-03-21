@@ -28,10 +28,11 @@ export const blogReducer =
         case GET_ALL_BLOG_SUCCESS:
             return {
                 loading: false,
-                blogs: action.payload.blogs,
+                blogs: action.payload.blogs === undefined ? [] : action.payload.blogs,
             }
         case GET_ALL_BLOG_FAIL:
             return {
+                ...state,
                 loading: false,
                 error: action.payload
             }
@@ -57,10 +58,11 @@ export const blogReducer =
         case GET_ONE_BLOG_SUCCESS:
             return {
                 loading: false,
-                blog: action.payload,
+                blog: action.payload === undefined ? {} : action.payload,
             }
         case GET_ONE_BLOG_FAIL:
             return {
+                ...state,
                 loading: false,
                 error: action.payload
             }
