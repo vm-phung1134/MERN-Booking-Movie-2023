@@ -158,13 +158,13 @@ function HomePage() {
               </div>
             </div>
             {/* Left Arrow */}
-            <div className="hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] lg:left-5 left-2 text-xl lg:text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer">
+            <div className="hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] lg:left-5 left-0 text-xl lg:text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer">
               <button onClick={prevSlide}>
                 <i className="fas fa-chevron-left text-[20px]"></i>
               </button>
             </div>
             {/* Right Arrow */}
-            <div className="hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] right-5 right-2 lg:text-xl lg:text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer">
+            <div className="hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] lg:right-5 right-0 lg:text-xl lg:text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer">
               <button onClick={nextSlide}>
                 <i className="fas fa-chevron-right text-[20px]"></i>
               </button>

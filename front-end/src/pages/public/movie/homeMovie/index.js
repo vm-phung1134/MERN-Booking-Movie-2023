@@ -97,7 +97,7 @@ function HomeMovie() {
                             <div className="">
                               <div className="relative">
                                 <img
-                                  className="w-[370px] lg:h-[470px] bg-cover"
+                                  className="w-[370px] h-[270px] md:h-[370px] lg:h-[470px] bg-cover"
                                   src={movie.poster}
                                   alt=""
                                 ></img>
@@ -127,7 +127,7 @@ function HomeMovie() {
                         </div>
                       ))}
                     </div>
-                    <div className="flex justify-center mt-5">
+                    <div className="flex justify-center my-5">
                       <button className="py-1 text-[14px] px-2 text-white bg-[#ce0000]">
                         <div className="buttons">
                           <button className="btn">
@@ -151,7 +151,7 @@ function HomeMovie() {
                             <div className="">
                               <div className="relative">
                                 <img
-                                  className="w-[370px] lg:h-[470px] bg-cover"
+                                  className="w-[370px] h-[270px] md:h-[370px] lg:h-[470px] bg-cover"
                                   src={movie.poster}
                                   alt=""
                                 ></img>
@@ -181,7 +181,7 @@ function HomeMovie() {
                         </div>
                       ))}
                     </div>
-                    <div className="flex justify-center mt-5">
+                    <div className="flex justify-center my-5">
                       <button className="py-1 text-[14px] px-2 text-white bg-[#ce0000]">
                         <div className="buttons">
                           <button className="btn">

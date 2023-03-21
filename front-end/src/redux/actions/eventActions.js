@@ -8,7 +8,7 @@ import {
     GET_ONE_EVENT_SUCCESS 
 } from "../constants/eventConstants"
 const baseURL = 'https://mern-full-stack-booking-movie-api.vercel.app'
-
+//const baseURL = 'http://localhost:5000'
 export const getAllEvent= () => async (dispatch) => {
     try{
         dispatch({type: GET_ALL_EVENT_REQUIRED})

@@ -41,6 +41,7 @@ function Booking() {
   const dispatch = useDispatch();
   // CALL STORE FROM GET API
   const baseURL = 'https://mern-full-stack-booking-movie-api.vercel.app'
+  //const baseURL = 'http://localhost:5000'
   const cinemas = useSelector((state) => state.cinemas.cinemas);
   const movies = useSelector((state) => state.movies.movies);
   const showtimes = useSelector((state) => state.showtimes.showtimes);
@@ -166,7 +167,7 @@ function Booking() {
   }, [language]);
   return (
     <>
-      <div className=" bg-cover bg-center bg-[url('https://wallpaperaccess.com/full/435988.jpg')]">
+      <div className="bg-cover bg-fixed bg-[url('https://wallpaperaccess.com/full/435988.jpg')]">
         <div className="bg-black/70">
           {loadingPage === true ? (
             <SpinnerLoading />
@@ -564,6 +565,7 @@ function Booking() {
                               </div>
                             </div>
                           </div>
+                          <div className="py-14"></div>
                         </div>
                       </>
                     )}

@@ -132,7 +132,7 @@ function Account() {
                       <div className="">
                         <div className="relative">
                           <img
-                            className="w-[370px] lg:h-[470px] bg-cover"
+                            className="w-[370px] h-[270px] md:h-[370px] lg:h-[470px] bg-cover"
                             src={movie.poster}
                             alt=""
                           ></img>
@@ -150,8 +150,8 @@ function Account() {
                           </Link>
                         </div>
                         <div className="text-[15px]">
-                          <p className="text-white uppercase">{movie.name}</p>
-                          <p className="text-gray-500 uppercase">
+                          <p className="text-white truncate uppercase">{movie.name}</p>
+                          <p className="text-gray-500 truncate uppercase">
                             {movie.namevn}
                           </p>
                         </div>

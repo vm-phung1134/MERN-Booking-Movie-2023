@@ -140,10 +140,10 @@ exports.forgotPassword = async (req, res, next) => {
       to: email,
       subject: "React Flix Account",
       text: `
-      Chào bạn! bạn có phải là người muốn reset password này không?\n
+      Chào bạn! bạn có phải là người muốn reset password này không?\
       Hãy sử dụng mã code này để cập nhật lại mật khẩu cho tài khoản ${email}\n
-      Đây là mã code của bạn: ${code}\n
-      Cảm ơn,\n
+      Đây là mã code của bạn: ${code}\
+      Cảm ơn,\
       React Flix Cinema
     `,
     });

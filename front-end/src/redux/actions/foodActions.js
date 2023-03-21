@@ -20,7 +20,7 @@ import {
     UPDATE_FOOD_FAIL
 } from '../constants/foodConstants'
 const baseURL = 'https://mern-full-stack-booking-movie-api.vercel.app'
-
+//const baseURL = 'http://localhost:5000'
 export const getAllFood = () => async (dispatch) => {
     try{
         dispatch({type: ALL_FOOD_REQUEST})

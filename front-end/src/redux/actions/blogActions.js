@@ -11,7 +11,7 @@ import {
     UPDATE_ONE_BLOG_SUCCESS
 } from "../constants/blogConstants"
 const baseURL = 'https://mern-full-stack-booking-movie-api.vercel.app'
-
+//const baseURL = 'http://localhost:5000'
 export const getAllBlog = () => async (dispatch) => {
     try{
         dispatch({type: GET_ALL_BLOG_REQUIRED})

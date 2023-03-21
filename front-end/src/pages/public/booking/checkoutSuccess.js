@@ -24,7 +24,7 @@ function CheckoutSuccess() {
   }, []);
   return (
     <>
-      <div className=" bg-cover bg-center bg-[url('https://gameranx.com/wp-content/uploads/2022/07/Star-Guardian-Key-Visual-1-scaled.jpg')] max-h">
+      <div className="bg-fixed bg-cover bg-[url('https://gameranx.com/wp-content/uploads/2022/07/Star-Guardian-Key-Visual-1-scaled.jpg')] max-h">
         <div className="h-full bg-gradient-to-t from-black/100 to-black/60">
           
           {loadingPage === true ? (
@@ -38,7 +38,7 @@ function CheckoutSuccess() {
                   data-aos-duration="1000"
                   className="text-white flex justify-center pt-[10%]"
                 >
-                  <div className="text-center">
+                  <div className="text-center p-3 md:p-0">
                     <h1 className="lg:text-[30px] text-[18px] md:text-[20px] font-bold uppercase">
                       Chúc mừng - Bạn đã đặt vé thành công!
                     </h1>
@@ -65,7 +65,7 @@ function CheckoutSuccess() {
                     </button>
                   </div>
                 </div>
-                <div className="lg:mx-16 md:mx-10 mx-5">
+                <div className="lg:mx-16 md:mx-10 mx-2">
                   <button
                     disabled
                     className="text-white text-sm lg:text-[15px] mt-[3%] pr-6 py-[10px] border-b-[3px] border-[#E50914]"
@@ -79,7 +79,7 @@ function CheckoutSuccess() {
                           <div className="">
                             <div className="relative">
                               <img
-                                className="w-[370px] h-[450px] bg-cover"
+                                className="w-[370px] h-[270px] md:h-[370px] lg:h-[470px] bg-cover"
                                 src={movie.poster}
                                 alt=""
                               ></img>
@@ -97,7 +97,7 @@ function CheckoutSuccess() {
                               </Link>
                             </div>
                             <div className="text-sm lg:text-[15px] mt-3">
-                              <p className="text-gray-300 uppercase">
+                              <p className="text-gray-300 truncate uppercase">
                                 {movie.namevn}
                               </p>
                             </div>

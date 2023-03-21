@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 function Events({event}) {
   return (
     <>
-      <div className="relative lg:w-[290px] h-[338px] lg:h-[480px]">
+      <div className="relative lg:w-[290px] h-[270px] md:h-[450px] lg:h-[480px]">
         <img
           className="w-full h-full"
           src={event.topImage}

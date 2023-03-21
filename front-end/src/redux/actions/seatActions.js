@@ -12,7 +12,7 @@ import {
   UPDATE_STATUS_FAIL,
 } from "../constants/seatConstants";
 const baseURL = 'https://mern-full-stack-booking-movie-api.vercel.app'
-
+//const baseURL = 'http://localhost:5000'
 export const getAllSeat = () => async (dispatch) => {
   try {
     dispatch({ type: ALL_SEAT_REQUEST });

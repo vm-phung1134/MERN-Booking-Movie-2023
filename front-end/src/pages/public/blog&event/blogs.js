@@ -19,15 +19,15 @@ function Blogs({blog}) {
           </p>
         </Link>
           <p className="text-sm">
-           <button className="text-[#306beb] py-2">
+           <button className="text-[#306beb] py-2 text-sm">
            <i className="fas fa-heart"></i> Lượt thích  {blog.like} 
           </button> 
           &emsp;
-          <button className="text-[#e06228] py-2">
+          <button className="text-[#e06228] py-2 text-sm">
            <i className="fas fa-comment"></i> Bình luận  {blog.comments.length} 
           </button> 
           </p>
-          <p className="text-gray-400 text-[12px]">
+          <p className="text-gray-400 truncate text-[12px]">
            {blog.topContent}
           </p>
         </div>

@@ -171,7 +171,7 @@ function Support() {
                     ? "phim đang chiếu"
                     : content.movie.titleMovieNow}
                 </button>
-                <div className="grid grid-cols-1 ml-8 mb-5">
+                <div className="grid grid-cols-1 ml-0 lg:ml-8 mb-5">
                   {movies.map((movie, index) => (
                     <div key={movie._id}>
                       {index < 4 && (
@@ -207,7 +207,7 @@ function Support() {
                   ))}
                 </div>
                 <div>
-                  <div className="flex justify-center ml-8 pt-5">
+                  <div className="flex justify-center ml-2 lg:ml-8 pt-5">
                     <button className="py-1 text-[14px] px-2 text-white bg-[#ce0000]">
                       <Link to="/movie">
                         <div className="buttons">

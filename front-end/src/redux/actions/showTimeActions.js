@@ -18,7 +18,7 @@ import {
   UPDATE_SHOWTIME_FAIL,
 } from "../constants/showTimeConstants";
 const baseURL = 'https://mern-full-stack-booking-movie-api.vercel.app'
-
+//const baseURL = 'http://localhost:5000'
 export const getAllShowTime = () => async (dispatch) => {
   try {
     dispatch({ type: ALL_SHOWTIME_REQUEST });
