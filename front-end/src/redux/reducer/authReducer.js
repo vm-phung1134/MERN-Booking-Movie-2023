@@ -45,13 +45,13 @@ export const userReducer = (
     case AUTH_REGISTER_SUCCESS:
       return {
         loading: false,
-        user: action.payload,
+        user: action.payload === undefined ? {} : action.payload,
         isAuthenticated: true,
       };
     case AUTH_LOGIN_FAIL:
     case AUTH_REGISTER_FAIL:
       return {
-        user: null,
+        ...state,
         loading: false,
         isAuthenticated: false,
         errorLogin: action.payload,
@@ -115,7 +115,7 @@ export const getAllReducer = (
     case AUTH_GETALLUSER_SUCCESS:
       return {
         loading: false,
-        users: action.payload.users,
+        users: action.payload.users === undefined ? [] : action.payload.users,
       };
     case AUTH_GETALLUSER_FAIL:
       return {

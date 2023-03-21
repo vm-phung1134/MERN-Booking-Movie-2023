@@ -40,7 +40,7 @@ import Data from "../components/TranslationEnglish/Data.json";
 function Booking() {
   const dispatch = useDispatch();
   // CALL STORE FROM GET API
-  const baseURL = "http://mern-full-stack-booking-movie-backend.vercel.app";
+  const baseURL = 'https://mern-full-stack-booking-movie-backend.vercel.app/'
   const cinemas = useSelector((state) => state.cinemas.cinemas);
   const movies = useSelector((state) => state.movies.movies);
   const showtimes = useSelector((state) => state.showtimes.showtimes);
