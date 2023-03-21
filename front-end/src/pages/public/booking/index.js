@@ -117,7 +117,7 @@ function Booking() {
     setTimeout(async () => {
       setStateLoadingLogin({ loading: false });
       await axios
-        .post(`http://mern-full-stack-booking-movie-backend.vercel.app/api/v1/payment/create-checkout-session`, {
+        .post(`https://mern-booking-movie-api.vercel.app/api/v1/payment/create-checkout-session`, {
           ticketPayment,
           userId: tokenId,
         })
