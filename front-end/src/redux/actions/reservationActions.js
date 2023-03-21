@@ -17,7 +17,7 @@ import {
     UPDATE_RESERVATION_REQUEST,
     UPDATE_RESERVATION_SUCCESS
 } from '../constants/reservationConstants'
-const baseURL = 'https://mern-full-stack-booking-movie-backend.vercel.app'
+const baseURL = 'https://mern-full-stack-booking-movie-api.vercel.app'
 
 export const createReservation = (reservation) => async (dispatch) => {
     try {

@@ -10,7 +10,7 @@ import {
     UPDATE_ONE_BLOG_REQUIRED,
     UPDATE_ONE_BLOG_SUCCESS
 } from "../constants/blogConstants"
-const baseURL = 'https://mern-full-stack-booking-movie-backend.vercel.app'
+const baseURL = 'https://mern-full-stack-booking-movie-api.vercel.app'
 
 export const getAllBlog = () => async (dispatch) => {
     try{

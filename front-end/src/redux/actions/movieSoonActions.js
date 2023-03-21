@@ -17,7 +17,7 @@ import {
     UPDATE_MOVIESOON_SUCCESS,
     UPDATE_MOVIESOON_FAIL,
 } from '../constants/movieSoonConstants'
-const baseURL = 'https://mern-full-stack-booking-movie-backend.vercel.app'
+const baseURL = 'https://mern-full-stack-booking-movie-api.vercel.app'
 
 export const getAllMovieSoon = () => async (dispatch) => {
     try{

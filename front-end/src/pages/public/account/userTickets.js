@@ -81,12 +81,20 @@ function UserTickets() {
               </Link>
               <Link className="text-gray-200">Vé đã đặt</Link>
             </Breadcrumbs>
-            <button
+            <div className="flex justify-between items-baseline">
+              <button
               disabled
               className="text-white text-sm lg:text-[15px] pr-6 py-[10px] border-b-[3px] border-[#E50914]"
             >
               VÉ CỦA BẠN
-            </button>
+              </button>
+              <div className="text-center text-black bg-white rounded-lg p-2 md:p-4">
+                <h1 className="uppercase text-[12px] md:text-sm">Số vé hiện tại bạn đã đặt</h1>
+                <p className="font-bold">{newReservations.filter(item => item.author._id === userId).length}</p>
+                <p className="text-[9px] md:text-[11px] font-thin">Bạn chỉ hủy vé trong 12h sau khi đặt thành công</p>
+              </div>
+            </div>
+            
             <div data-aos="fade-left" data-aos-duration="1000">
               {newReservations.slice().reverse().map(
                 (
@@ -107,19 +115,19 @@ function UserTickets() {
                                 <h1 className="lg:mr-5 mr-0 lg:ml-3 ml-0 pt-2 text-sm lg:text-[15px] ">
                                   Phim:{" "}
                                   <span className="text-white font-thin text-[12px] lg:text-[15px] uppercase">
-                                    {reservation.nameMovie}
+                                    <p className="truncate">{reservation.nameMovie}</p>
                                   </span>
                                 </h1>
                                 <h2 className="lg:ml-5 lg:pt-2 text-sm lg:text-[15px] ">
                                   Rạp chiếu:{" "}
                                   <span className="text-white font-thin">
-                                    {reservation.nameCinema}
+                                    <p className="truncate">{reservation.nameCinema}</p>
                                   </span>
                                 </h2>
                                 <h2 className="lg:ml-5 lg:pt-2 text-sm lg:text-[15px] ">
                                   Ngày đặt:{" "}
                                   <span className="text-white font-thin">
-                                    {reservation.createdAt}
+                                  <p className="truncate">{reservation.createdAt}</p> 
                                   </span>
                                 </h2>
                               </div>
