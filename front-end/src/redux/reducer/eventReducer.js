@@ -25,7 +25,7 @@ export const eventReducer =
         case GET_ALL_EVENT_SUCCESS:
             return {
                 loading: false,
-                events: action.payload.events,
+                events: action.payload.events === undefined ? [] : action.payload.events,
             }
         case GET_ALL_EVENT_FAIL:
             return {

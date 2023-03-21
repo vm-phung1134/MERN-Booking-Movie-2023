@@ -31,7 +31,7 @@ export const foodReducer = (
     case ALL_FOOD_SUCCESS:
       return {
         loading: false,
-        foods: action.payload,
+        foods: action.payload === undefined ? [] : action.payload,
       };
     case ALL_FOOD_FAIL:
       return {

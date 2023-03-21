@@ -24,7 +24,7 @@ export const ticketReducer = (
     case ALL_TICKET_SUCCESS:
       return {
         loading: false,
-        tickets: action.payload.tickets,
+        tickets: action.payload.tickets === undefined ? [] : action.payload.tickets,
       };
     case ALL_TICKET_FAIL:
       return {
@@ -57,32 +57,32 @@ export const ticketReducer = (
   }
 };
 
-export const getOneTicketReducer = (
-  state = {
-    ticket: {},
-  },
-  action
-) => {
-  switch (action.type) {
-    case ONE_TICKET_REQUEST:
-      return {
-        loading: true,
-        tickets: [],
-      };
-    case ONE_TICKET_SUCCESS:
-      return {
-        loading: false,
-        tickets: action.payload,
-      };
-    case ONE_TICKET_FAIL:
-      return {
-        loading: false,
-        error: action.payload,
-      };
-    default:
-      return state;
-  }
-};
+// export const getOneTicketReducer = (
+//   state = {
+//     ticket: {},
+//   },
+//   action
+// ) => {
+//   switch (action.type) {
+//     case ONE_TICKET_REQUEST:
+//       return {
+//         loading: true,
+//         tickets: {},
+//       };
+//     case ONE_TICKET_SUCCESS:
+//       return {
+//         loading: false,
+//         tickets: action.payload,
+//       };
+//     case ONE_TICKET_FAIL:
+//       return {
+//         loading: false,
+//         error: action.payload,
+//       };
+//     default:
+//       return state;
+//   }
+// };
 
 export const ticketDetailReducer = (
   state = {

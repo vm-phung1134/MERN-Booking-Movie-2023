@@ -23,7 +23,7 @@ export const seatsReducer = (
     case ALL_SEAT_SUCCESS:
       return {
         loading: false,
-        seats: action.payload.seats,
+        seats: action.payload.seats === undefined ? [] : action.payload.seats,
         seatsCount: action.payload.productsCount,
       };
     case ALL_SEAT_FAIL:
@@ -55,7 +55,7 @@ export const seatDetailReducer = (
     case ONE_SEAT_SUCCESS:
       return {
         loading: false,
-        seat: action.payload,
+        seat: action.payload === undefined ? [] : action.payload,
       };
     case ONE_SEAT_FAIL:
       return {

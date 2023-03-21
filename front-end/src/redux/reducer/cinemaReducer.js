@@ -29,7 +29,7 @@ export const cinemaReducer = (
     case ALL_CINEMA_SUCCESS:
       return {
         loading: false,
-        cinemas: action.payload === undefined ? {} : action.payload,
+        cinemas: action.payload === undefined ? [] : action.payload,
       };
     case ALL_CINEMA_FAIL:
       return {

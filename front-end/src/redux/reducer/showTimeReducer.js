@@ -29,7 +29,7 @@ export const showTimeReducer = (
     case ALL_SHOWTIME_SUCCESS:
       return {
         loading: false,
-        showtimes: action.payload,
+        showtimes: action.payload === undefined ? [] : action.payload,
       };
     case ALL_SHOWTIME_FAIL:
       return {
@@ -57,10 +57,11 @@ export const showtimeDetailReducer = (
     case ONE_SHOWTIME_SUCCESS:
       return {
         loading: false,
-        showtime: action.payload,
+        showtime: action.payload === undefined ? {} : action.payload,
       };
     case ONE_SHOWTIME_FAIL:
       return {
+        ...state,
         loading: false,
         error: action.payload,
       };
