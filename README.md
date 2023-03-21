@@ -1,7 +1,7 @@
 # MERN Stack - Website Movie Theater Ticket System 2023
 
 ## Demo Website
-- 👉 Here : [mern-booking-movie.vercel.app](https://mern-booking-movie.vercel.app)
+- 👉 Here : [mern-full-stack-booking-movie.vercel.app](https://mern-full-stack-booking-movie.vercel.app)
 
 ## Run Locally
 
