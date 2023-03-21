@@ -226,10 +226,10 @@ function Support() {
                 </div>
               </div>
             </div>
+            <div className="pb-20"></div>
             <FooterPublic />
           </div>
         )}
-        <div className="pb-20"></div>
       </div>
     </>
   );

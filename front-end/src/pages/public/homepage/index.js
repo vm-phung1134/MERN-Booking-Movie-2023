@@ -219,9 +219,28 @@ function HomePage() {
                   {content === "" ? "review phim" : content.title.blogfilm}
                 </button>
                 <div className="grid lg:grid-cols-2 grid-cols-1 py-10 gap-4">
-                  {blogs.map((blog) => (
+                  {blogs.map((blog, index) => (
+                    index < 6 &&
                     <Blogs key={blog._id} blog={blog} />
                   ))}
+                </div>
+                <div>
+                  <div className="flex justify-center mt-5">
+                    <button className="py-1 text-[14px] px-2 text-white bg-[#ce0000]">
+                      <Link to="/blog&event">
+                        <div className="buttons">
+                          <button className="btn">
+                            <span></span>
+                            <p
+                              data-start="good luck!"
+                              data-text="Let's go!"
+                              data-title="Xem thêm"
+                            ></p>
+                          </button>
+                        </div>
+                      </Link>
+                    </button>
+                  </div>
                 </div>
               </div>
               {/* sự kiện */}
@@ -237,7 +256,26 @@ function HomePage() {
                     <Events key={event._id} event={event} />
                   ))}
                 </div>
+                <div>
+                  <div className="flex justify-center mt-5">
+                    <button className="py-1 text-[14px] px-2 text-white bg-[#ce0000]">
+                      <Link to="/blog&event">
+                        <div className="buttons">
+                          <button className="btn">
+                            <span></span>
+                            <p
+                              data-start="good luck!"
+                              data-text="Let's go!"
+                              data-title="Xem thêm"
+                            ></p>
+                          </button>
+                        </div>
+                      </Link>
+                    </button>
+                  </div>
+                </div>
               </div>
+
               {/* về chúng tôi */}
               <div className="py-5">
                 <button className="text-white py-[17px]  text-[15px] border-b-[3px] mb-10 border-[#E50914]">

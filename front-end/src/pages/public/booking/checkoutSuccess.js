@@ -1,8 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import HeaderPublic from "../components/headerPublic";
 import SpinnerLoading from "../components/spinnerLoading";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -18,12 +16,8 @@ function CheckoutSuccess() {
     setLoadingPage(true);
     let timeOut = setTimeout(async () => {
       await dispatch(getAllMovieSoon());
-      toast.success("Đặt vé thành công !", {
-        position: toast.POSITION.BOTTOM_LEFT,
-        className: "text-black",
-      });
       setLoadingPage(false);
-    }, 1500);
+    }, 1300);
     return () => {
       clearTimeout(timeOut);
     };
@@ -32,12 +26,12 @@ function CheckoutSuccess() {
     <>
       <div className=" bg-cover bg-center bg-[url('https://gameranx.com/wp-content/uploads/2022/07/Star-Guardian-Key-Visual-1-scaled.jpg')] max-h">
         <div className="h-full bg-gradient-to-t from-black/100 to-black/60">
-          <HeaderPublic />
+          
           {loadingPage === true ? (
             <SpinnerLoading />
           ) : (
             <>
-              <ToastContainer toastStyle={{ color: "black" }} />
+              <HeaderPublic />
               <div className="bg-transparent">
                 <div
                   data-aos="zoom-in"
@@ -81,7 +75,7 @@ function CheckoutSuccess() {
                   <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 lg:gap-x-5 pt-10">
                     {movieSoons.map((movie, index) => (
                       <div key={movie._id}>
-                        {index < 4 && (
+                        {index < 8 && (
                           <div className="">
                             <div className="relative">
                               <img

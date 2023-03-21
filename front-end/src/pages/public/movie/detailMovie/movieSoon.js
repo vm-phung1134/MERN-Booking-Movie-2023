@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 //import logic
-import React, {useCallback, useState, useEffect} from 'react'
+import React, { useCallback, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -11,25 +11,24 @@ import HeaderPublic from "../../components/headerPublic";
 import SpinnerLoading from "../../components/spinnerLoading";
 import MovieSoonList from "../homeMovie/movieSoonList";
 import Cinema from "./cinema";
-import {
-  Dialog,
-  DialogBody,
-  DialogFooter,
-} from "@material-tailwind/react";
-import FooterPublic from "../../components/footerPublic"
+import { Dialog, DialogBody, DialogFooter } from "@material-tailwind/react";
+import Data from "../../components/TranslationEnglish/Data.json";
+import FooterPublic from "../../components/footerPublic";
 
 const DetailMovieSoon = () => {
   const dispatch = useDispatch();
   const movieSoonId = useParams();
   const { movieSoon } = useSelector((state) => state.movieSoon);
   const cinemas = useSelector((state) => state.cinemas.cinemas);
-const [size, setSize] = useState(null);
-    const [vlYoutube, setVlYoutube] = useState("");
+  const [content, setContent] = useState("");
+  const language = useSelector((state) => state.language.language);
+  const [size, setSize] = useState(null);
+  const [vlYoutube, setVlYoutube] = useState("");
   const [loadingPage, setLoadingPage] = useState(false);
   const handleOpen = useCallback((value, embed) => {
-      setSize(value);
-      setVlYoutube(embed);
-    }, []);
+    setSize(value);
+    setVlYoutube(embed);
+  }, []);
   useEffect(() => {
     window.scrollTo(0, 0);
     setLoadingPage(true);
@@ -39,6 +38,13 @@ const [size, setSize] = useState(null);
       setLoadingPage(false);
     }, 1300);
   }, [movieSoonId.id]);
+  useEffect(() => {
+    if (language === "English") {
+      setContent(Data.english);
+    } else {
+      setContent("");
+    }
+  }, [language]);
   return (
     <>
       <div className="max-h-full min-h-screen w-full">
@@ -60,7 +66,7 @@ const [size, setSize] = useState(null);
                       <div className="relative">
                         <img
                           src={movieSoon.poster}
-                          className="w-[340px]"
+                          className="w-[340px] h-[550px]"
                           alt=""
                         ></img>
                         <div className="absolute opacity-0 hover:opacity-100 transition duration-500 ease-in-out top-0 right-0 left-0 bottom-0 w-full h-full overflow-hidden bg-fixed bg-black/60">
@@ -84,18 +90,78 @@ const [size, setSize] = useState(null);
                       <h2 className="text-[17px] lg:text-[25px] text-green-500 font-medium uppercase">
                         {movieSoon.namevn}
                       </h2>
-                      <div className="lg:text-[20px] text-[15px] leading-9">
-                        <p>Năm sản xuất: {movieSoon.year}</p>
-                        <p>Đạo diễn: {movieSoon.director}</p>
-                        <p>Quốc gia: {movieSoon.country}</p>
-                        <p>Thời lượng: {movieSoon.duration} phút</p>
-                        <p>Đạo diễn: {movieSoon.director}</p>
-                        <p>Thể loại: {movieSoon.type}</p>
-                        <div>
-                          <h1>Diễn viên</h1>
-                        </div>
-                        <p className="text-[#e75353]">
-                          Ngày khởi chiếu: {movieSoon.released}
+                      <div className="lg:text-[20px] text-white text-[15px] leading-9">
+                        <p>
+                          <span className="text-gray-300">
+                            {content === ""
+                              ? "Năm sản xuất"
+                              : content.movieDetail.year}{" "}
+                            :{" "}
+                          </span>
+                          {movieSoon.year}
+                        </p>
+                        <p>
+                          <span className="text-gray-300">
+                            {content === ""
+                              ? "Đạo diễn"
+                              : content.movieDetail.director}{" "}
+                            :{" "}
+                          </span>
+                          {movieSoon.director}
+                        </p>
+                        <p>
+                          <span className="text-gray-300">
+                            {content === ""
+                              ? "Quốc gia"
+                              : content.movieDetail.country}{" "}
+                            :{" "}
+                          </span>
+                          {movieSoon.country}
+                        </p>
+                        <p>
+                          <span className="text-gray-300">
+                            {content === ""
+                              ? "Thời lượng"
+                              : content.movieDetail.duration}{" "}
+                            :{" "}
+                          </span>
+                          {movieSoon.duration} phút
+                        </p>
+                        <p>
+                          <span className="text-gray-300">
+                            {content === ""
+                              ? "Thể loại"
+                              : content.movieDetail.type} :{" "}
+                          </span>
+                          {movieSoon.type}
+                        </p>
+                        <p>
+                          <span className="text-gray-300">
+                            {content === ""
+                              ? "Diễn viên"
+                              : content.movieDetail.actors}{" "}
+                            :{" "}
+                          </span>
+                          {movieSoon.actors}
+                        </p>
+
+                        <p>
+                          <span className="text-gray-300">
+                            {content === ""
+                              ? "Độ tuổi giới hạn"
+                              : content.movieDetail.limit}{" "}
+                            :{" "}
+                          </span>
+                          {movieSoon.limitAge}
+                        </p>
+                        <p className="text-[#bb1010]">
+                          <span className="text-gray-300">
+                            {content === ""
+                              ? "Ngày khởi chiếu"
+                              : content.movieDetail.date}{" "}
+                            :{" "}
+                          </span>
+                          {movieSoon.released}
                         </p>
                       </div>
                     </div>
@@ -171,7 +237,7 @@ const [size, setSize] = useState(null);
                   </div>
                 </div>
               </div>
-              <FooterPublic/>
+              <FooterPublic />
             </div>
           )}
         </div>

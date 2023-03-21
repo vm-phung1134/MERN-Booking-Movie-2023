@@ -169,6 +169,7 @@ export default function Login() {
         </div>
         </DialogBody>
       </Dialog>
+      <div className="py-10"></div>
       <FooterPublic/>
     </>
   );

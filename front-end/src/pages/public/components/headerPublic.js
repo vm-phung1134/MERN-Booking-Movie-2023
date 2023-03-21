@@ -133,7 +133,7 @@ function HeaderPublic() {
               </button>
               <Menu>
                 <MenuHandler>
-                  <Button className="text-white ml-0 md:ml-3 py-2 bg-transparent hover:bg-none font-[400] shadow-none text-[14px] capitalize">
+                  <Button className="text-white px-4 ml-0 md:ml-3 py-2 bg-transparent hover:bg-none font-[400] shadow-none text-[14px] capitalize">
                     {userName} &ensp;
                     <i className="fas fa-chevron-down text-[12px]"></i>
                   </Button>

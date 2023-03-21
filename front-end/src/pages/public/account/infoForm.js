@@ -147,9 +147,10 @@ function InfoForm({ userInfo }) {
                 id="email"
                 name="email"
                 type="text"
+                disabled
                 value={values.email}
                 onChange={handleChange}
-                className="block w-full px-4 py-2 mt-2 text-white bg-transparent border rounded-md focus:border-white focus:ring-white focus:outline-none"
+                className="block w-full px-4 py-2 mt-2 text-gray-500 bg-transparent border rounded-md focus:border-white focus:ring-white focus:outline-none"
               />
             </div>
             <div className="mb-4">

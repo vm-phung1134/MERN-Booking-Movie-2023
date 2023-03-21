@@ -66,7 +66,7 @@ const DetailMovie = () => {
                       <div className="relative">
                         <img
                           src={movie.poster}
-                          className="w-[340px]"
+                          className="w-[340px] h-[550px]"
                           alt=""
                         ></img>
                         <div className="absolute opacity-0 hover:opacity-100 transition duration-500 ease-in-out top-0 right-0 left-0 bottom-0 w-full h-full overflow-hidden bg-fixed bg-black/60">
@@ -86,63 +86,85 @@ const DetailMovie = () => {
                           ? "thông tin chi tiết"
                           : content.movieDetail.titleDetail}
                       </button>
-                      <h1 className="lg:text-[40px] text-[30px]  font-medium uppercase">
+                      <h1 className="lg:text-[40px] truncate text-[30px]  font-medium uppercase">
                         {movie.name}
                       </h1>
                       <h2 className="text-[17px] lg:text-[25px] text-green-500 font-medium uppercase">
                         {movie.namevn}
                       </h2>
-                      <div className="lg:text-[20px] text-[15px] leading-9">
+                      <div className="lg:text-[20px] text-white text-[15px] leading-9">
                         <p>
-                          {content === ""
-                            ? "Năm sản xuất"
-                            : content.movieDetail.year}
-                          : {movie.year}
+                          <span className="text-gray-300">
+                            {content === ""
+                              ? "Năm sản xuất"
+                              : content.movieDetail.year}{" "}
+                            :{" "}
+                          </span>
+                          {movie.year}
                         </p>
                         <p>
-                          {content === ""
-                            ? "Đạo diễn"
-                            : content.movieDetail.director}
-                          : {movie.director}
+                          <span className="text-gray-300">
+                            {content === ""
+                              ? "Đạo diễn"
+                              : content.movieDetail.director}{" "}
+                            :{" "}
+                          </span>
+                          {movie.director}
                         </p>
                         <p>
-                          {content === ""
-                            ? "Quốc gia"
-                            : content.movieDetail.country}
+                          <span className="text-gray-300">
+                            {content === ""
+                              ? "Quốc gia"
+                              : content.movieDetail.country}{" "}
+                            : {" "}
+                          </span>
+                          {movie.country}
                         </p>
                         <p>
-                          {content === ""
-                            ? "Thời lượng"
-                            : content.movieDetail.duration}
-                          : {movie.duration} phút
+                          <span className="text-gray-300">
+                            {content === ""
+                              ? "Thời lượng"
+                              : content.movieDetail.duration}{" "}
+                            :{" "}
+                          </span>
+                          {movie.duration} phút
                         </p>
                         <p>
-                          {content === ""
-                            ? "Thể loại"
-                            : content.movieDetail.type}
-                          : {movie.type}
+                          <span className="text-gray-300">
+                            {content === ""
+                              ? "Thể loại"
+                              : content.movieDetail.type} :{" "}
+                            
+                          </span>
+                          {movie.type}
                         </p>
-                        <div>
-                          <h1>
+                        <p>
+                          <span className="text-gray-300">
                             {content === ""
                               ? "Diễn viên"
-                              : content.movieDetail.actors}
+                              : content.movieDetail.actors}{" "}
                             :{" "}
-                          </h1>
-                        </div>
-                        <div>
-                          <h1>
+                          </span>
+                          {movie.actors}
+                        </p>
+
+                        <p>
+                          <span className="text-gray-300">
                             {content === ""
                               ? "Độ tuổi giới hạn"
-                              : content.movieDetail.limit}
-                            : {movie.limitAge}
-                          </h1>
-                        </div>
+                              : content.movieDetail.limit}{" "}
+                            :{" "}
+                          </span>
+                          {movie.limitAge}
+                        </p>
                         <p className="text-[#bb1010]">
-                          {content === ""
-                            ? "Ngày khởi chiếu"
-                            : content.movieDetail.date}
-                          : {movie.released}
+                          <span className="text-gray-300">
+                            {content === ""
+                              ? "Ngày khởi chiếu"
+                              : content.movieDetail.date}{" "}
+                            :{" "}
+                          </span>
+                          {movie.released}
                         </p>
                       </div>
                     </div>

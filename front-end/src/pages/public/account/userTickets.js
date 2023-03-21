@@ -100,7 +100,7 @@ function UserTickets() {
                         }}
                         className="bg-center bg-cover rounded-lg"
                       >
-                        <div className="bg-gradient-to-r from-black/90 to-black/50 text-sm w-full text-white mt-5 px-2 lg:px-3 py-1 lg:py-3">
+                        <div className="bg-gradient-to-r from-black/90 to-black/40 text-sm w-full text-white mt-5 px-2 lg:px-3 py-1 lg:py-3">
                           <div className="bg-transparent">
                             <div className="grid grid-cols-3 lg:px-2">
                               <div className="lg:flex lg:items-center justify-start col-span-2">
@@ -320,9 +320,9 @@ function UserTickets() {
               PHIM ĐANG CHIẾU
             </button>
             <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 lg:gap-x-5 pt-10">
-              {movies.map((movie, index) => (
+              {movies.slice().reverse().map((movie, index) => (
                 <div key={movie._id}>
-                  {index < 4 && (
+                  {index < 8 && (
                     <div className="">
                       <div className="relative">
                         <img

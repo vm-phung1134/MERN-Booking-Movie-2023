@@ -20,11 +20,11 @@ function Blogs({blog}) {
         </Link>
           <p className="text-sm">
            <button className="text-[#306beb] py-2">
-            Lượt thích {blog.like}
+           <i className="fas fa-heart"></i> Lượt thích  {blog.like} 
           </button> 
           &emsp;
           <button className="text-[#e06228] py-2">
-           Bình luận {blog.comments.length} <i className="fas fa-comment"></i>
+           <i className="fas fa-comment"></i> Bình luận  {blog.comments.length} 
           </button> 
           </p>
           <p className="text-gray-400 text-[12px]">

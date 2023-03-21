@@ -98,12 +98,12 @@ function BlogDetail() {
               <div className="leading-7">
                 <button
                   onClick={handleLike}
-                  className="bg-blue-500 font-thin my-5 text-[12px] md:text-[15px] mr-1 py-1 px-3 text-sm"
+                  className="bg-blue-500 font-thin my-5 mr-1 py-2 px-5 shadow-lg shadow-gray-800 text-sm"
                 >
-                  <i className="fas fa-thumbs-up"></i> Thích {like}
+                  <i className="fas fa-heart"></i> Thích {like}
                 </button>
-                <button className="bg-[#d4491f] font-thin text-[12px] md:text-[15px]  ml-1 my-5 py-1 px-3 text-sm">
-                  <i className="fas fa-star"></i> Đánh giá &#40;{" "}
+                <button className="bg-[#d4491f] font-thin ml-1 my-5 py-2 px-5 shadow-lg shadow-gray-800  text-sm">
+                  <i className="fas fa-comment"></i> Đánh giá &#40;{" "}
                   {listComment.length} &#41;
                 </button>
                 <p className="text-justify text-sm md:text-[15px] font-thin">
@@ -145,7 +145,7 @@ function BlogDetail() {
         </div>
         <div className="grid md:grid-cols-9 grid-cols-7 lg:grid-cols-11 xl:grid-cols-12 my-6 lg:my-7 gap-x-2 md:gap-x-3 lg:gap-x-3 2xl:gap-x-5">
           <div className="col-span-1">
-            <p className="bg-[#E50914] xl:mx-5 md:mx-3 mx-2 text-white px-3 py-3 text-center rounded-full text-[12px] md:text-sm">
+            <p className="bg-[#E50914] xl:mx-5 md:mx-3 mx-0 text-white px-2 md:px-3 py-3 text-center rounded-full text-[12px] md:text-sm">
               RF
             </p>
           </div>
@@ -155,7 +155,7 @@ function BlogDetail() {
                 value={comment}
                 onChange={handlePostComment}
                 type="text"
-                className="border-b w-[90%] placeholder:text-[12px] placeholder:md:text-sm  focus:outline-none bg-transparent placeholder:text-gray-300 py-2"
+                className="border-b w-[80%] md:w-[90%] placeholder:text-[12px] placeholder:md:text-sm  focus:outline-none bg-transparent placeholder:text-gray-300 py-2"
                 placeholder="Viết bình luận..."
               />
               <button type="submit" className="lg:px-4 md:px-3 px-2">
@@ -174,7 +174,7 @@ function BlogDetail() {
                     <div key={bg._id}>
                       <div className="grid md:grid-cols-9 grid-cols-7 lg:grid-cols-11 xl:grid-cols-12 my-6 lg:my-7 gap-x-2 md:gap-x-3 lg:gap-x-3 2xl:gap-x-5">
                         <div>
-                          <p className="bg-[#E50914] xl:mx-5 md:mx-3 mx-2 text-white px-3 py-3 text-center rounded-full text-[12px] md:text-sm">
+                          <p className="bg-[#E50914] xl:mx-5 md:mx-3 mx-0 text-white px-2 md:px-3 py-3 text-center rounded-full text-[12px] md:text-sm">
                             RF
                           </p>
                         </div>

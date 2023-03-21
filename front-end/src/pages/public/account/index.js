@@ -179,6 +179,7 @@ function Account() {
                 </div>
               </div>
             </div>
+            <div className="py-10"></div>
             <FooterPublic />
           </div>
         )}
