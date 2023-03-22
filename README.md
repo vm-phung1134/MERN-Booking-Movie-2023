@@ -43,10 +43,9 @@ $ npm run start
 ![test-card c3f9b3d1a3e8caca3c9f4c9c481fd49c](https://user-images.githubusercontent.com/106596859/221561685-3a961fc7-daea-4ece-8ef7-18eb30b11695.jpg)
   
 # Preview
-![mern-img-1](https://user-images.githubusercontent.com/106596859/219338238-ab572253-86f2-43d8-bb60-2e544a3e7a15.png)
-![mern-img-2](https://user-images.githubusercontent.com/106596859/219338250-447d3b76-04f6-471f-9e9d-11c5f9d9e427.png)
-![mern-img-3](https://user-images.githubusercontent.com/106596859/219338272-8b5feb44-f3aa-4b6e-baa3-542cc3eee014.png)
-![mern-img-4](https://user-images.githubusercontent.com/106596859/219338288-344a4400-8436-4484-acbb-7cc26a72a229.png)
-![mern-img-5](https://user-images.githubusercontent.com/106596859/219338349-eb55dcb0-9998-4861-934e-c1899c4b9dfa.png)
-![mern-img-6](https://user-images.githubusercontent.com/106596859/219338378-be7ff4fc-498d-41f4-ac20-f66f9dd9c06c.png)
-![Capture](https://user-images.githubusercontent.com/106596859/221561825-49fe6912-693a-4870-ac9d-e830dd6b2ea4.JPG)
+![Screenshot 2023-03-22 140557](https://user-images.githubusercontent.com/106596859/226827971-be88a580-f047-408f-a130-3e094e1db5b1.png)
+![Screenshot 2023-03-22 140732](https://user-images.githubusercontent.com/106596859/226827990-99ebc799-e7de-46a9-901f-6c92efbf77b5.png)
+![Screenshot 2023-03-22 140813](https://user-images.githubusercontent.com/106596859/226828025-afe716f1-e731-4325-926e-3f2cd76bd07b.png)
+![Screenshot 2023-03-22 140901](https://user-images.githubusercontent.com/106596859/226828053-13b38ed4-54af-4f76-9496-b0da40ba8095.png)
+![Screenshot 2023-03-22 140943](https://user-images.githubusercontent.com/106596859/226828080-54d6a0d3-776a-43db-bb8a-a3495a69cfca.png)
+![Screenshot 2023-03-22 141026](https://user-images.githubusercontent.com/106596859/226828101-7911a6eb-c42f-4087-a229-76b41837f4d2.png)
