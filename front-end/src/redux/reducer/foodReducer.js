@@ -12,7 +12,7 @@ import {
   CREATE_FOOD_FAIL,
   UPDATE_FOOD_REQUEST,
   UPDATE_FOOD_SUCCESS,
-  UPDATE_FOOD_FAIL
+  UPDATE_FOOD_FAIL,
 } from "../constants/foodConstants";
 
 //REDUCER GET ALL FOODS
@@ -31,7 +31,7 @@ export const foodReducer = (
     case ALL_FOOD_SUCCESS:
       return {
         loading: false,
-        foods: action.payload === undefined ? [] : action.payload,
+        foods: action.payload ?? [],
       };
     case ALL_FOOD_FAIL:
       return {
@@ -108,17 +108,14 @@ export const foodDetailReducer = (
   }
 };
 
-export const foodEditReducer = (
-  state = {}, 
-  action
-  ) => {
+export const foodEditReducer = (state = {}, action) => {
   switch (action.type) {
     // UPDATE FOOD INFOMATION REDUCER
     case UPDATE_FOOD_REQUEST:
       return {
         ...state,
         loading: true,
-        isUpdated: false
+        isUpdated: false,
       };
     case UPDATE_FOOD_SUCCESS:
       return {

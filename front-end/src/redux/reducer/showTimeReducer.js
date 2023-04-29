@@ -29,7 +29,7 @@ export const showTimeReducer = (
     case ALL_SHOWTIME_SUCCESS:
       return {
         loading: false,
-        showtimes: action.payload === undefined ? [] : action.payload,
+        showtimes: action.payload ?? [],
       };
     case ALL_SHOWTIME_FAIL:
       return {
@@ -57,7 +57,7 @@ export const showtimeDetailReducer = (
     case ONE_SHOWTIME_SUCCESS:
       return {
         loading: false,
-        showtime: action.payload === undefined ? {} : action.payload,
+        showtime: action.payload ?? {},
       };
     case ONE_SHOWTIME_FAIL:
       return {
@@ -88,17 +88,14 @@ export const showtimeDetailReducer = (
   }
 };
 
-export const showTimeEditReducer = (
-  state = {}, 
-  action
-  ) => {
+export const showTimeEditReducer = (state = {}, action) => {
   switch (action.type) {
     // UPDATE CINEMA INFOMATION REDUCER
     case UPDATE_SHOWTIME_REQUEST:
       return {
         ...state,
         loading: true,
-        isUpdated: false
+        isUpdated: false,
       };
     case UPDATE_SHOWTIME_SUCCESS:
       return {
@@ -115,4 +112,3 @@ export const showTimeEditReducer = (
       return state;
   }
 };
-

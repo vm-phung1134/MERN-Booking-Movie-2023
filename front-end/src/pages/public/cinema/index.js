@@ -1,20 +1,24 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import HeaderPublic from "../components/headerPublic";
-import { Select, Option } from "@material-tailwind/react";
-import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-import { Carousel } from "react-responsive-carousel";
-import SpinnerLoading from "../components/spinnerLoading";
+// IMPORT HOOKS
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { Breadcrumbs } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
-import FooterPublic from "../components/footerPublic";
+// IMPORT REDUX
 import { getAllCinema } from "../../../redux/actions/cinemaActions";
 import { getAllShowTime } from "../../../redux/actions/showTimeActions";
 import { getAllMovie } from "../../../redux/actions/movieActions";
+// IMPORT UI
+import { Carousel } from "react-responsive-carousel";
+import SpinnerLoading from "../components/spinnerLoading";
 import Data from "../components/TranslationEnglish/Data.json";
+import { Select, Option } from "@material-tailwind/react";
+import HeaderPublic from "../components/headerPublic";
+import FooterPublic from "../components/footerPublic";
+import { Breadcrumbs } from "@material-tailwind/react";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 function Cinema() {
+  // DEFINE
   const dispatch = useDispatch();
   const [loadingPage, setLoadingPage] = useState(false);
   const cinemas = useSelector((state) => state.cinemas.cinemas);
@@ -23,11 +27,10 @@ function Cinema() {
   const [vlCinema, setVlCinema] = useState("");
   const [content, setContent] = useState("");
   const language = useSelector((state) => state.language.language);
-
   const handleChangeCinema = (value) => {
     setVlCinema(value);
   };
-
+  // HOOK
   useEffect(() => {
     window.scrollTo(0, 0);
     setLoadingPage(true);
@@ -36,7 +39,7 @@ function Cinema() {
       await dispatch(getAllShowTime());
       await dispatch(getAllMovie());
       setLoadingPage(false);
-    }, 1300);
+    }, 1200);
     return () => {
       clearTimeout(timeOut);
     };

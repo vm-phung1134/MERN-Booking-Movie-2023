@@ -45,7 +45,7 @@ export const userReducer = (
     case AUTH_REGISTER_SUCCESS:
       return {
         loading: false,
-        user: action.payload === undefined ? {} : action.payload,
+        user: action.payload ?? {},
         isAuthenticated: true,
       };
     case AUTH_LOGIN_FAIL:
@@ -115,7 +115,7 @@ export const getAllReducer = (
     case AUTH_GETALLUSER_SUCCESS:
       return {
         loading: false,
-        users: action.payload.users === undefined ? [] : action.payload.users,
+        users: action.payload.users ?? [],
       };
     case AUTH_GETALLUSER_FAIL:
       return {
@@ -144,7 +144,7 @@ export const userInfoReducer = (
     case AUTH_GETONEUSER_SUCCESS:
       return {
         loading: false,
-        userInfo: action.payload,
+        userInfo: action.payload ?? {},
       };
     case AUTH_GETONEUSER_FAIL:
       return {

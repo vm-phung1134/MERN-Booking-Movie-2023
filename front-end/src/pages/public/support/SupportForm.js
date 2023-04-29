@@ -1,14 +1,17 @@
+// IMPORT HOOKS
 import { Formik } from "formik";
 import { memo } from "react";
 import { useDispatch, useSelector } from "react-redux";
+// IMPORT REDUX
+import { postOneFeedBack } from "../../../redux/actions/feedBackActions";
+// IMPORT UI
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { postOneFeedBack } from "../../../redux/actions/feedBackActions";
 
-function SupportForm({ userInfo }) {
+function SupportForm() {
+  // DEFINE
   const dispatch = useDispatch();
   const feedBack = useSelector((state) => state.feedBack.feedBack);
-  console.log(feedBack);
   const initialValues = {
     userName: "",
     email: "",

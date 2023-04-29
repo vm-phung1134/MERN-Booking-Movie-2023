@@ -1,30 +1,34 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Formik } from "formik";
-import { useState, useEffect } from "react";
+// IMPORT HOOKS
+import { useState, useEffect, memo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import { toast, ToastContainer } from "react-toastify";
-// import "react-toastify/dist/ReactToastify.css";
-import { forgotPassword, clearErrors} from "../../../redux/actions/authActions";
+// IMPORT REDUX
+import {
+  forgotPassword,
+  clearErrors,
+} from "../../../redux/actions/authActions";
+// IMPORT UI
+import { Formik } from "formik";
 
 function ForgetForm({ setIsActive, isActive, setEmail, setSize }) {
+  // DEFINE
   const dispatch = useDispatch();
+  const { errorChangePw, code } = useSelector((state) => state.user);
   const [stateError, setStateError] = useState("");
   const initialValues = {
     email: "",
   };
-
-  const {errorChangePw, code } = useSelector((state) => state.user);
   const submitForm = async (values) => {
     await dispatch(forgotPassword(values));
-    if(code){
+    if (code) {
       setEmail(values.email);
       setIsActive(!isActive);
     }
   };
+  // VALIDATE
   const validate = (values) => {
     let errors = {};
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
-    // email
     if (!regex.test(values.email)) {
       errors.email = "! Email chưa chính xác";
     } else if (values.email.length > 30) {
@@ -32,6 +36,7 @@ function ForgetForm({ setIsActive, isActive, setEmail, setSize }) {
     }
     return errors;
   };
+  // HOOK USEEFFECT
   useEffect(() => {
     if (errorChangePw) {
       setStateError(errorChangePw);
@@ -56,10 +61,12 @@ function ForgetForm({ setIsActive, isActive, setEmail, setSize }) {
           handleBlur,
         } = formik;
         return (
-          <form 
-          data-aos="fade-right"
-          data-aos-duration="600"
-          className="px-0 md:px-5 lg:px-10 py-3 col-span-2" onSubmit={handleSubmit}>
+          <form
+            data-aos="fade-right"
+            data-aos-duration="600"
+            className="px-0 md:px-5 lg:px-10 py-3 col-span-2"
+            onSubmit={handleSubmit}
+          >
             <h1 className="text-[17px] font-medium mb-3">QUÊN MẬT KHẨU</h1>
             <p className="pt-1 text-center text-sm font-medium text-[#e01414]">
               {stateError}
@@ -78,7 +85,7 @@ function ForgetForm({ setIsActive, isActive, setEmail, setSize }) {
                 value={values.email}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                placeholder="Nhập email"
+                placeholder="Nhập địa chỉ email"
                 className="block w-full text-black px-4 rounded-lg py-2 text-sm  border border-gray-400 bg-transparent focus:border-gray-400 focus:ring-gray-700  focus:outline-none"
               />
               {errors.email && touched.email && (
@@ -90,23 +97,21 @@ function ForgetForm({ setIsActive, isActive, setEmail, setSize }) {
                 Mã xác nhận sẽ được gửi qua email của bạn
               </p>
               <div className="flex">
-              <p
-                onClick={() => {
-                  setSize(null);
-                }}
-                className="font-medium text-sm cursor-pointer text-black px-5 py-2"
-              >
-                Hủy
-              </p>
+                <p
+                  onClick={() => {
+                    setSize(null);
+                  }}
+                  className="font-medium text-sm cursor-pointer text-black px-5 py-2"
+                >
+                  Hủy
+                </p>
                 <button
-                type="submit"
-                className="bg-[#114ecf] text-sm text-white py-2 px-6 rounded-md"
-              >
-                Nhận code
-              </button>
-
+                  type="submit"
+                  className="bg-[#114ecf] text-sm text-white py-2 px-6 rounded-md"
+                >
+                  Nhận code
+                </button>
               </div>
-              
             </div>
           </form>
         );
@@ -115,4 +120,4 @@ function ForgetForm({ setIsActive, isActive, setEmail, setSize }) {
   );
 }
 
-export default ForgetForm;
+export default memo(ForgetForm);

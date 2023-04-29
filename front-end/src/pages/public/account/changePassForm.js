@@ -1,24 +1,28 @@
-import { Formik } from "formik";
+// IMPORT HOOKS
 import { memo, useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+// IMPORT REDUX
 import {
   changePasswordUser,
   authLogout,
 } from "../../../redux/actions/authActions";
+// IMPORT UI
+import { Formik } from "formik";
 
 function ChangePassForm({ userInfo }) {
-  const initialValues = {
-    passwordCurrent: "",
-    passwordNew: "",
-    passwordNewConfirm: "",
-  };
+  // DEFINE
   const dispatch = useDispatch();
   const navigator = useNavigate();
   const { error, isChanged } = useSelector((state) => state.newUser);
   const { user, isAuthenticated } = useSelector((state) => state.user);
   const [stateErr, setStateErr] = useState("");
+  const initialValues = {
+    passwordCurrent: "",
+    passwordNew: "",
+    passwordNewConfirm: "",
+  };
   const submitForm = async (values, { resetForm }) => {
     await dispatch(
       changePasswordUser(
@@ -40,6 +44,7 @@ function ChangePassForm({ userInfo }) {
   };
   const validate = (values) => {
     let errors = {};
+    // CURRENT PASSWORD
     if (!values.passwordCurrent) {
       errors.passwordCurrent = "! Vui lòng nhập mật khẩu";
     } else if (values.passwordCurrent.length < 6) {
@@ -47,7 +52,7 @@ function ChangePassForm({ userInfo }) {
     } else if (values.passwordCurrent.length > 30) {
       errors.passwordCurrent = "! Mật khẩu không vượt quá 30 ký tự";
     }
-    // new password
+    // NEW PASSWORD
     if (!values.passwordNew) {
       errors.passwordNew = "! Vui lòng nhập mật khẩu mới";
     } else if (values.passwordNew.length < 6) {
@@ -55,12 +60,13 @@ function ChangePassForm({ userInfo }) {
     } else if (values.passwordNew.length > 30) {
       errors.passwordNew = "! Mật khẩu không vượt quá 30 ký tự";
     }
-    // confirm new password
+    // CONFIRM NEW PASSWORD
     if (values.passwordNew !== values.passwordNewConfirm) {
       errors.passwordNewConfirm = "! Mật khẩu không khớp với mật khẩu vừa nhập";
     }
     return errors;
   };
+  // HOOK
   useEffect(() => {
     if (error) {
       setStateErr(error);
@@ -69,7 +75,6 @@ function ChangePassForm({ userInfo }) {
       setStateErr("");
     }
   }, [dispatch, error, isChanged]);
-
   useEffect(() => {
     if (isAuthenticated === false) {
       navigator("/");

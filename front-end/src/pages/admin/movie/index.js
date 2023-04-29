@@ -118,7 +118,7 @@ function ManageMovie() {
               <div className="mt-5 px-2 py-4 rounded-lg shadow-xl">
                 <div className="flex justify-between">
                   <h2 className="py-2 font-medium">Danh sách phim đang chiếu</h2>
-                  <input type="text" onChange={handleFilter} className="px-2 border focus:outline-none text-sm border-gray-700 text-black placeholder:text-gray-400" placeholder="Tìm kiếm phim"/>
+                  <input type="text" onChange={handleFilter} className="px-2 border w-[40%] focus:outline-none text-sm border-gray-700 text-black placeholder:text-gray-400" placeholder="Tìm kiếm phim"/>
                 </div>
                 <div className="mt-3 shadow-2xl">
                   <div className="overflow-x-auto">

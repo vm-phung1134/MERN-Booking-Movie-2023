@@ -29,7 +29,7 @@ export const getAllMovieSoonReducer = (
     case ALL_MOVIESOON_SUCCESS:
       return {
         loading: false,
-        movieSoons: action.payload.movieSoons === undefined ? [] : action.payload.movieSoons,
+        movieSoons: action.payload.movieSoons ?? [],
         movieSoonsCount: action.payload.productsCount,
       };
     case ALL_MOVIESOON_FAIL:
@@ -61,7 +61,7 @@ export const getOneMovieSoonReducer = (
     case ONE_MOVIESOON_SUCCESS:
       return {
         loading: false,
-        movieSoon: action.payload === undefined ? {} : action.payload,
+        movieSoon: action.payload ?? {},
       };
     case ONE_MOVIESOON_FAIL:
       return {
@@ -89,17 +89,14 @@ export const getOneMovieSoonReducer = (
   }
 };
 
-export const movieSoonEditReducer = (
-  state = {}, 
-  action
-  ) => {
+export const movieSoonEditReducer = (state = {}, action) => {
   switch (action.type) {
     // UPDATE MOVIE INFOMATION REDUCER
     case UPDATE_MOVIESOON_REQUEST:
       return {
         ...state,
         loading: true,
-        isUpdated: false
+        isUpdated: false,
       };
     case UPDATE_MOVIESOON_SUCCESS:
       return {

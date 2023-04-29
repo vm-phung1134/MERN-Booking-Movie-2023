@@ -1,25 +1,29 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import HeaderPublic from "../components/headerPublic";
-import { getAllBlog } from "../../../redux/actions/blogActions";
-import { getAllEvent } from "../../../redux/actions/eventActions";
+// IMPORT HOOKS
+import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
+// IMPORT REDUX
+import { getAllBlog } from "../../../redux/actions/blogActions";
+import { getAllEvent } from "../../../redux/actions/eventActions";
+// IMPORT UI
+import { Breadcrumbs } from "@material-tailwind/react";
+import Data from "../components/TranslationEnglish/Data.json";
 import Events from "./events";
 import Blogs from "./blogs";
-import { Breadcrumbs } from "@material-tailwind/react";
-import { Link } from "react-router-dom";
 import SpinnerLoading from "../components/spinnerLoading";
 import FooterPublic from "../components/footerPublic";
-import Data from "../components/TranslationEnglish/Data.json";
+import HeaderPublic from "../components/headerPublic";
 
 function BlogAndEvent() {
+  // DEFINE
   const dispatch = useDispatch();
   const blogs = useSelector((state) => state.blogs.blogs);
   const events = useSelector((state) => state.events.events);
   const [loadingPage, setLoadingPage] = useState(false);
   const [content, setContent] = useState("");
   const language = useSelector((state) => state.language.language);
-
+  // HOOK
   useEffect(() => {
     window.scrollTo(0, 0);
     setLoadingPage(true);

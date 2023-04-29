@@ -31,7 +31,8 @@ exports.createEvent = async (req, res, next) => {
 
 exports.updateEvent = async (req, res, next) => {
     try {
-        const event = await Event.findByIdAndUpdate(EventId,{...req.body})
+        const {eventId} = req.params;
+        const event = await Event.findByIdAndUpdate(eventId,{...req.body})
         res.status(200).json(event)
     } catch (error) {
         res.json(error)

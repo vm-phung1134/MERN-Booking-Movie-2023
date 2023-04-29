@@ -19,11 +19,7 @@ function CinemaAdd() {
   };
   const submitForm = async (values, { resetForm }) => {
     await dispatch(createCinema(values));
-    resetForm({
-        name: "",
-        area: "",
-        adress: "",
-    });
+    resetForm();
     toast.success("Đã thêm rạp chiếu thành công !", {
       position: toast.POSITION.BOTTOM_LEFT,
       className: "text-black",

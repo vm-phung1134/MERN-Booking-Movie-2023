@@ -29,23 +29,7 @@ function MovieNowAdd() {
   };
   const submitForm = async (values, { resetForm }) => {
     await dispatch(createMovie(values));
-    resetForm({
-      name: "",
-      namevn: "",
-      year: 2022,
-      country: "",
-      type: "",
-      released: "",
-      duration: 100,
-      poster: "",
-      image: "",
-      bg: "",
-      director: "",
-      limitAge: 13,
-      actors: "",
-      discription: "",
-      trailer: "",
-    });
+    resetForm();
     toast.success("Một bộ phim đã được thêm vào mục đang chiếu !", {
       position: toast.POSITION.BOTTOM_LEFT,
       className: "text-black",

@@ -1,18 +1,23 @@
-import HeaderPublic from "../components/headerPublic";
-import FooterPublic from "../components/footerPublic"
-import { useParams } from "react-router-dom";
-import { Breadcrumbs } from "@material-tailwind/react";
-import { Link } from "react-router-dom";
-import Events from "./events";
-import { useSelector, useDispatch } from "react-redux";
-import { getOneEvent, getAllEvent } from "../../../redux/actions/eventActions";
+// IMPORT HOOK
 import { useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+// IMPORT REDUX
+import { getOneEvent, getAllEvent } from "../../../redux/actions/eventActions";
+// IMPORT UI
+import { Breadcrumbs } from "@material-tailwind/react";
+import HeaderPublic from "../components/headerPublic";
+import FooterPublic from "../components/footerPublic";
+import Events from "./events";
 
 function EventDetail() {
+  // DEFINE
   const dispatch = useDispatch();
   const eventId = useParams();
   const { event } = useSelector((state) => state.event);
   const events = useSelector((state) => state.events.events);
+  // HOOK
   useEffect(() => {
     dispatch(getOneEvent(eventId.id));
     dispatch(getAllEvent());

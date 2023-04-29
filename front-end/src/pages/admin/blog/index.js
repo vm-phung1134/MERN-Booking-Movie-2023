@@ -4,10 +4,7 @@ import NavBars from "../components/navBars";
 import SideBars from "../components/sideBars";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useCallback, useState, memo } from "react";
-import {
-  deleteReservation,
-  getAllReservation,
-} from "../../../redux/actions/reservationActions";
+import { getAllBlog, deleteBlog } from "../../../redux/actions/blogActions";
 import {
   Dialog,
   DialogHeader,
@@ -17,30 +14,30 @@ import {
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-function ManageReceipt() {
+function ManageBlog() {
   const dispatch = useDispatch();
-  const { reservations } = useSelector((state) => state.reservations);
+  const { blogs } = useSelector((state) => state.blogs);
   const [size, setSize] = useState(null);
   const [id, setId] = useState("");
   const [isSearching, setIsSearching] = useState("");
-  const [searchReceipt, setSearchReceipt] = useState([]);
+  const [searchBlog, setSearchBlog] = useState([]);
   const handleOpen = useCallback((value, id) => {
     setSize(value);
     setId(id);
   }, []);
-  const handleDeleteUser = (id) => {
-    dispatch(deleteReservation(id));
+  const handleDeleteBlog = (id) => {
+    dispatch(deleteBlog(id));
     setSize(null); //DISMISS MODAL
-    setSearchReceipt(reservations.filter((item) => item._id !== id)); //AFTER DELETE SAVE INTO NEW RESERVATION
-    toast.success("Đã xóa hóa đơn người dùng khỏi hệ thống!", {
+    setSearchBlog(blogs.filter((item) => item._id !== id)); //AFTER DELETE SAVE INTO NEW RESERVATION
+    toast.success("Đã xóa Blog thành công!", {
       position: toast.POSITION.BOTTOM_LEFT,
       className: "text-black",
     });
   };
   const handleFilter = (e) => {
     setIsSearching(e.target.value);
-    setSearchReceipt(
-      reservations.filter((entry) =>
+    setSearchBlog(
+      blogs.filter((entry) =>
         Object.values(entry).some(
           (val) =>
             typeof val === "string" &&
@@ -51,11 +48,11 @@ function ManageReceipt() {
   };
 
   useEffect(() => {
-    dispatch(getAllReservation());
+    dispatch(getAllBlog());
   }, []);
   useEffect(() => {
-    setSearchReceipt(reservations);
-  }, [reservations]);
+    setSearchBlog(blogs);
+  }, [blogs]);
   return (
     <>
       <div className="grid grid-cols-10">
@@ -66,23 +63,32 @@ function ManageReceipt() {
           <NavBars />
           <ToastContainer toastStyle={{ color: "black" }} />
           <div className="m-5">
-            <h1 className="font-bold text-[35px] uppercase">QUẢN LÝ HÓA ĐƠN</h1>
+            <h1 className="font-bold text-[35px] uppercase">
+              QUẢN LÝ BLOG PHIM
+            </h1>
 
             <div className="flex justify-start mt-5">
               <div className="rounded-lg shadow-2xl text-center mr-2 p-5">
-                <h1>SỐ HÓA ĐƠN TRÊN HỆ THỐNG</h1>
+                <h1>SỐ BLOG TRÊN HỆ THỐNG</h1>
                 <p className="text-[35px] py-4 font-bold">
-                  {searchReceipt.length}
+                  {searchBlog.length}
                 </p>
               </div>
             </div>
+            <div className="my-5">
+              <Link to="create-blog">
+                <button className="bg-[#cf1111] text-[13px] text-white py-2 px-6 rounded-md">
+                  Thêm blog phim
+                </button>
+              </Link>
+            </div>
             <div className="flex  mt-5 justify-between">
-              <h2 className="py-2 font-medium">Danh sách hóa đơn khách hàng</h2>
+              <h2 className="py-2 font-medium">Danh sách blog phim</h2>
               <input
                 type="text"
                 onChange={handleFilter}
                 className="px-2 border w-[40%] focus:outline-none text-sm border-gray-700 text-black placeholder:text-gray-400"
-                placeholder="Tìm kiếm hóa đơn"
+                placeholder="Tìm kiếm blog phim"
               />
             </div>
             <div className="mt-3 shadow-2xl">
@@ -96,31 +102,25 @@ function ManageReceipt() {
                             scope="col"
                             className="px-6 py-3 text-xs font-bold text-left uppercase "
                           >
-                            Mã hóa đơn
+                            Mã blog
                           </th>
                           <th
                             scope="col"
                             className="px-6 py-3 text-xs font-bold text-center uppercase "
                           >
-                            Tên khách hàng
+                            Tên blog
                           </th>
                           <th
                             scope="col"
                             className="px-6 py-3 text-xs font-bold text-center uppercase "
                           >
-                            Ngày đặt vé
+                            Số lượt thích
                           </th>
                           <th
                             scope="col"
                             className="px-6 py-3 text-xs font-bold text-center uppercase "
                           >
-                            Số tiền <p className="text-[9px] lowercase capitalize"> Nghìn đồng</p>
-                          </th>
-                          <th
-                            scope="col"
-                            className="px-6 py-3 text-xs font-bold text-center uppercase "
-                          >
-                            Trạng thái
+                            Số bình luận
                           </th>
                           <th
                             scope="col"
@@ -131,36 +131,33 @@ function ManageReceipt() {
                         </tr>
                       </thead>
                       <tbody className="divide-y divide-gray-200">
-                        {searchReceipt
+                        {searchBlog
                           .slice()
                           .reverse()
-                          .map((receipt, index) => (
+                          .map((blog, index) => (
                             <>
                               <tr key={index}>
                                 <td className="px-6 py-4 text-sm whitespace-nowrap">
-                                  {receipt._id}
+                                  {blog._id}
                                 </td>
                                 <td className="px-6 py-4 text-sm text-center capitalize whitespace-nowrap">
-                                  {receipt.author.name}
+                                  {blog.name}
                                 </td>
                                 <td className="px-6 py-4 text-sm text-center capitalize whitespace-nowrap">
-                                  {receipt.createdAt}
+                                  {blog.like}
                                 </td>
                                 <td className="px-4 py-4 text-sm text-center capitalize whitespace-nowrap">
-                                {(receipt.total*1000).toLocaleString('vi', {style : 'currency', currency : 'VND'})}
-                                </td>
-                                <td className="px-4 py-4 text-sm text-center capitalize whitespace-nowrap">
-                                  Đã thanh toán
+                                  {blog.comments.length}
                                 </td>
                                 <td className="px-6 py-4 text-sm text-center capitalize whitespace-nowrap">
-                                  <Link to={`update-receipt/${receipt._id}`}>
+                                  <Link to={`update-blog/${blog._id}`}>
                                     <button className="px-2 text-blue-600">
                                       Chi tiết
                                     </button>
                                   </Link>
 
                                   <button
-                                    onClick={() => handleOpen("sm", receipt._id)}
+                                    onClick={() => handleOpen("sm", blog._id)}
                                     className="px-2 text-red-500"
                                   >
                                     Xóa
@@ -186,20 +183,20 @@ function ManageReceipt() {
       >
         <DialogHeader>
           <h2 className="text-sm lg:text-[17px] text-[#c40404] font-bold">
-            XOÁ HOÁ ĐƠN
+            XOÁ BLOG PHIM
           </h2>
         </DialogHeader>
         <DialogBody divider>
           <div className="mb-5 w-full">
             <p className="my-2 text-[#000000]">
-              Bạn có chắc là muốn xóa hóa đơn này không?
+              Bạn có chắc là muốn xóa blog này không?
             </p>
           </div>
         </DialogBody>
         <DialogFooter>
           <button
             className="px-6 my-5 py-2 text-sm text-white bg-[#c40404]"
-            onClick={() => handleDeleteUser(id)}
+            onClick={() => handleDeleteBlog(id)}
           >
             Tiếp tục
           </button>
@@ -209,4 +206,4 @@ function ManageReceipt() {
   );
 }
 
-export default memo(ManageReceipt);
+export default memo(ManageBlog);

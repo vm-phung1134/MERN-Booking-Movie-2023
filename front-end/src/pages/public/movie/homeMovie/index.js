@@ -1,16 +1,19 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import HeaderPublic from "../../components/headerPublic";
+// IMPORT HOOKS
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import SpinnerLoading from "../../components/spinnerLoading";
 import { Link } from "react-router-dom";
-import { Breadcrumbs } from "@material-tailwind/react";
+// IMPORT REDUX
 import { getAllMovie } from "../../../../redux/actions/movieActions";
 import { getAllMovieSoon } from "../../../../redux/actions/movieSoonActions";
+import { Breadcrumbs } from "@material-tailwind/react";
+// IMPORT UI
 import FooterPublic from "../../components/footerPublic";
+import HeaderPublic from "../../components/headerPublic";
+import SpinnerLoading from "../../components/spinnerLoading";
 import Data from "../../components/TranslationEnglish/Data.json";
-
 function HomeMovie() {
+  // DEFINE
   const dispatch = useDispatch();
   const [loadingPage, setLoadingPage] = useState(false);
   const {movies} = useSelector((state) => state.movies);
@@ -21,6 +24,7 @@ function HomeMovie() {
   const handleClickActive = (e) => {
     setIsActive(e.target.value);
   };
+  // HOOK
   useEffect(() => {
     window.scrollTo(0, 0);
     setLoadingPage(true);
@@ -28,12 +32,11 @@ function HomeMovie() {
       await dispatch(getAllMovie());
       await dispatch(getAllMovieSoon());
       setLoadingPage(false);
-    }, 1300);
+    }, 1200);
     return () => {
       clearTimeout(timeOut);
     };
   }, []);
-
   useEffect(() => {
     if (language === "English") {
       setContent(Data.english);
@@ -41,6 +44,7 @@ function HomeMovie() {
       setContent("");
     }
   }, [language]);
+  
   return (
     <>
       <div className="bg-black min-h-screen max-h-full">

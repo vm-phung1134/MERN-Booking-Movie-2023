@@ -5,7 +5,11 @@ function SideBars() {
   return (
     <div className="px-3 w-[20%] fixed top-0">
       <div className="flex justify-center p-8">
-        <img className="lg:h-8 lg:w-[150px] h-5 w-[100px]" src={Logo} alt="Workflow" />
+        <img
+          className="lg:h-8 lg:w-[150px] h-5 w-[100px]"
+          src={Logo}
+          alt="Workflow"
+        />
       </div>
       <div className="mt-2">
         <h2 className="font-medium text-sm text-gray-600">TRANG CHỦ</h2>
@@ -51,16 +55,26 @@ function SideBars() {
               suất chiếu
             </Link>
           </button>
+          <button className="py-1 pl-8 hover:bg-gray-800 hover:text-white hover:w-full">
+            <Link to="/admin/seat">
+              <i className="fas fa-solid fa-business-time"></i>&ensp;Quản lý
+              phòng chiếu
+            </Link>
+          </button>
         </div>
       </div>
       <div className="mt-2">
         <h2 className="font-medium text-sm text-gray-600">BlOG & SỰ KIỆN</h2>
         <div className="flex flex-col items-start">
           <button className="py-1 pl-8 hover:bg-gray-800 hover:text-white hover:w-full">
-            <i className="fas fa-blog"></i>&emsp;Blog điện ảnh
+            <Link to="/admin/blog">
+              <i className="fas fa-blog"></i>&emsp;Blog điện ảnh
+            </Link>
           </button>
           <button className="py-1 pl-8 hover:bg-gray-800 hover:text-white hover:w-full">
-            <i className="fas fa-calendar-days"></i>&emsp;Sự kiện
+            <Link to="/admin/event">
+              <i className="fas fa-calendar-days"></i>&emsp;Sự kiện
+            </Link>
           </button>
         </div>
       </div>

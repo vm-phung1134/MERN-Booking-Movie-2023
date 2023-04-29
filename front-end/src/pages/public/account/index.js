@@ -1,20 +1,25 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+// IMPORT HOOKS
 import React, { useEffect, memo, useState } from "react";
-import { getAllMovie } from "../../../redux/actions/movieActions";
-import { useSelector, useDispatch } from "react-redux";
+import Cookies from "universal-cookie";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+// IMPORT REDUX
+import { getOneUser } from "../../../redux/actions/authActions";
+import { getAllReservation } from "../../../redux/actions/reservationActions";
+import { getAllMovie } from "../../../redux/actions/movieActions";
+// IMPORT UI
+import InfoForm from "./infoForm";
 import { Breadcrumbs } from "@material-tailwind/react";
 import HeaderPublic from "../components/headerPublic";
 import SpinnerLoading from "../components/spinnerLoading";
 import ChangePassForm from "./changePassForm";
-import { getOneUser } from "../../../redux/actions/authActions";
-import InfoForm from "./infoForm";
-import { getAllReservation } from "../../../redux/actions/reservationActions";
 import FooterPublic from "../components/footerPublic";
-
 function Account() {
+  // DEFINE
   const dispatch = useDispatch();
-  const userId = localStorage.getItem("userId");
+  const cookies = new Cookies();
+  const userId = cookies.get("userId");
   const movies = useSelector((state) => state.movies.movies);
   const userInfo = useSelector((state) => state.userInfo.userInfo);
   const reservations = useSelector((state) => state.reservations.reservations);
@@ -24,22 +29,27 @@ function Account() {
   const handleClickActive = (e) => {
     setIsActive(e.target.value);
   };
+  // HOOK
   useEffect(() => {
     window.scrollTo(0, 0);
     setLoadingPage(true);
     let timeOut = setTimeout(async () => {
       await dispatch(getOneUser(userId));
-      await dispatch(getAllMovie());
-      await dispatch(getAllReservation());
+      dispatch(getAllMovie());
+      dispatch(getAllReservation());
       setLoadingPage(false);
-    }, 1300);
+    }, 1200);
     return () => {
       clearTimeout(timeOut);
     };
   }, []);
   useEffect(() => {
     let total = 0;
-    reservations.map((reservation) => (total = total + reservation.total));
+    reservations.map((reservation) =>
+      reservation.author._id === userId
+        ? (total = total + reservation.total)
+        : 0
+    );
     setCountTotal(total);
   }, [reservations]);
 
@@ -90,11 +100,16 @@ function Account() {
                           <h1 className="text-sm">
                             Số tiền bạn đã chi trong năm 2023
                           </h1>
-                          <p className="font-bold">{countTotal * 1000} VNĐ</p>
+                          <p className="font-bold">
+                            {(countTotal * 1000).toLocaleString("vi", {
+                              style: "currency",
+                              currency: "VND",
+                            })}
+                          </p>
                         </div>
                         <div className="lg:my-5 my-2 p-5 text-black text-center rounded-lg bg-white">
                           <h1 className="text-sm">Cấp độ tài khoản</h1>
-                          {countTotal > 1000 ? (
+                          {countTotal > 1000000 ? (
                             <p className="font-bold">Thành viên</p>
                           ) : (
                             <p className="font-bold">Khách hàng thân thiết</p>
@@ -103,7 +118,89 @@ function Account() {
                       </div>
                       <div className="lg:my-5 my-2 p-5 text-black text-left rounded-lg bg-white">
                         <h1 className="text-sm">Lịch sử tài khoản</h1>
-                        
+                        <div className="mt-3 text-sm shadow-2xl">
+                          <div className="overflow-x-auto">
+                            <div className="w-full inline-block align-middle">
+                              <div className="overflow-auto rounded-xl">
+                                <table className="min-w-full text-black">
+                                  <thead className="bg-[#206cb391]">
+                                    <tr>
+                                      <th
+                                        scope="col"
+                                        className="px-6 py-3 text-xs font-bold text-left uppercase "
+                                      >
+                                        Mã giao dịch
+                                      </th>
+                                      <th
+                                        scope="col"
+                                        className="px-6 py-3 text-xs font-bold text-center uppercase "
+                                      >
+                                        Tên khách hàng
+                                      </th>
+                                      <th
+                                        scope="col"
+                                        className="px-6 py-3 text-xs font-bold text-center uppercase "
+                                      >
+                                        Ngày giao dịch
+                                      </th>
+                                      <th
+                                        scope="col"
+                                        className="px-6 py-3 text-xs font-bold text-center uppercase "
+                                      >
+                                        Tổng thanh toán
+                                      </th>
+                                      <th
+                                        scope="col"
+                                        className="px-6 py-3 text-xs font-bold text-center uppercase "
+                                      >
+                                        Trạng thái
+                                      </th>
+                                    </tr>
+                                  </thead>
+                                  <tbody className="divide-y divide-gray-200">
+                                    {reservations
+                                      .slice()
+                                      .reverse()
+                                      .map((reservation, index) => (
+                                        <>
+                                          {index < 10 &&
+                                          reservation.author._id === userId ? (
+                                            <tr>
+                                              <td className="px-6 py-4 text-sm whitespace-nowrap">
+                                                {reservation._id}
+                                              </td>
+                                              <td className="px-6 py-4 text-sm text-center capitalize whitespace-nowrap">
+                                                {reservation.author.name}
+                                              </td>
+                                              <td className="px-6 py-4 text-sm text-center capitalize whitespace-nowrap">
+                                                {reservation.createdAt}
+                                              </td>
+                                              <td className="px-6 text-center py-4 text-sm whitespace-nowrap">
+                                                {(
+                                                  reservation.total * 1000
+                                                ).toLocaleString("vi", {
+                                                  style: "currency",
+                                                  currency: "VND",
+                                                })}
+                                              </td>
+                                              <td className="px-6 text-center py-4 text-green-700 text-sm whitespace-nowrap">
+                                                hoàn tất
+                                              </td>
+                                            </tr>
+                                          ) : (
+                                            <></>
+                                          )}
+                                        </>
+                                      ))}
+                                    <button className="py-3 text-end text-sm px-6 font-bold">
+                                      Xem thêm
+                                    </button>
+                                  </tbody>
+                                </table>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   )}
@@ -150,7 +247,9 @@ function Account() {
                           </Link>
                         </div>
                         <div className="text-[15px]">
-                          <p className="text-white truncate uppercase">{movie.name}</p>
+                          <p className="text-white truncate uppercase">
+                            {movie.name}
+                          </p>
                           <p className="text-gray-500 truncate uppercase">
                             {movie.namevn}
                           </p>

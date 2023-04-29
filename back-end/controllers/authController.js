@@ -14,11 +14,7 @@ exports.register = async (req, res, next) => {
       return next(err);
     } else {
       const user = await User.create(req.body);
-      const token = jwt.sign({ userId: user._id }, process.env.APP_SECRET);
-      res.status(200).json({
-        user,
-        token,
-      });
+      res.status(200).json({user});
     }
   } catch (error) {
     res.json(error);
@@ -40,7 +36,7 @@ exports.login = async (req, res, next) => {
         token,
         userName: user.name,
         userId: user._id,
-        userPosition: user.position,
+        user_position: user.position
       });
     } else {
       const err = new Error("Mật khẩu không chính xác - Vui lòng nhập lại");

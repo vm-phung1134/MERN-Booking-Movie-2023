@@ -11,7 +11,6 @@ function Blogs({blog}) {
             alt=""
           ></img>
         </Link>
-        
         <div className="col-span-2">
         <Link className="hover:text-red-600 ease-linear duration-300" to={`/blog-detail/${blog._id}`}>
           <p className="capitalize">

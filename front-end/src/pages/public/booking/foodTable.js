@@ -1,12 +1,16 @@
+// IMPORT HOOKS
 import { useDispatch } from "react-redux";
 import { memo, useEffect } from "react";
+// IMPORT REDUX
 import {
   incrementFood,
   decrementFood,
 } from "../../../redux/actions/foodActions";
 
 function FoodTable({ foods, setvlPriceFood}) {
+  // DEFINE
   const dispatch = useDispatch();
+  // HOOK
   useEffect(() => {
     let total = 0;
     foods.map(food => 

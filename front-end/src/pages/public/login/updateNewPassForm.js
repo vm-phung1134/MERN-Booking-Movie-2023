@@ -1,9 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Formik } from "formik";
+// IMPORT HOOKS
 import { useDispatch } from "react-redux";
+// IMPORT REDUX
+import { updateNewPasswordUser } from "../../../redux/actions/authActions";
+// IMPORT UI
+import { Formik } from "formik";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { updateNewPasswordUser } from "../../../redux/actions/authActions";
 
 function UpdateNewPassForm({
   codeConfirm,
@@ -12,6 +15,7 @@ function UpdateNewPassForm({
   isActive,
   setIsActive,
 }) {
+  // DEFINE
   const dispatch = useDispatch();
   const initialValues = {
     email: email,
@@ -29,6 +33,7 @@ function UpdateNewPassForm({
   };
   const validate = (values) => {
     let errors = {};
+    // PASSWORD
     if (!values.password) {
       errors.password = "! Vui lòng nhập mật khẩu";
     } else if (values.password.length < 6) {
@@ -36,7 +41,7 @@ function UpdateNewPassForm({
     } else if (values.password.length > 30) {
       errors.password = "! Mật khẩu không vượt quá 30 ký tự";
     }
-    // confirm password
+    // CONFIRM PASSWORD
     if (values.confirmPassword !== values.password) {
       errors.confirmPassword = "! Mật khẩu không khớp với mật khẩu vừa nhập";
     }

@@ -1,11 +1,14 @@
-import { Formik } from "formik";
+// IMPORT HOOKS
 import { memo } from "react";
 import { useDispatch } from "react-redux";
+// IMPORT REDUX
+import { updateOneUser } from "../../../redux/actions/authActions";
+// IMPORT UI
+import { Formik } from "formik";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { updateOneUser } from "../../../redux/actions/authActions";
-
 function InfoForm({ userInfo }) {
+  // DEFINE
   const dispatch = useDispatch();
   const initialValues = {
     name: userInfo.name,
@@ -15,25 +18,25 @@ function InfoForm({ userInfo }) {
     email: userInfo.email,
     password: userInfo.password,
   };
-  const validate = (values) => {
-    let errors = {};
-    // phone
-    const regex =
-      /^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$/;
-    if (!regex.test(values.phone)) {
-      errors.phone = "! Số điện thoại không chính xác";
-    }
-    // cmnd
-    if (values.cardId.length !== 9) {
-      errors.cardId = "! Số CMND không chính xác";
-    }
-    return errors;
-  };
   const submitForm = async (values) => {
     await dispatch(updateOneUser(userInfo._id, values));
     toast.success("Cập nhật thông tin thành công !", {
       position: toast.POSITION.BOTTOM_LEFT,
     });
+  };
+  const validate = (values) => {
+    let errors = {};
+    // PHONE
+    const regex =
+      /^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$/;
+    if (!regex.test(values.phone)) {
+      errors.phone = "! Số điện thoại không chính xác";
+    }
+    // ID CARD
+    if (values.cardId.length !== 9) {
+      errors.cardId = "! Số CMND không chính xác";
+    }
+    return errors;
   };
   return (
     <Formik

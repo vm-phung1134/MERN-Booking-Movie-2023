@@ -1,23 +1,27 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import HeaderPublic from "../components/headerPublic";
-import SpinnerLoading from "../components/spinnerLoading";
+// IMPORT HOOKS
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import FooterPublic from "../components/footerPublic";
+// IMPORT REDUX
 import { getAllMovieSoon } from "../../../redux/actions/movieSoonActions";
-
+// IMPORT UI
+import HeaderPublic from "../components/headerPublic";
+import FooterPublic from "../components/footerPublic";
+import SpinnerLoading from "../components/spinnerLoading";
 function CheckoutSuccess() {
+  // DEFINE
   const dispatch = useDispatch();
   const [loadingPage, setLoadingPage] = useState(false);
   const { movieSoons } = useSelector((state) => state.movieSoons);
+  // HOOK
   useEffect(() => {
     window.scrollTo(0, 0);
     setLoadingPage(true);
     let timeOut = setTimeout(async () => {
       await dispatch(getAllMovieSoon());
       setLoadingPage(false);
-    }, 1300);
+    }, 1200);
     return () => {
       clearTimeout(timeOut);
     };

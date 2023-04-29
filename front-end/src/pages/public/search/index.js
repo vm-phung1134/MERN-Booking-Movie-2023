@@ -1,14 +1,18 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import HeaderPublic from "../components/headerPublic";
+// IMPORT HOOKS
+import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+// IMPORT REDUX
 import { getAllMovie } from "../../../redux/actions/movieActions";
 import { getAllMovieSoon } from "../../../redux/actions/movieSoonActions";
-import { Link } from "react-router-dom";
+// IMPORT UI
+import HeaderPublic from "../components/headerPublic";
 import FooterPublic from "../components/footerPublic";
 import Data from "../components/TranslationEnglish/Data.json";
 
 function SearchPage() {
+  // DEFINE
   const dispatch = useDispatch();
   const movies = useSelector((state) => state.movies.movies);
   const movieSoons = useSelector((state) => state.movieSoons.movieSoons);
@@ -23,6 +27,7 @@ function SearchPage() {
   };
   const handleSearch = (e) => {
     setIsSearching(e.target.value);
+    // SEARCHING FOR MOVIE NOW
     setSearchCurrentMovie(
       movies.filter((entry) =>
         Object.values(entry).some(
@@ -32,6 +37,7 @@ function SearchPage() {
         )
       )
     );
+    // SEARCHING FOR MOVIE SOON
     setSearchSoonMovie(
       movieSoons.filter((entry) =>
         Object.values(entry).some(
@@ -42,6 +48,7 @@ function SearchPage() {
       )
     );
   };
+  // HOOK
   useEffect(() => {
     dispatch(getAllMovie());
     dispatch(getAllMovieSoon());

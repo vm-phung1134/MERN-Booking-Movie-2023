@@ -1,75 +1,83 @@
-import HeaderPublic from "../components/headerPublic";
+// IMPORT HOOKS
+import { useEffect, useState, memo } from "react";
 import { useParams } from "react-router-dom";
-import { Breadcrumbs } from "@material-tailwind/react";
-import { Link } from "react-router-dom";
-import FooterPublic from "../components/footerPublic";
 import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+import Cookies from "universal-cookie";
+// IMPORT COMPONENTS
+import FooterPublic from "../components/footerPublic";
+// IMPORT REDUX
 import {
   getOneBlog,
   getAllBlog,
   updateOneBlog,
 } from "../../../redux/actions/blogActions";
-import { useEffect, useState, memo } from "react";
+// IMPORT UI
+import { Breadcrumbs } from "@material-tailwind/react";
+import HeaderPublic from "../components/headerPublic";
 
 function BlogDetail() {
+  // DEFINE
   const dispatch = useDispatch();
   const blogId = useParams();
+  const cookies = new Cookies();
   const current = new Date();
+  const userName = cookies.get("user");
   const date = `${current.getDate()}/${
     current.getMonth() + 1
   }/${current.getFullYear()}`;
   const { blog } = useSelector((state) => state.blog);
-  const userName = localStorage.getItem("user");
+  const { blogs } = useSelector((state) => state.blogs);
   const [loadMore, setLoadMore] = useState(5);
-  const [comment, setComment] = useState(""); // set value input form
+  const [comment, setComment] = useState(""); // SET VALUES FROM INPUT FORM
   const [like, setLike] = useState(blog.like);
   const [listComment, setListComment] = useState([]);
-  //define new cmt user
+  //CONSTRUCTOR USER'S COMMENTS
   let cmt = {
     userName: userName,
     date: date,
     content: comment,
   };
-  const { blogs } = useSelector((state) => state.blogs);
-  useEffect(() => {
-    blogs.map((bg) => bg._id === blogId.id && setListComment(bg.comments)); // get comment from blogs
-  }, [blogId.id, blogs]);
-
-  // Content in user's port
-  const handlePostComment = (e) => {
-    setComment(e.target.value);
-  };
-
-  // Handle Submit comment
+  // HANDLE SUBMIT COMMENT
   const onSubmit = async (e) => {
     e.preventDefault();
+    // UPDATE COMMENT INTO DATABASE
     await dispatch(
       updateOneBlog(blogId.id, {
-        // lưu comment vào db
         ...blog,
         comments: [cmt, ...listComment],
       })
     );
-    setListComment((prev) => [cmt, ...prev]); //hiển thị list comments
-    setComment(""); //xóa input comment
+    //GET NEW LIST COMMENTS
+    setListComment((prev) => [cmt, ...prev]);
+    //EMPTY INPUT COMMENT
+    setComment("");
   };
-
+  // HANDLE SUBMIT LIKE
   const handleLike = () => {
+    // UPDATE LIKE INTO DATABASE
     dispatch(
       updateOneBlog(blogId.id, {
         ...blog,
         like: blog.like + 1,
       })
     );
+    // GET NEW QUANTITY LIKE
     setLike((prev) => prev + 1);
   };
-
+  // COMMENT OF USER
+  const handlePostComment = (e) => {
+    setComment(e.target.value);
+  };
+  // HOOK
+  useEffect(() => {
+    blogs.map((bg) => bg._id === blogId.id && setListComment(bg.comments)); // get comment from blogs
+  }, [blogId.id, blogs]);
   useEffect(() => {
     window.scrollTo(0, 0);
     dispatch(getOneBlog(blogId.id));
     dispatch(getAllBlog());
   }, [blogId.id, dispatch]);
-
   useEffect(() => {
     setLike(blog.like);
   }, [blog.like]);

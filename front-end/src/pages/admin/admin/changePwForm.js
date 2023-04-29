@@ -7,6 +7,7 @@ import {
   changePasswordUser,
   authLogout,
 } from "../../../redux/actions/authActions";
+import Cookies from "universal-cookie";
 
 function ChangePassForm({handleOpenPw}) {
   const initialValues = {
@@ -19,12 +20,13 @@ function ChangePassForm({handleOpenPw}) {
   const { error, isChanged } = useSelector((state) => state.newUser);
   const { user, isAuthenticated } = useSelector((state) => state.user);
   const [stateErr, setStateErr] = useState("");
-  const userId = localStorage.getItem("userId");
+  const cookies = new Cookies()
+  const adminId = cookies.get("adminId");
   const submitForm = async (values, { resetForm }) => {
     await dispatch(
-      changePasswordUser(userId, values.passwordCurrent, values.passwordNew)
+      changePasswordUser(adminId, values.passwordCurrent, values.passwordNew)
     );
-    if (stateErr !== "") {
+    if (stateErr !== ""){
       resetForm({});
     }
     dispatch(authLogout());

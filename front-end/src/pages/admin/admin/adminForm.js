@@ -5,10 +5,12 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useEffect } from "react";
 import { getOneUser, updateOneUser } from "../../../redux/actions/authActions";
+import Cookies from "universal-cookie";
 
 function AdminForm({ handleOpen }) {
   const dispatch = useDispatch();
-  const adminId = localStorage.getItem("adminId");
+  const cookies = new Cookies()
+  const adminId = cookies.get("adminId");
   const user = useSelector((state) => state.userInfo.userInfo);
   const initialValues = {
     name: user.name,

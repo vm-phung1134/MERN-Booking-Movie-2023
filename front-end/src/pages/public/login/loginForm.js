@@ -1,21 +1,31 @@
+// IMPORT HOOKS
 import { useState, useEffect, memo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { authLogin, clearErrors } from "../../../redux/actions/authActions";
 import { useNavigate } from "react-router-dom";
+import Cookies from "universal-cookie";
+// IMPORT REDUX
+import { authLogin, clearErrors } from "../../../redux/actions/authActions";
+// IMPORT LIBRARY UI
 import { Formik } from "formik";
 import { Link } from "react-router-dom";
+
 function LoginForm({ handleOpen }) {
+  // DEFINE
   const initialValues = {
     email: "",
     password: "",
   };
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [showOrHide, setShowOrHide] = useState(false)
+  const { user, errorLogin, isAuthenticated } = useSelector(
+    (state) => state.user
+  );
+  const [showOrHide, setShowOrHide] = useState(false);
   const [stateError, setStateError] = useState("");
   const [stateLoadingLogin, setStateLoadingLogin] = useState({
     loading: false,
   });
+  
   const submitForm = (values) => {
     setStateLoadingLogin({ loading: true });
     let timeOutLogin = setTimeout(async () => {
@@ -24,30 +34,8 @@ function LoginForm({ handleOpen }) {
       return () => {
         clearTimeout(timeOutLogin);
       };
-    }, 2000);
+    }, 1200);
   };
-  const { user, errorLogin, isAuthenticated } = useSelector(
-    (state) => state.user
-  );
-  useEffect(() => {
-    if (errorLogin) {
-      setStateError(errorLogin);
-      dispatch(clearErrors(errorLogin));
-    }
-    if (isAuthenticated === true) {
-      if (user.userPosition !== "") {
-        navigate("/admin/dashboard");
-        localStorage.setItem("admin", user.userName);
-        localStorage.setItem("token-admin", user.token);
-        localStorage.setItem("adminId", user.userId);
-      } else {
-        navigate("/home");
-        localStorage.setItem("user", user.userName);
-        localStorage.setItem("token-user", user.token);
-        localStorage.setItem("userId", user.userId);
-      }
-    }
-  }, [dispatch, errorLogin, isAuthenticated, navigate, stateError, user]);
   const validate = (values) => {
     let errors = {};
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
@@ -67,6 +55,28 @@ function LoginForm({ handleOpen }) {
     }
     return errors;
   };
+  // HOOK
+  useEffect(() => {
+    if (errorLogin) {
+      setStateError(errorLogin);
+      dispatch(clearErrors(errorLogin));
+    }
+    if (isAuthenticated === true) {
+      const cookies = new Cookies();
+      if (user.user_position !== "") {
+        navigate("/admin/dashboard");
+        cookies.set("admin", user.userName);
+        cookies.set("token-admin", user.token);
+        cookies.set("adminId", user.userId);
+      } else {
+        navigate("/home");
+        cookies.set("user", user.userName);
+        cookies.set("token", user.token);
+        cookies.set("userId", user.userId);
+      }
+    }
+  }, [dispatch, errorLogin, isAuthenticated, navigate, stateError, user]);
+
   return (
     <Formik
       initialValues={initialValues}
@@ -84,7 +94,7 @@ function LoginForm({ handleOpen }) {
         } = formik;
         return (
           <div
-            className="relative mt-10 flex flex-col justify-center min-h-screen overflow-hidden"
+            className="relative mt-10 lg:mt-20 flex flex-col justify-center min-h-screen overflow-hidden"
             id="login"
           >
             <div
@@ -143,7 +153,7 @@ function LoginForm({ handleOpen }) {
                   )}
                 </div>
                 <div className="flex justify-between">
-                  <div >
+                  <div>
                     <input
                       id="showPassword"
                       type="checkbox"
@@ -201,7 +211,7 @@ function LoginForm({ handleOpen }) {
                         className="animate-spin h-0 w-5 mr-3 text-white"
                         viewBox="0 0 24 24"
                       ></svg>
-                      Đăng nhập
+                      Đăng nhập <i class="fa-solid fa-chevron-right"></i>
                     </button>
                   )}
                 </div>

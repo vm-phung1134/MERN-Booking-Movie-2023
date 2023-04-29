@@ -1,15 +1,21 @@
-import { Formik } from "formik";
+// IMPORT HOOKS
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect, memo } from "react";
+// IMPORT REDUX
+import { authRegister } from "../../../redux/actions/authActions";
+// IMPORT UI
+import { Formik } from "formik";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { authRegister } from "../../../redux/actions/authActions";
-
 function RegisterForm() {
+  // DEFINE
+  const dispatch = useDispatch();
+  const [stateErr, setStateErr] = useState("");
+  const [stateSuccess, setStateSuccess] = useState("");
   const [stateLoadingRegister, setStateLoadingRegister] = useState({
     loading: false,
   });
-
+  const { user, error, isRegister } = useSelector((state) => state.user);
   const initialValues = {
     name: "",
     email: "",
@@ -20,37 +26,52 @@ function RegisterForm() {
     position: "",
     passwordConfirm: "",
   };
-  const dispatch = useDispatch();
-  const [stateErr, setStateErr] = useState("");
-  const [stateSuccess, setStateSuccess] = useState("");
+
   const submitForm = (values, { resetForm }) => {
     setStateLoadingRegister({ loading: true });
     let timeOutRegister = setTimeout(async () => {
       await setStateLoadingRegister({ loading: false });
-      dispatch(
-        authRegister(
-          values.name,
-          values.email,
-          values.password,
-          values.phone,
-          values.cardId,
-          values.gender,
-          values.position
-        )
-      );
-      resetForm({
-        name: "",
-        email: "",
-        password: "",
-        passwordConfirm: "",
-      });
+      dispatch(authRegister(values));
+      resetForm({});
       return () => {
         clearTimeout(timeOutRegister);
       };
-    }, 2000);
+    }, 1200);
   };
-  const { user, error, isRegister } = useSelector((state) => state.user);
-
+  const validate = (values) => {
+    let errors = {};
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+    // USER
+    if (!values.name) {
+      errors.name = "! Vui lòng nhập tên";
+    } else if (values.name.length < 6) {
+      errors.name = "! Tên người tối thiếu phải có 6 ký tự";
+    } else if (values.name.length > 30) {
+      errors.name = "! Name không vượt quá 30 ký tự";
+    }
+    // EMAIL
+    if (!values.email) {
+      errors.email = "! Vui lòng nhập Email";
+    } else if (!regex.test(values.email)) {
+      errors.email = "! Email chưa chính xác";
+    } else if (values.email.length > 30) {
+      errors.email = "! Email không vượt quá 30 ký tự";
+    }
+    // PASSWORD
+    if (!values.password) {
+      errors.password = "! Vui lòng nhập mật khẩu";
+    } else if (values.password.length < 6) {
+      errors.password = "! Mật khẩu quá ngắn";
+    } else if (values.password.length > 30) {
+      errors.password = "! Mật khẩu không vượt quá 30 ký tự";
+    }
+    // CONFIRM PASSWORD
+    if (values.passwordConfirm !== values.password) {
+      errors.passwordConfirm = "! Mật khẩu không khớp với mật khẩu vừa nhập";
+    }
+    return errors;
+  };
+  // HOOK
   useEffect(() => {
     if (error) {
       setStateErr(error);
@@ -64,39 +85,7 @@ function RegisterForm() {
       setStateErr("");
     }
   }, [dispatch, error, isRegister, stateErr, stateSuccess, user]);
-  const validate = (values) => {
-    let errors = {};
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
-    // tên người dùng
-    if (!values.name) {
-      errors.name = "! Vui lòng nhập tên";
-    } else if (values.name.length < 6) {
-      errors.name = "! Tên người tối thiếu phải có 6 ký tự";
-    } else if (values.name.length > 30) {
-      errors.name = "! Name không vượt quá 30 ký tự";
-    }
-    // email
-    if (!values.email) {
-      errors.email = "! Vui lòng nhập Email";
-    } else if (!regex.test(values.email)) {
-      errors.email = "! Email chưa chính xác";
-    } else if (values.email.length > 30) {
-      errors.email = "! Email không vượt quá 30 ký tự";
-    }
-    // password
-    if (!values.password) {
-      errors.password = "! Vui lòng nhập mật khẩu";
-    } else if (values.password.length < 6) {
-      errors.password = "! Mật khẩu quá ngắn";
-    } else if (values.password.length > 30) {
-      errors.password = "! Mật khẩu không vượt quá 30 ký tự";
-    }
-    // confirm password
-    if (values.passwordConfirm !== values.password) {
-      errors.passwordConfirm = "! Mật khẩu không khớp với mật khẩu vừa nhập";
-    }
-    return errors;
-  };
+
   return (
     <Formik
       initialValues={initialValues}
@@ -115,7 +104,7 @@ function RegisterForm() {
         return (
           <div
             id="register"
-            className="relative mb-10 flex flex-col justify-center min-h-screen overflow-hidden"
+            className="relative mb-16 flex flex-col justify-center min-h-screen overflow-hidden"
           >
             <div
               data-aos="fade-down"
@@ -125,7 +114,7 @@ function RegisterForm() {
               <h1 className="text-[25px] font-medium">
                 ĐĂNG KÝ TRỰC TUYẾN TRÊN NHIỀU NÊN TẢNG
               </h1>
-              <p className="text-[15px] font-thin mt-5">
+              <p className="text-[15px] font-thin my-5">
                 Hệ thống luôn hỗ trợ đăng ký thành viên trên nhiều nên tảng khác
                 nhau
               </p>

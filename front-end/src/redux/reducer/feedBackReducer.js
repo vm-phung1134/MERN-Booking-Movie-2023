@@ -67,7 +67,7 @@ export const getAllFeedBackReducer = (
     case ALL_FEEDBACK_SUCCESS:
       return {
         loading: false,
-        feedbacks: action.payload === undefined ? {} : action.payload,
+        feedbacks: action.payload ?? [],
       };
     case ALL_FEEDBACK_FAIL:
       return {

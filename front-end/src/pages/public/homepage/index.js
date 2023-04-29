@@ -86,7 +86,7 @@ function HomePage() {
       setLoadingPage(false);
       await dispatch(getAllBlog());
       await dispatch(getAllEvent());
-    }, 1300);
+    }, 1200);
     return () => {
       clearTimeout(timeOut);
     };
@@ -124,7 +124,7 @@ function HomePage() {
                 <div className="relative lg:mt-28 mt-16">
                   <div
                     data-aos="fade-right"
-                    data-aos-duration="2000"
+                    data-aos-duration="1500"
                     className="absolute z-10 text-white translate-x-[-50%] top-[25%] lg:top-[50%] left-8 md:left-12 lg:left-20 w-[80%] lg:w-[50%]"
                   >
                     <h2 className="lg:text-[15px] text-sm">

@@ -1,25 +1,30 @@
-import Logo from "./mylogo.png";
-import LoginForm from "./loginForm";
-import RegisterForm from "./RegisterForm";
+//IMPORT HOOKS
 import { useSelector } from "react-redux";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { useEffect, useState, useCallback } from "react";
-import { Dialog, DialogBody } from "@material-tailwind/react";
+// IMPORT COMPONENTS
 import ForgetForm from "./forgetPasswordForm";
 import UpdateNewPassForm from "./updateNewPassForm";
 import FooterPublic from "../components/footerPublic";
+import Logo from "./mylogo.png";
+import LoginForm from "./loginForm";
+import RegisterForm from "./registerForm";
+//IMPORT LIBRARY UI
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { Dialog, DialogBody } from "@material-tailwind/react";
 
 export default function Login() {
+  // DEFINE
   const { isChanged } = useSelector((state) => state.newUser);
-  const {code} = useSelector((state) => state.user);
+  const { code } = useSelector((state) => state.user);
   const [size, setSize] = useState(null);
-  const [isActive, setIsActive] = useState(true)
-  const [codeConfirm, setCodeConfirm] = useState("")
-  const [email, setEmail] = useState("")
+  const [isActive, setIsActive] = useState(true);
+  const [codeConfirm, setCodeConfirm] = useState("");
+  const [email, setEmail] = useState("");
   const handleOpen = useCallback((value) => {
     setSize(value);
   }, []);
+  // HOOK USEEFFECT
   useEffect(() => {
     window.scrollTo(0, 0);
     if (isChanged === true) {
@@ -32,14 +37,14 @@ export default function Login() {
       );
     }
   }, [isChanged]);
-  
   useEffect(() => {
-    setCodeConfirm(code)
-  },[code])
+    setCodeConfirm(code);
+  }, [code]);
+  // MAIN COMPONENT
   return (
     <>
       <div className="bg-[url('https://assets.nflxext.com/ffe/siteui/vlv3/5e48e7b6-350d-48d9-96d6-de8ca173c89f/e39414f0-9714-4480-8e82-119dc943cfc1/VN-vi-20221219-popsignuptwoweeks-perspective_alpha_website_medium.jpg')] bg-cover w-full h-screen relative">
-        <div className="bg-black/[0.65] h-screen">
+        <div className="bg-black/[0.65] min-h-screen max-h-full">
           <div className="flex justify-between p-6 bg-transparent">
             <img
               src={Logo}
@@ -92,12 +97,12 @@ export default function Login() {
         </div>
       </div>
       {/*-----------------FORM ĐĂNG NHẬP---------------- */}
-      <div className="grid lg:grid-cols-2 grid-cols-1 border-t border-zinc-400 gap-x-4 p-4 text-white bg-black h-full">
+      <div className="grid lg:grid-cols-2 grid-cols-1 gap-x-4 p-4 text-white bg-black h-full">
         <div className="relative lg:block hidden ">
           <div
             data-aos="fade-down"
             data-aos-duration="1000"
-            className="absolute translate-x-[-40%] top-[20%] left-[20%]"
+            className="absolute translate-x-[-40%] top-[25%] left-[20%]"
           >
             <h1 className="text-[35px] font-medium">
               ƯU ĐÃI DÀNH CHO THÀNH VIÊN HỆ THỐNG
@@ -129,7 +134,7 @@ export default function Login() {
           <div
             data-aos="fade-down"
             data-aos-duration="1000"
-            className="absolute translate-x-[40%] top-[15%] right-[20%]"
+            className="absolute translate-x-[40%] top-[18%] right-[20%]"
           >
             <h1 className="text-[35px] font-medium">
               ĐĂNG KÝ TRỰC TUYẾN TRÊN NHIỀU NÊN TẢNG
@@ -153,7 +158,7 @@ export default function Login() {
         style={{ borderRadius: "0px" }}
       >
         <DialogBody>
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-x-2 lg:gap-x-3">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-x-2 lg:gap-x-3">
             <div>
               <img
                 className="h-[200px] w-full md:w-[300px] lg:w-[400px]"
@@ -161,15 +166,28 @@ export default function Login() {
                 alt=""
               />
             </div>
-              {
-                isActive === true 
-                ?  <ForgetForm setEmail={setEmail} setSize={setSize} setCodeConfirm={setCodeConfirm} isActive={isActive} setIsActive={setIsActive} />
-                : <UpdateNewPassForm setSize={setSize} email={email} setCodeConfirm={setCodeConfirm}  isActive={isActive} setIsActive={setIsActive} codeConfirm={codeConfirm} />
-              }
-        </div>
+            {isActive === true ? (
+              <ForgetForm
+                setEmail={setEmail}
+                setSize={setSize}
+                setCodeConfirm={setCodeConfirm}
+                isActive={isActive}
+                setIsActive={setIsActive}
+              />
+            ) : (
+              <UpdateNewPassForm
+                setSize={setSize}
+                email={email}
+                setCodeConfirm={setCodeConfirm}
+                isActive={isActive}
+                setIsActive={setIsActive}
+                codeConfirm={codeConfirm}
+              />
+            )}
+          </div>
         </DialogBody>
       </Dialog>
-      <FooterPublic/>
+      <FooterPublic />
     </>
   );
 }

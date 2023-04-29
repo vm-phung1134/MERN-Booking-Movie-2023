@@ -1,32 +1,39 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+// IMPORT HOOKS
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { Breadcrumbs } from "@material-tailwind/react";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
-import HeaderPublic from "../components/headerPublic";
-import FooterPublic from "../components/footerPublic";
-import SpinnerLoading from "../components/spinnerLoading";
-import { Select, Option } from "@material-tailwind/react";
+// IMPORT REDUX
 import {
   getAllCinema,
   getOneCinema,
 } from "../../../redux/actions/cinemaActions";
 import { getAllMovie, getOneMovie } from "../../../redux/actions/movieActions";
 import { useSelector, useDispatch } from "react-redux";
-import Session from "./session";
 import {
   getAllShowTime,
   getOneShowTime,
 } from "../../../redux/actions/showTimeActions";
 import { getAllTicket } from "../../../redux/actions/ticketActions";
-import TicketTable from "./ticketTable";
-import FoodTable from "./foodTable";
 import { getAllFood } from "../../../redux/actions/foodActions";
 import {
   getAllSeat,
   updateStatusSeat,
 } from "../../../redux/actions/seatActions";
 import { createReservation } from "../../../redux/actions/reservationActions";
+// IMPORT COMPONENTS
+import TicketTable from "./ticketTable";
+import FoodTable from "./foodTable";
+import Session from "./session";
+import HeaderPublic from "../components/headerPublic";
+import FooterPublic from "../components/footerPublic";
+import SpinnerLoading from "../components/spinnerLoading";
+// IMPORT UI
+import { Select, Option } from "@material-tailwind/react";
+import { isCheckQuanlitySeat } from "../middleware";
+import Data from "../components/TranslationEnglish/Data.json";
+import Cookies from "universal-cookie";
+import { Breadcrumbs } from "@material-tailwind/react";
 import {
   Dialog,
   DialogHeader,
@@ -34,14 +41,15 @@ import {
   DialogFooter,
   Tooltip,
 } from "@material-tailwind/react";
-import { isCheckQuanlitySeat } from "../middleware";
-import Data from "../components/TranslationEnglish/Data.json";
 
 function Booking() {
-  const dispatch = useDispatch();
-  // CALL STORE FROM GET API
+  // DEFINE
   const baseURL = 'https://mern-full-stack-booking-movie-api.vercel.app'
   //const baseURL = 'http://localhost:5000'
+  const dispatch = useDispatch();
+  const cookies = new Cookies()
+  const tokenId = cookies.get("userId");
+  // CALL STORE FROM GET API
   const cinemas = useSelector((state) => state.cinemas.cinemas);
   const movies = useSelector((state) => state.movies.movies);
   const showtimes = useSelector((state) => state.showtimes.showtimes);
@@ -52,7 +60,7 @@ function Booking() {
   const showtime = useSelector((state) => state.showtime.showtime);
   const seats = useSelector((state) => state.seats.seats);
   const language = useSelector((state) => state.language.language);
-  // COUNT SỐ VÉ KHÁCH HÀNG ĐÃ CHỌN
+  // COUNT QUANTITY TICKET WHICH USER CHOSEN
   let [countTicket, setCountTicket] = useState(0);
   tickets.map((ticket) => (countTicket = countTicket + ticket.quantity));
   const [size, setSize] = useState(null);
@@ -75,7 +83,6 @@ function Booking() {
   // CHECK QUANLITY TICKET AND SEAT SELECTED
   isCheckQuanlitySeat(selectSeats, countTicket);
   const newSelectSeats = [...new Set(selectSeats)];
-  //const newIsActive = [...new Set(isActive)]
   const handleOpen = (value) => setSize(value);
   // GET VALUE CINEMA
   const handleChangeCinema = useCallback(
@@ -101,7 +108,7 @@ function Booking() {
       setCountTicket(countTicket - 1);
     }
   };
-  const tokenId = localStorage.getItem("userId");
+  // CONSTRUCTOR TICKET'S USER
   const ticketPayment = {
     nameMovie: movie.name,
     imgMovie: movie.bg,
@@ -113,7 +120,7 @@ function Booking() {
     startDate: showtime.startDate,
     total: vlPriceFood + vlPriceTicket,
   };
-
+  // HANDLE PAYMENT METHOD
   const handlePayment = () => {
     setStateLoadingLogin({ loading: true });
     setTimeout(async () => {
@@ -135,29 +142,28 @@ function Booking() {
         .catch((err) => console.log(err.message));
     }, 2000);
   };
+  // HOOK
   useMemo(() => {
     dispatch(getOneCinema(valueCinema));
     dispatch(getOneMovie(valueMovie));
     dispatch(getOneShowTime(valueShowTime.id));
   }, [dispatch, valueCinema, valueMovie, valueShowTime.id]);
-
   useEffect(() => {
     window.scrollTo(0, 0);
     setLoadingPage(true);
     let timeOut = setTimeout(async () => {
       await dispatch(getAllMovie());
       await dispatch(getAllCinema());
-      await dispatch(getAllShowTime());
-      await dispatch(getAllTicket());
-      await dispatch(getAllFood());
-      await dispatch(getAllSeat());
+       dispatch(getAllShowTime());
+       dispatch(getAllTicket());
+       dispatch(getAllFood());
+       dispatch(getAllSeat());
       setLoadingPage(false);
-    }, 1300);
+    }, 1200);
     return () => {
       clearTimeout(timeOut);
     };
   }, []);
-
   useEffect(() => {
     if (language === "English") {
       setContent(Data.english);
@@ -244,11 +250,11 @@ function Booking() {
                             >
                               <div className="flex justify-between">
                                 <div>
-                                  <span className="capitalize">
+                                  <span className="uppercase">
                                     {movie.name}
                                   </span>{" "}
                                   -{" "}
-                                  <span className="lowercase">
+                                  <span className="capitalize lowercase ">
                                     {movie.namevn}
                                   </span>
                                 </div>

@@ -1,16 +1,21 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+// IMPORT HOOKS
 import { useEffect, useState, memo, useCallback } from "react";
+import Cookies from "universal-cookie";
 import { Link } from "react-router-dom";
 import QRCode from "react-qr-code";
-import { Breadcrumbs } from "@material-tailwind/react";
 import { useDispatch, useSelector } from "react-redux";
+// IMPORT COMPONENTS
 import {
   getAllReservation,
-  deleteTicket,
+  deleteReservation,
 } from "../../../redux/actions/reservationActions";
 import HeaderPublic from "../components/headerPublic";
-import { getAllMovie } from "../../../redux/actions/movieActions";
 import SpinnerLoading from "../components/spinnerLoading";
+import FooterPublic from "../components/footerPublic";
+// IMPORT REDUX
+import { getAllMovie } from "../../../redux/actions/movieActions";
+// IMPORT UI
 import {
   Dialog,
   DialogHeader,
@@ -21,18 +26,23 @@ import {
 import { Select, Option } from "@material-tailwind/react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import FooterPublic from "../components/footerPublic"
+
+import { Breadcrumbs } from "@material-tailwind/react";
 function UserTickets() {
-  const dispatch = useDispatch();
-  const movies = useSelector((state) => state.movies.movies);
-  const reservations = useSelector((state) => state.reservations.reservations);
-  const [size, setSize] = useState(null);
-  const [sizeQR, setSizeQR] = useState(null);
-  const userId = localStorage.getItem("userId");
-  const [loadingPage, setLoadingPage] = useState(false);
-  const [id, setId] = useState("");
-  const [idQR, setIdQR] = useState("");
-  const [newReservations, setNewReservations] = useState([]); //CREATE ONE EMPTY ARRAY TO SAVE CURRENT RESERVATION
+  // DEFINE
+  const cookies = new Cookies()
+  const dispatch = useDispatch()
+  const userId = cookies.get("userId")
+  const movies = useSelector((state) => state.movies.movies)
+  const reservations = useSelector((state) => state.reservations.reservations)
+  // MODAL DELETE TICKET
+  const [id, setId] = useState("")
+  const [size, setSize] = useState(null)
+  // MODAL QR CODE
+  const [sizeQR, setSizeQR] = useState(null)
+  const [idQR, setIdQR] = useState("")
+  const [loadingPage, setLoadingPage] = useState(false)
+  const [newReservations, setNewReservations] = useState([]) //CREATE ONE EMPTY ARRAY TO SAVE CURRENT RESERVATION
   const handleOpen = useCallback((value, id) => {
     setSize(value);
     setId(id);
@@ -42,8 +52,7 @@ function UserTickets() {
     setIdQR(id);
   }, []);
   const handleDeleteTicket = async (id) => {
-    await dispatch(deleteTicket(id));
-
+    await dispatch(deleteReservation(id));
     setSize(null); //DISMISS MODAL
     setNewReservations(reservations.filter((item) => item._id !== id)); //AFTER DELETE SAVE INTO NEW RESERVATION
     toast.success("Hủy vé thành công !", {
@@ -51,6 +60,7 @@ function UserTickets() {
       className: "text-black",
     });
   };
+  // HOOK
   useEffect(() => {
     window.scrollTo(0, 0);
     setLoadingPage(true);
@@ -58,7 +68,7 @@ function UserTickets() {
       await dispatch(getAllReservation());
       await dispatch(getAllMovie());
       setLoadingPage(false);
-    }, 1300);
+    }, 1200);
     return () => {
       clearTimeout(timeOut);
     };
@@ -86,7 +96,7 @@ function UserTickets() {
               disabled
               className="text-white text-sm lg:text-[15px] pr-6 py-[10px] border-b-[3px] border-[#E50914]"
             >
-              VÉ CỦA BẠN
+              VÉ ĐÃ ĐẶT GẦN ĐÂY
               </button>
               <div className="text-center text-black bg-white rounded-lg p-2 md:p-4">
                 <h1 className="uppercase text-[12px] md:text-sm">Số vé hiện tại bạn đã đặt</h1>
@@ -127,7 +137,7 @@ function UserTickets() {
                                 <h2 className="lg:ml-5 lg:pt-2 text-sm lg:text-[15px] ">
                                   Ngày đặt:{" "}
                                   <span className="text-white font-thin">
-                                  <p className="truncate">{reservation.createdAt}</p> 
+                                  <p className="truncate">{reservation.createdAt.toLocaleString("fr")}</p> 
                                   </span>
                                 </h2>
                               </div>
@@ -224,7 +234,7 @@ function UserTickets() {
                                     Tống thanh toán
                                   </h3>
                                   <p className="font-bold text-[15px] lg:text-[17px]">
-                                    {reservation.total * 1000} VNĐ
+                                    {(reservation.total * 1000).toLocaleString('vi', {style : 'currency', currency : 'VND'})}
                                   </p>
                                   <p className="text-[12px] lg:text-sm text-green-800">
                                     Đã thanh toán

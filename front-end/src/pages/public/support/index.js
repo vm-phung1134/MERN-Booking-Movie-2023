@@ -1,9 +1,12 @@
+// IMPORT HOOKS
 import { memo, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import HeaderPublic from "../components/headerPublic";
-import { getAllMovie } from "../../../redux/actions/movieActions";
 import { useSelector, useDispatch } from "react-redux";
+// IMPORT REDUX
+import { getAllMovie } from "../../../redux/actions/movieActions";
+// IMPORT UI
 import SpinnerLoading from "../components/spinnerLoading";
+import HeaderPublic from "../components/headerPublic";
 import FooterPublic from "../components/footerPublic";
 import {
   Accordion,
@@ -15,6 +18,7 @@ import SupportForm from "./SupportForm";
 import Data from "../components/TranslationEnglish/Data.json";
 
 function Support() {
+  // DEFINE
   const dispatch = useDispatch();
   const movies = useSelector((state) => state.movies.movies);
   const [isActive, setIsActive] = useState("1");
@@ -29,13 +33,14 @@ function Support() {
   const handleOpenAccordion = (value) => {
     setOpenAccordion(openAccordion === value ? 0 : value);
   };
+  // HOOK
   useEffect(() => {
     window.scrollTo(0, 0);
     setLoadingPage(true);
     let timeOut = setTimeout(async () => {
       await dispatch(getAllMovie());
       setLoadingPage(false);
-    }, 1300);
+    }, 1200);
     return () => {
       clearTimeout(timeOut);
     };

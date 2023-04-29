@@ -16,8 +16,10 @@ import {
   DELETE_TICKET_SUCCESS,
   DELETE_TICKET_FAIL,
 } from "../constants/ticketConstants";
-const baseURL = 'https://mern-full-stack-booking-movie-api.vercel.app'
-//const baseURL = 'http://localhost:5000'
+//const baseURL = 'https://mern-full-stack-booking-movie-api.vercel.app'
+const baseURL = "http://localhost:5000";
+
+// ACTION GET ALL TICKETS
 export const getAllTicket = () => async (dispatch) => {
   try {
     dispatch({ type: ALL_TICKET_REQUEST });
@@ -33,6 +35,7 @@ export const getAllTicket = () => async (dispatch) => {
     });
   }
 };
+// ACTION GET ONE TICKET
 export const getOneTicket = (id) => async (dispatch) => {
   try {
     dispatch({ type: ONE_TICKET_REQUEST });
@@ -48,20 +51,21 @@ export const getOneTicket = (id) => async (dispatch) => {
     });
   }
 };
-
+// ACTION INCREMENT QUANTITY TICKET
 export const increment = (id) => async (dispatch) => {
   return dispatch({
     type: INCREMENT,
     payload: id,
   });
 };
+// ACTION DECREMENT QUANTITY TICKET
 export const decrement = (id) => async (dispatch) => {
   return dispatch({
     type: DECREMENT,
     payload: id,
   });
 };
-
+// ACTION CREATE NEW TICKET
 export const createOneTicket = (values) => async (dispatch) => {
   try {
     dispatch({ type: CREATE_TICKET_REQUEST });
@@ -86,6 +90,7 @@ export const createOneTicket = (values) => async (dispatch) => {
     });
   }
 };
+// ACTION DELETE ONE TICKET
 export const deleteOneTicket = (id) => async (dispatch) => {
   try {
     dispatch({ type: DELETE_TICKET_REQUEST });

@@ -33,8 +33,10 @@ import {
   AUTH_UPDATENEWPW_FAIL,
 } from "../constants/authConstants";
 
-const baseURL = 'https://mern-full-stack-booking-movie-api.vercel.app'
-//const baseURL = 'http://localhost:5000'
+//const baseURL = 'https://mern-full-stack-booking-movie-api.vercel.app'
+const baseURL = "http://localhost:5000";
+
+// ACTION LOGIN
 export const authLogin = (email, password) => async (dispatch) => {
   try {
     dispatch({ type: AUTH_LOGIN_REQUEST });
@@ -59,7 +61,7 @@ export const authLogin = (email, password) => async (dispatch) => {
     });
   }
 };
-
+// ACTION LOG OUT
 export const authLogout = () => async (dispatch) => {
   try {
     await axios.get(`${baseURL}/api/v1/auth/logout`);
@@ -68,34 +70,32 @@ export const authLogout = () => async (dispatch) => {
     dispatch({ type: AUTH_LOGOUT_FAIL, payload: error.response.data.message });
   }
 };
-
+// CLEAR ERRORS
 export const clearErrors = () => async (dispatch) => {
   dispatch({ type: CLEAR_ERRORS });
 };
-
-export const authRegister =
-  (name, email, password, phone, cardId, gender, position) =>
-  async (dispatch) => {
-    try {
-      dispatch({ type: AUTH_REGISTER_REQUEST });
-      const config = { headers: { "Content-Type": "application/json" } };
-      const { data } = await axios.post(
-        `${baseURL}/api/v1/auth/register`,
-        { name, email, password, phone, cardId, gender, position },
-        config
-      );
-      dispatch({
-        type: AUTH_REGISTER_SUCCESS,
-        payload: data,
-      });
-    } catch (error) {
-      dispatch({
-        type: AUTH_REGISTER_FAIL,
-        payload: error.response.data.message,
-      });
-    }
-  };
-
+// ACTION REGISTER
+export const authRegister = (values) => async (dispatch) => {
+  try {
+    dispatch({ type: AUTH_REGISTER_REQUEST });
+    const config = { headers: { "Content-Type": "application/json" } };
+    const { data } = await axios.post(
+      `${baseURL}/api/v1/auth/register`,
+      values,
+      config
+    );
+    dispatch({
+      type: AUTH_REGISTER_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: AUTH_REGISTER_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+// ACTION GET ALL USER
 export const getAllUser = () => async (dispatch) => {
   try {
     dispatch({ type: AUTH_GETALLUSER_REQUEST });
@@ -111,6 +111,7 @@ export const getAllUser = () => async (dispatch) => {
     });
   }
 };
+// ACTION GET ONE USER
 export const getOneUser = (id) => async (dispatch) => {
   try {
     dispatch({ type: AUTH_GETONEUSER_REQUEST });
@@ -126,7 +127,7 @@ export const getOneUser = (id) => async (dispatch) => {
     });
   }
 };
-
+// ACTION UPDATE USER
 export const updateOneUser = (id, user) => async (dispatch) => {
   try {
     dispatch({ type: AUTH_UPDATE_REQUEST });
@@ -147,24 +148,23 @@ export const updateOneUser = (id, user) => async (dispatch) => {
     });
   }
 };
-
+// ACTION DELETE USER
 export const deleteOneUser = (id) => async (dispatch) => {
-  try{
-      
-      dispatch({type: AUTH_DELETE_REQUEST})
-      const {data} = await axios.delete(`${baseURL}/api/v1/auth/user/${id}`)
-      dispatch({
-          type: AUTH_DELETE_SUCCESS,
-          payload: data
-      })
-  }catch(error){
-      dispatch({
-          type: AUTH_DELETE_FAIL,
-          payload: error
-      })
+  try {
+    dispatch({ type: AUTH_DELETE_REQUEST });
+    const { data } = await axios.delete(`${baseURL}/api/v1/auth/user/${id}`);
+    dispatch({
+      type: AUTH_DELETE_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: AUTH_DELETE_FAIL,
+      payload: error,
+    });
   }
-}
-
+};
+// ACTION CHANGE PASSWORD
 export const changePasswordUser =
   (id, passwordCurrent, passwordNew) => async (dispatch) => {
     try {
@@ -186,46 +186,45 @@ export const changePasswordUser =
       });
     }
   };
-
-  export const forgotPassword = (values) => async (dispatch) => {
-    try {
-      dispatch({ type: AUTH_FORGOTPW_REQUEST });
-      const config = { headers: { "Content-Type": "application/json" } };
-      const { data } = await axios.post(
-        `${baseURL}/api/v1/auth/forgot-password`,
-        values,
-        config
-      );
-      dispatch({
-        type: AUTH_FORGOTPW_SUCCESS,
-        payload: data,
-      });
-    } catch (error) {
-      dispatch({
-        type: AUTH_FORGOTPW_FAIL,
-        payload: error.response.data.message,
-      });
-    }
-  };
-
-  export const updateNewPasswordUser =
-  (email, password) => async (dispatch) => {
-    try {
-      dispatch({ type: AUTH_UPDATENEWPW_REQUEST });
-      const config = { headers: { "Content-Type": "application/json" } };
-      const { data } = await axios.patch(
-        `${baseURL}/api/v1/auth/forgot-password`,
-        { email, password},
-        config
-      );
-      dispatch({
-        type: AUTH_UPDATENEWPW_SUCCESS,
-        payload: data,
-      });
-    } catch (error) {
-      dispatch({
-        type: AUTH_UPDATENEWPW_FAIL,
-        payload: error.response.data.message,
-      });
-    }
-  };
+// ACTION WHEN USER FORGOT PASSWORD
+export const forgotPassword = (values) => async (dispatch) => {
+  try {
+    dispatch({ type: AUTH_FORGOTPW_REQUEST });
+    const config = { headers: { "Content-Type": "application/json" } };
+    const { data } = await axios.post(
+      `${baseURL}/api/v1/auth/forgot-password`,
+      values,
+      config
+    );
+    dispatch({
+      type: AUTH_FORGOTPW_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: AUTH_FORGOTPW_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+// ACTION UPDATE NEW PASSWORD WHEN USER FORGOT PASSWORD
+export const updateNewPasswordUser = (email, password) => async (dispatch) => {
+  try {
+    dispatch({ type: AUTH_UPDATENEWPW_REQUEST });
+    const config = { headers: { "Content-Type": "application/json" } };
+    const { data } = await axios.patch(
+      `${baseURL}/api/v1/auth/forgot-password`,
+      { email, password },
+      config
+    );
+    dispatch({
+      type: AUTH_UPDATENEWPW_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: AUTH_UPDATENEWPW_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};

@@ -1,10 +1,13 @@
+// IMPORT HOOKS
 import { useDispatch } from "react-redux";
 import { memo, useEffect } from "react";
+// IMPORT REDUX
 import { increment, decrement } from "../../../redux/actions/ticketActions";
-//import { getOneTicket } from '../../../redux/actions/ticketActions';
 
 function TicketTable({ tickets, setvlPriceTicket }) {
+  // DEFINE
   const dispatch = useDispatch();
+  // HOOK
   useEffect(() => {
     let total = 0;
     tickets.map((ticket) => (total = total + ticket.quantity * ticket.price));

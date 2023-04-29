@@ -1,8 +1,16 @@
+// IMPORT HOOKS
 import React, { useState, useEffect, memo } from "react";
 import { Link } from "react-router-dom";
-import { Transition } from "@headlessui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import Cookies from "universal-cookie"
+// IMPORT REDUX
+import { authLogout } from "../../../redux/actions/authActions";
+import { changeLanguage } from "../../../redux/actions/languageAction";
+// IMPORT UI
+import Data from "./TranslationEnglish/Data.json"
+import Logo from "../login/mylogo.png";
+import { Transition } from "@headlessui/react";
 import {
   Menu,
   MenuHandler,
@@ -10,28 +18,29 @@ import {
   MenuItem,
   Button,
 } from "@material-tailwind/react";
-import Data from "./TranslationEnglish/Data.json"
 
-import Logo from "../login/mylogo.png";
-import { authLogout } from "../../../redux/actions/authActions";
-import { changeLanguage } from "../../../redux/actions/languageAction";
 function HeaderPublic() {
+  // DEFINE
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const cookies = new Cookies()
   const [isOpen, setIsOpen] = useState(false);
   const [isActive, setIsActive] = useState(true)
   const [content, setContent] = useState("")
   const language = useSelector(state => state.language.language)
-  const userName = localStorage.getItem("user");
+  const { user, isAuthenticated } = useSelector((state) => state.user);
+  const userName = cookies.get("user");
+  const token = cookies.get("token");
+  const userId = cookies.get("userId");
   const handleLogout = () => {
     dispatch(authLogout());
-    localStorage.removeItem("user");
-    localStorage.removeItem("userId");
-    localStorage.removeItem("token-user");
+    cookies.remove("user");
+    cookies.remove("userId");
+    cookies.remove("token");
   };
-  const { user, isAuthenticated } = useSelector((state) => state.user);
+  // HOOK
   useEffect(() => {
-    if (isAuthenticated === false) {
+    if (isAuthenticated === false || userName === undefined || token === undefined || userId === undefined) {
       navigate("/");
     }
     if(language === "English"){
@@ -39,7 +48,7 @@ function HeaderPublic() {
     }else{
       setContent("")
     }
-  }, [dispatch, isAuthenticated, language, navigate, user]);
+  }, [dispatch, isAuthenticated, language, navigate, token, user, userId, userName]);
   return (
     <div>
       <nav className="bg-transparent">

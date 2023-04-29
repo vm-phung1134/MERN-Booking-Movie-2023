@@ -52,8 +52,8 @@ exports.createSeat = async (req, res, next) => {
 
 exports.updateSeat = async (req, res, next) => {
     try {
-        const {SeatId} = req.params;
-        const seat = await Seat.findByIdAndUpdate(SeatId,{...req.body})
+        const {seatId} = req.params;
+        const seat = await Seat.findByIdAndUpdate(seatId,{...req.body})
         res.status(200).json(seat)
     } catch (error) {
         res.json(error)

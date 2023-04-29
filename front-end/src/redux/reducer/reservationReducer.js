@@ -16,9 +16,12 @@ import {
   UPDATE_RESERVATION_SUCCESS,
 } from "../constants/reservationConstants";
 
-export const reservationReducer = (state = {
-  reservation: {}
-}, action) => {
+export const reservationReducer = (
+  state = {
+    reservation: {},
+  },
+  action
+) => {
   switch (action.type) {
     case ONE_RESERVATION_REQUEST:
       return {
@@ -28,7 +31,7 @@ export const reservationReducer = (state = {
     case ONE_RESERVATION_SUCCESS:
       return {
         loading: false,
-        reservation: action.payload === undefined ? {} : action.payload,
+        reservation: action.payload ?? {},
       };
     case ONE_RESERVATION_FAIL:
       return {

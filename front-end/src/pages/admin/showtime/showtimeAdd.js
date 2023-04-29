@@ -31,14 +31,7 @@ function ShowTimeAdd() {
       startDate: values.startDate,
     };
     await dispatch(createShowTime(values.cinemaId, values.movieId, newValues));
-    resetForm({
-      typeMovie: "",
-      startTime: "",
-      screen: "",
-      startDate: "",
-      movieId: "",
-      cinemaId: "",
-    });
+    resetForm({});
     setArrTime([])
     toast.success("Đã thêm một suất chiếu thành công !", {
       position: toast.POSITION.BOTTOM_LEFT,

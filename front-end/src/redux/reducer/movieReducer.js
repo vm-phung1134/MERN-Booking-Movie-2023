@@ -10,7 +10,7 @@ import {
   CREATE_MOVIE_FAIL,
   UPDATE_MOVIE_REQUEST,
   UPDATE_MOVIE_SUCCESS,
-  UPDATE_MOVIE_FAIL
+  UPDATE_MOVIE_FAIL,
 } from "../constants/movieConstants";
 
 //REDUCER GET ALL MOVIES
@@ -29,7 +29,8 @@ export const moviesReducer = (
     case ALL_MOVIE_SUCCESS:
       return {
         loading: false,
-        movies: action.payload.movies === undefined ? [] : action.payload.movies,
+        movies:
+          action.payload.movies ?? [],
         moviesCount: action.payload.productsCount,
       };
     case ALL_MOVIE_FAIL:
@@ -61,7 +62,7 @@ export const movieDetailReducer = (
     case ONE_MOVIE_SUCCESS:
       return {
         loading: false,
-        movie: action.payload === undefined ? {} : action.payload,
+        movie: action.payload ?? {},
       };
     case ONE_MOVIE_FAIL:
       return {
@@ -89,17 +90,14 @@ export const movieDetailReducer = (
   }
 };
 
-export const movieEditReducer = (
-  state = {}, 
-  action
-  ) => {
+export const movieEditReducer = (state = {}, action) => {
   switch (action.type) {
     // UPDATE CINEMA INFOMATION REDUCER
     case UPDATE_MOVIE_REQUEST:
       return {
         ...state,
         loading: true,
-        isUpdated: false
+        isUpdated: false,
       };
     case UPDATE_MOVIE_SUCCESS:
       return {

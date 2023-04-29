@@ -29,7 +29,7 @@ export const cinemaReducer = (
     case ALL_CINEMA_SUCCESS:
       return {
         loading: false,
-        cinemas: action.payload === undefined ? [] : action.payload,
+        cinemas: action.payload ?? [],
       };
     case ALL_CINEMA_FAIL:
       return {
@@ -57,7 +57,7 @@ export const cinemaDetailReducer = (
     case ONE_CINEMA_SUCCESS:
       return {
         loading: false,
-        cinema: action.payload === undefined ? {} : action.payload,
+        cinema: action.payload ?? {},
       };
     case ONE_CINEMA_FAIL:
       return {
@@ -88,17 +88,14 @@ export const cinemaDetailReducer = (
   }
 };
 
-export const cinemaEditReducer = (
-  state = {}, 
-  action
-  ) => {
+export const cinemaEditReducer = (state = {}, action) => {
   switch (action.type) {
     // UPDATE CINEMA INFOMATION REDUCER
     case UPDATE_CINEMA_REQUEST:
       return {
         ...state,
         loading: true,
-        isUpdated: false
+        isUpdated: false,
       };
     case UPDATE_CINEMA_SUCCESS:
       return {
@@ -115,5 +112,3 @@ export const cinemaEditReducer = (
       return state;
   }
 };
-
-

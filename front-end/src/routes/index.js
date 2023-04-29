@@ -21,9 +21,9 @@ import MovieNowAdd from "../pages/admin/movie/movieNowAdd";
 import MovieSoonAdd from "../pages/admin/movie/movieSoonAdd";
 import MovieNowUpdate from "../pages/admin/movie/movieNowUpdate";
 import MovieSoonUpdate from "../pages/admin/movie/movieSoonUpdate";
-import ManageShowTime from "../pages/admin/showtime"
-import ShowTimeAdd from "../pages/admin/showtime/showtimeAdd"
-import ShowTimeEdit from "../pages/admin/showtime/showtimeEdit"
+import ManageShowTime from "../pages/admin/showtime";
+import ShowTimeAdd from "../pages/admin/showtime/showtimeAdd";
+import ShowTimeEdit from "../pages/admin/showtime/showtimeEdit";
 import ManageCinema from "../pages/admin/cinema";
 import CinemaEdit from "../pages/admin/cinema/cinemaEdit";
 import CinemaAdd from "../pages/admin/cinema/cinemaAdd";
@@ -35,8 +35,15 @@ import ManageUser from "../pages/admin/user";
 import CreateUser from "../pages/admin/user/createUser";
 import UpdateUser from "../pages/admin/user/updateUser";
 import ManageReceipt from "../pages/admin/receipt";
-import UpdateReceipt from "../pages/admin/receipt/editReceipt"
+import UpdateReceipt from "../pages/admin/receipt/editReceipt";
 import FeedBack from "../pages/admin/feedback";
+import ManageSeat from "../pages/admin/seat";
+import ManageBlog from "../pages/admin/blog";
+import AddBlogMovie from "../pages/admin/blog/addBlogMovie";
+import UpdateBlogMovie from "../pages/admin/blog/updateBlogMovie";
+import ManageEvent from "../pages/admin/event";
+import AddEvent from "../pages/admin/event/addEvent";
+import UpdateEvent from "../pages/admin/event/updateEvent";
 
 const publicRoutes = [
   {
@@ -112,84 +119,112 @@ const privateRoutes = [
   },
   {
     path: "/admin/movie",
-    component: ManageMovie
+    component: ManageMovie,
   },
   {
     path: "/admin/movie/add-movie-now",
-    component: MovieNowAdd
+    component: MovieNowAdd,
   },
   {
     path: "/admin/movie/add-movie-soon",
-    component: MovieSoonAdd
+    component: MovieSoonAdd,
   },
   {
     path: "/admin/movie/update-movie-now/:id",
-    component: MovieNowUpdate
+    component: MovieNowUpdate,
   },
   {
     path: "/admin/movie/update-movie-soon/:id",
-    component: MovieSoonUpdate
+    component: MovieSoonUpdate,
   },
   {
     path: "/admin/showtime",
-    component: ManageShowTime
+    component: ManageShowTime,
   },
   {
     path: "/admin/showtime/add-showtime",
-    component: ShowTimeAdd
+    component: ShowTimeAdd,
   },
   {
     path: "/admin/showtime/edit-showtime/:id",
-    component: ShowTimeEdit
+    component: ShowTimeEdit,
   },
   {
     path: "/admin/cinema",
-    component: ManageCinema
+    component: ManageCinema,
   },
   {
     path: "/admin/cinema/add-cinema",
-    component: CinemaAdd
+    component: CinemaAdd,
   },
   {
     path: "/admin/cinema/edit-cinema/:id",
-    component: CinemaEdit
+    component: CinemaEdit,
   },
   {
     path: "/admin/food-ticket",
-    component: ManageCombo
+    component: ManageCombo,
   },
   {
     path: "/admin/food-ticket/add-food",
-    component: FoodAdd
+    component: FoodAdd,
   },
   {
-    path:"/admin/food-ticket/edit-food/:id",
-    component: FoodEdit
+    path: "/admin/food-ticket/edit-food/:id",
+    component: FoodEdit,
   },
   {
     path: "/admin/users",
-    component: ManageUser
+    component: ManageUser,
   },
   {
     path: "/admin/users/create-user",
-    component: CreateUser
+    component: CreateUser,
   },
   {
     path: "/admin/users/update-user/:id",
-    component: UpdateUser
+    component: UpdateUser,
   },
   {
     path: "/admin/receipts",
-    component: ManageReceipt
+    component: ManageReceipt,
   },
   {
     path: "/admin/receipts/update-receipt/:id",
-    component: UpdateReceipt
+    component: UpdateReceipt,
   },
   {
     path: "/admin/feedback",
-    component: FeedBack
-  }
+    component: FeedBack,
+  },
+  {
+    path: "/admin/seat",
+    component: ManageSeat,
+  },
+  {
+    path: "/admin/blog",
+    component: ManageBlog,
+  },
+  {
+    path: "/admin/blog/create-blog",
+    component: AddBlogMovie,
+  },
+  {
+    path: "/admin/blog/update-blog/:id",
+    component: UpdateBlogMovie,
+  },
+  {
+    path: "/admin/event",
+    component: ManageEvent,
+  },
+  {
+    path: "/admin/event/create-event",
+    component: AddEvent,
+  },
+  {
+    path: "/admin/event/update-event/:id",
+    component: UpdateEvent,
+  },
 ];
 
 export { publicRoutes, privateRoutes };

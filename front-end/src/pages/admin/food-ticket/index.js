@@ -110,7 +110,7 @@ function ManageCombo() {
                                     scope="col"
                                     className="px-6 py-3 text-xs font-bold text-center uppercase "
                                   >
-                                    Giá 1000vnđ
+                                    Giá
                                   </th>
                                   <th
                                     scope="col"
@@ -140,7 +140,7 @@ function ManageCombo() {
                                           {food.typeFood}
                                         </td>
                                         <td className="px-6 py-4 text-sm text-center capitalize whitespace-nowrap">
-                                          {food.price}
+                                          {(food.price * 1000).toLocaleString('vi', {style : 'currency', currency : 'VND'})}
                                         </td>
                                         <td className="px-4 py-4 text-sm text-center capitalize whitespace-nowrap">
                                           {food.discription}
@@ -200,7 +200,7 @@ function ManageCombo() {
                                     scope="col"
                                     className="px-6 py-3 text-xs font-bold text-center uppercase "
                                   >
-                                    Giá 1000vnđ
+                                    Giá
                                   </th>
                                   <th
                                     scope="col"
@@ -230,7 +230,7 @@ function ManageCombo() {
                                           {ticket.typeTicket}
                                         </td>
                                         <td className="px-6 py-4 text-sm text-center capitalize whitespace-nowrap">
-                                          {ticket.price}
+                                          {(ticket.price * 1000).toLocaleString('vi', {style : 'currency', currency : 'VND'})}
                                         </td>
                                         <td className="px-4 py-4 text-sm text-center capitalize whitespace-nowrap">
                                           {ticket.discription}

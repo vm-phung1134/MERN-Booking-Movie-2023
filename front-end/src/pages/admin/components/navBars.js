@@ -14,26 +14,28 @@ import { useDispatch, useSelector } from "react-redux";
 import { authLogout } from "../../../redux/actions/authActions";
 import AdminForm from "../admin/adminForm";
 import ChangePwForm from "../admin/changePwForm";
+import Cookies from "universal-cookie";
 
 function NavBars() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const cookies = new Cookies()
   const { user, isAuthenticated } = useSelector((state) => state.user);
-  const adminName = localStorage.getItem("admin");
+  const adminName = cookies.get("admin");
   const [size, setSize] = useState(null);
   const handleOpen = useCallback((value) => {
     setSize(value);
   }, []);
   const [sizePw, setSizePw] = useState(null);
-  const evt = JSON.parse(localStorage.getItem('eventDay'));
+  const evt = localStorage.getItem('eventDay') === undefined ? [] : JSON.parse(localStorage.getItem('eventDay'));
   const handleOpenPw = useCallback((value) => {
     setSizePw(value);
   }, []);
   const handleLogout = async () => {
     await dispatch(authLogout());
-    localStorage.removeItem("admin");
-    localStorage.removeItem("adminId");
-    localStorage.removeItem("token-admin");
+    cookies.remove("admin");
+    cookies.remove("adminId");
+    cookies.remove("token-admin");
   };
   useEffect(() => {
     if (isAuthenticated === false) {
