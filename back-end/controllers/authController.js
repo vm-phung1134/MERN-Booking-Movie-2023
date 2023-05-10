@@ -161,3 +161,16 @@ exports.updateNewPasswordUser = async (req, res, next) => {
     res.json(error);
   }
 };
+
+exports.deleteUser = async (req, res, next) => {
+  try {
+      const {userId} = req.params;
+      await User.findByIdAndDelete(userId)
+      res.status(200).json({
+          status: 'success',
+          message: 'User has been deleted'
+      })
+  } catch (error) {
+      res.json(error)
+  }
+}

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import SideBars from "../components/sideBars";
 import NavBars from "../components/navBars";
 import { Link } from "react-router-dom";
@@ -29,18 +30,20 @@ function ShowTime() {
     setId(id);
   }, []);
 
-  const handleDeleteShowTime = (id) => {
-    dispatch(deleteOneShowTime(id));
+  const handleDeleteShowTime = useCallback( async (id) => {
+    await dispatch(deleteOneShowTime(id));
     setSize(null); //DISMISS MODAL
     setNewShowTimes(showtimes.filter((item) => item._id !== id)); //AFTER DELETE SAVE INTO NEW RESERVATION
     toast.success("Đã xóa 1 suất chiếu!", {
       position: toast.POSITION.BOTTOM_LEFT,
       className: "text-black",
     });
-  };
+  },[dispatch, showtimes, id]);
+
   useEffect(() => {
     dispatch(getAllShowTime());
     dispatch(getAllCinema());
+    
   }, [dispatch]);
   useEffect(() => {
     setNewShowTimes(showtimes);

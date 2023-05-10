@@ -15,7 +15,7 @@ function RegisterForm() {
   const [stateLoadingRegister, setStateLoadingRegister] = useState({
     loading: false,
   });
-  const { user, error, isRegister } = useSelector((state) => state.user);
+  const {error, isRegistered } = useSelector((state) => state.user);
   const initialValues = {
     name: "",
     email: "",
@@ -77,14 +77,14 @@ function RegisterForm() {
       setStateErr(error);
       setStateSuccess("");
     }
-    if (isRegister === true) {
+    if (isRegistered === true) {
       toast.success("Đăng ký thành công !", {
         position: toast.POSITION.BOTTOM_LEFT,
         className: "text-black",
       });
       setStateErr("");
     }
-  }, [dispatch, error, isRegister, stateErr, stateSuccess, user]);
+  }, [error, isRegistered]);
 
   return (
     <Formik

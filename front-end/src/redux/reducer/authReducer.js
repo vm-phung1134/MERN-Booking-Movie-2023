@@ -35,26 +35,43 @@ export const userReducer = (
   switch (action.type) {
     // USER LOGIN & USER REGISTER
     case AUTH_LOGIN_REQUEST:
-    case AUTH_REGISTER_REQUEST:
       return {
         ...state,
         loading: true,
         isAuthenticated: false,
       };
     case AUTH_LOGIN_SUCCESS:
-    case AUTH_REGISTER_SUCCESS:
       return {
         loading: false,
         user: action.payload ?? {},
         isAuthenticated: true,
       };
     case AUTH_LOGIN_FAIL:
-    case AUTH_REGISTER_FAIL:
       return {
         ...state,
         loading: false,
         isAuthenticated: false,
         errorLogin: action.payload,
+      };
+    // REGISTER
+    case AUTH_REGISTER_REQUEST:
+      return {
+        ...state,
+        loading: true,
+        isRegistered: false,
+      };
+    case AUTH_REGISTER_SUCCESS:
+      return {
+        loading: false,
+        user: action.payload ?? {},
+        isRegistered: true,
+      };
+    case AUTH_REGISTER_FAIL:
+      return {
+        ...state,
+        loading: false,
+        isRegistered: false,
+        error: action.payload,
       };
     // USER LOGOUT
     case AUTH_LOGOUT_SUCCESS:

@@ -30,7 +30,6 @@ Router.post('/create-checkout-session', async (req, res) => {
     success_url: `${process.env.CLIENT_PORT}/checkout-success`,
     cancel_url: `${process.env.CLIENT_PORT}/booking`,
   });
-
   res.json({url: session.url});
 });
 

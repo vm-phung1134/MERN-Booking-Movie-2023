@@ -56,12 +56,12 @@ function Dashboard() {
               <div className="flex justify-between">
                 <h1>NGƯỜI DÙNG ĐĂNG KÝ</h1>
                 <p className="text-green-500">
-                  <i className="fas fa-caret-up"></i>&ensp;{users.length}
+                  <i className="fas fa-caret-up"></i>&ensp;{users.length-1}
                 </p>
               </div>
 
               <p className="text-[35px] py-4 font-bold">
-                {1000 + users.length}
+                {1000 + users.length-1}
               </p>
               <div className="flex justify-between">
                 <Link to="/admin/users">
@@ -112,8 +112,8 @@ function Dashboard() {
               <p className="text-sm">&#40; Đơn vị tính: Nghìn đồng &#41;</p>
               <div className="p-5" style={{ width: 200, height: 200 }}>
                 <CircularProgressbar
-                  value={(countTotal*1000/20000000 * 100)}
-                  text={`${countTotal*1000/20000000 * 100}%`}
+                  value={Math.floor(countTotal*1000/20000000 * 100)}
+                  text={`${Math.floor(countTotal*1000/20000000 * 100)}%`}
                   strokeWidth={2}
                 />
               </div>

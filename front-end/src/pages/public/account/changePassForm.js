@@ -1,6 +1,7 @@
 // IMPORT HOOKS
 import { memo, useEffect } from "react";
 import { useState } from "react";
+import Cookies from "universal-cookie";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 // IMPORT REDUX
@@ -14,6 +15,7 @@ import { Formik } from "formik";
 function ChangePassForm({ userInfo }) {
   // DEFINE
   const dispatch = useDispatch();
+  const cookies = new Cookies();
   const navigator = useNavigate();
   const { error, isChanged } = useSelector((state) => state.newUser);
   const { user, isAuthenticated } = useSelector((state) => state.user);
@@ -39,8 +41,9 @@ function ChangePassForm({ userInfo }) {
       });
     }
     dispatch(authLogout());
-    localStorage.removeItem("user");
-    localStorage.removeItem("token-user");
+    cookies.remove("user");
+    cookies.remove("userId");
+    cookies.remove("token");
   };
   const validate = (values) => {
     let errors = {};

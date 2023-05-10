@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 //IMPORT HOOKS
 import { useSelector } from "react-redux";
 import { useEffect, useState, useCallback } from "react";
@@ -36,7 +37,7 @@ export default function Login() {
         }
       );
     }
-  }, [isChanged]);
+  }, []);
   useEffect(() => {
     setCodeConfirm(code);
   }, [code]);
@@ -150,6 +151,15 @@ export default function Login() {
             ></img>
           </div>
         </div>
+      </div>
+      <div className="py-10 text-white flex flex-col items-center bg-black">
+        <h2 className="text-[35px] uppercase">Trãi nghiệm ngay còn kịp !!!</h2>
+        <p className="text-[20px] text-gray-300">Lưu lại những nội dung yêu thích một cách dễ dàng và luôn có thứ để xem.</p>
+        <img
+          className="w-[400px]"
+          src="https://assets.nflxext.com/ffe/siteui/acquisition/ourStory/fuji/desktop/mobile-0819.jpg"
+          alt=""
+        ></img>
       </div>
       <Dialog
         open={size === "lg"}

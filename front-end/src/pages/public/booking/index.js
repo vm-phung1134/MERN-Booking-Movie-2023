@@ -44,8 +44,8 @@ import {
 
 function Booking() {
   // DEFINE
-  const baseURL = 'https://mern-full-stack-booking-movie-api.vercel.app'
-  //const baseURL = 'http://localhost:5000'
+  //const baseURL = 'https://mern-full-stack-booking-movie-api.vercel.app'
+  const baseURL = 'http://localhost:5000'
   const dispatch = useDispatch();
   const cookies = new Cookies()
   const tokenId = cookies.get("userId");
@@ -133,11 +133,11 @@ function Booking() {
         .then((res) => {
           if (res.data.url) {
             window.location.href = res.data.url;
-            dispatch(createReservation(ticketPayment));
-            newSelectSeats.map((item) =>
-              dispatch(updateStatusSeat(valueSeats, item))
-            );
           }
+          dispatch(createReservation(ticketPayment))
+          newSelectSeats.map((item) =>
+          dispatch(updateStatusSeat(valueSeats, item))
+          );
         })
         .catch((err) => console.log(err.message));
     }, 2000);

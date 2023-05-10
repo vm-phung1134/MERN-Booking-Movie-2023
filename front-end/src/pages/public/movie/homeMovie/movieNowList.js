@@ -24,7 +24,10 @@ function MovieNow() {
           <div key={movie._id}>{index < 9 && <Movie movie={movie} />}</div>
         ))}
       </div>
-      <div>
+      <div
+        data-aos="fade-up"
+        data-aos-duration="1500"
+      >
         <div className="flex justify-center mt-5">
           <button className="py-1 text-[14px] px-2 text-white bg-[#ce0000]">
             <Link to="/movie">

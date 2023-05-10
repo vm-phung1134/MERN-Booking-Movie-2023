@@ -28,7 +28,7 @@ export const createReservation = (reservation) => async (dispatch) => {
     const config = {
       headers: {
         "Content-Type": "application/json",
-        Authorization: cookies.get("token-user"),
+        Authorization: cookies.get("token"),
       },
     };
     const { data } = await axios.post(

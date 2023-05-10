@@ -3,8 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { publicRoutes, privateRoutes } from "./routes";
 import "aos/dist/aos.css";
 import Zendesk, { ZendeskAPI } from "./ZendexConfig";
-const ZENDESK_KEY = "1689d03d-8916-4d4c-b83d-b809a1f8e023";
-
+const ZENDESK_KEY = "b6035ad1-2d71-4d43-b7f0-7c66196d2e3c";
 AOS.init();
 export default function App() {
   const handleLoaded = () => {

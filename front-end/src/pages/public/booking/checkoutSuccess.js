@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 // IMPORT REDUX
-import { getAllMovieSoon } from "../../../redux/actions/movieSoonActions";
+import { getAllMovie } from "../../../redux/actions/movieActions";
 // IMPORT UI
 import HeaderPublic from "../components/headerPublic";
 import FooterPublic from "../components/footerPublic";
@@ -13,13 +13,13 @@ function CheckoutSuccess() {
   // DEFINE
   const dispatch = useDispatch();
   const [loadingPage, setLoadingPage] = useState(false);
-  const { movieSoons } = useSelector((state) => state.movieSoons);
+  const { movies } = useSelector((state) => state.movies);
   // HOOK
   useEffect(() => {
     window.scrollTo(0, 0);
     setLoadingPage(true);
     let timeOut = setTimeout(async () => {
-      await dispatch(getAllMovieSoon());
+      await dispatch(getAllMovie());
       setLoadingPage(false);
     }, 1200);
     return () => {
@@ -77,7 +77,7 @@ function CheckoutSuccess() {
                     PHIM ĐANG CHIẾU
                   </button>
                   <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 lg:gap-x-5 pt-10">
-                    {movieSoons.map((movie, index) => (
+                    {movies.map((movie, index) => (
                       <div key={movie._id}>
                         {index < 8 && (
                           <div className="">

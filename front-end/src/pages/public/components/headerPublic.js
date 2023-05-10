@@ -40,7 +40,7 @@ function HeaderPublic() {
   };
   // HOOK
   useEffect(() => {
-    if (isAuthenticated === false || userName === undefined || token === undefined || userId === undefined) {
+    if (userName === undefined || token === undefined || userId === undefined) {
       navigate("/");
     }
     if(language === "English"){
