@@ -17,8 +17,8 @@ import {
   UPDATE_RESERVATION_REQUEST,
   UPDATE_RESERVATION_SUCCESS,
 } from "../constants/reservationConstants";
-//const baseURL = 'https://mern-full-stack-booking-movie-api.vercel.app'
-const baseURL = "http://localhost:5000";
+const baseURL = 'https://mern-full-stack-booking-movie-api.vercel.app'
+// const baseURL = "http://localhost:5000";
 
 // ACTION CREATE NEW RESERVATION
 const cookies = new Cookies();

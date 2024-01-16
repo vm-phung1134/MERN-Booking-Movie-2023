@@ -16,8 +16,8 @@ import {
   DELETE_TICKET_SUCCESS,
   DELETE_TICKET_FAIL,
 } from "../constants/ticketConstants";
-//const baseURL = 'https://mern-full-stack-booking-movie-api.vercel.app'
-const baseURL = "http://localhost:5000";
+const baseURL = 'https://mern-full-stack-booking-movie-api.vercel.app'
+// const baseURL = "http://localhost:5000";
 
 // ACTION GET ALL TICKETS
 export const getAllTicket = () => async (dispatch) => {

@@ -16,8 +16,8 @@ import {
   UPDATE_EVENT_REQUIRED,
   UPDATE_EVENT_SUCCESS,
 } from "../constants/eventConstants";
-//const baseURL = 'https://mern-full-stack-booking-movie-api.vercel.app'
-const baseURL = "http://localhost:5000";
+const baseURL = 'https://mern-full-stack-booking-movie-api.vercel.app'
+// const baseURL = "http://localhost:5000";
 
 // ACTION GET ALL EVENT
 export const getAllEvent = () => async (dispatch) => {

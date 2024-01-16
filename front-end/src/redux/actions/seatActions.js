@@ -14,8 +14,8 @@ import {
   CREATE_SEAT_SUCCESS,
   CREATE_SEAT_FAIL,
 } from "../constants/seatConstants";
-//const baseURL = 'https://mern-full-stack-booking-movie-api.vercel.app'
-const baseURL = "http://localhost:5000";
+const baseURL = 'https://mern-full-stack-booking-movie-api.vercel.app'
+// const baseURL = "http://localhost:5000";
 
 // ACTION GET ALL LIST OF SEAT
 export const getAllSeat = () => async (dispatch) => {

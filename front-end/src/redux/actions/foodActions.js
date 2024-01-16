@@ -19,8 +19,8 @@ import {
   UPDATE_FOOD_SUCCESS,
   UPDATE_FOOD_FAIL,
 } from "../constants/foodConstants";
-//const baseURL = 'https://mern-full-stack-booking-movie-api.vercel.app'
-const baseURL = "http://localhost:5000";
+const baseURL = 'https://mern-full-stack-booking-movie-api.vercel.app'
+// const baseURL = "http://localhost:5000";
 
 // ACTION GET ALL FOOD
 export const getAllFood = () => async (dispatch) => {

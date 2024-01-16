@@ -16,8 +16,8 @@ import {
   CREATE_ONE_BLOG_SUCCESS,
   CREATE_ONE_BLOG_FAIL,
 } from "../constants/blogConstants";
-//const baseURL = 'https://mern-full-stack-booking-movie-api.vercel.app'
-const baseURL = "http://localhost:5000";
+const baseURL = 'https://mern-full-stack-booking-movie-api.vercel.app'
+// const baseURL = "http://localhost:5000";
 
 // ACTION GET ALL BLOG
 export const getAllBlog = () => async (dispatch) => {

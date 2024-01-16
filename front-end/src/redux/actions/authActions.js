@@ -33,8 +33,8 @@ import {
   AUTH_UPDATENEWPW_FAIL,
 } from "../constants/authConstants";
 
-//const baseURL = 'https://mern-full-stack-booking-movie-api.vercel.app'
-const baseURL = "http://localhost:5000";
+const baseURL = 'https://mern-full-stack-booking-movie-api.vercel.app'
+// const baseURL = "http://localhost:5000";
 
 // ACTION LOGIN
 export const authLogin = (email, password) => async (dispatch) => {
