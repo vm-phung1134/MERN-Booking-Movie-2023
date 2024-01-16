@@ -11,9 +11,9 @@ import { useSelector, useDispatch } from "react-redux";
 import FooterPublic from "../components/footerPublic";
 import Blogs from "../blog&event/blogs";
 import Events from "../blog&event/events";
-import slide1 from "./assets/slide_1.webp";
-import slide2 from "./assets/slide_2.jpg";
-import slide3 from "./assets/slide_3.png";
+import slide1 from "../../../assets/slide_1.webp";
+import slide2 from "../../../assets/slide_2.jpg";
+import slide3 from "../../../assets/slide_3.png";
 import Data from "../components/TranslationEnglish/Data.json";
 
 function HomePage() {
@@ -164,7 +164,7 @@ function HomePage() {
               </button>
             </div>
             {/* Right Arrow */}
-            <div className="hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] lg:right-5 right-0 lg:text-xl lg:text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer">
+            <div className="hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] lg:right-5 right-0 lg:text-xl rounded-full p-2 bg-black/20 text-white cursor-pointer">
               <button onClick={nextSlide}>
                 <i className="fas fa-chevron-right text-[20px]"></i>
               </button>

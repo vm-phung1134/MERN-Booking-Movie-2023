@@ -4,10 +4,10 @@ import {memo} from 'react'
 function MovieSoon({movie}) {
     return (  
         <>
-        <div className="">
-          <div className="relative">
+        <div className="h-96 w-[28.5rem]">
+          <div className="relative h-[75%]">
             <img
-              className="w-[370px] h-[250px] bg-cover"
+              className="w-full h-full bg-cover"
               src={movie.image}
               alt=""
             ></img>

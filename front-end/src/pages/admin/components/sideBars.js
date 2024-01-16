@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import Logo from "../../public/login/mylogo.png";
+import Logo from "../../../assets/mylogo.png";
 
 function SideBars() {
   return (

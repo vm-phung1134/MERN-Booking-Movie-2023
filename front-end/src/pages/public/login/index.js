@@ -6,9 +6,9 @@ import { useEffect, useState, useCallback } from "react";
 import ForgetForm from "./forgetPasswordForm";
 import UpdateNewPassForm from "./updateNewPassForm";
 import FooterPublic from "../components/footerPublic";
-import Logo from "./mylogo.png";
+import Logo from "../../../assets/mylogo.png";
 import LoginForm from "./loginForm";
-import RegisterForm from "./registerForm";
+import RegisterForm from "./RegisterForm";
 //IMPORT LIBRARY UI
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -61,7 +61,6 @@ export default function Login() {
                         bg-transparent
                         text-sm
                         lg:text-[15px]
-                        text-white
                         rounded
                         "
               >

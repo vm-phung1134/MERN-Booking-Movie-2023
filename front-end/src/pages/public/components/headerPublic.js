@@ -9,7 +9,7 @@ import { authLogout } from "../../../redux/actions/authActions";
 import { changeLanguage } from "../../../redux/actions/languageAction";
 // IMPORT UI
 import Data from "./TranslationEnglish/Data.json"
-import Logo from "../login/mylogo.png";
+import Logo from "../../../assets/mylogo.png";
 import { Transition } from "@headlessui/react";
 import {
   Menu,

@@ -30,7 +30,7 @@ import FooterPublic from "../components/footerPublic";
 import SpinnerLoading from "../components/spinnerLoading";
 // IMPORT UI
 import { Select, Option } from "@material-tailwind/react";
-import { isCheckQuanlitySeat } from "../middleware";
+import { isCheckQuanlitySeat } from "../../../utils";
 import Data from "../components/TranslationEnglish/Data.json";
 import Cookies from "universal-cookie";
 import { Breadcrumbs } from "@material-tailwind/react";
@@ -45,9 +45,9 @@ import {
 function Booking() {
   // DEFINE
   //const baseURL = 'https://mern-full-stack-booking-movie-api.vercel.app'
-  const baseURL = 'http://localhost:5000'
+  const baseURL = "http://localhost:5000";
   const dispatch = useDispatch();
-  const cookies = new Cookies()
+  const cookies = new Cookies();
   const tokenId = cookies.get("userId");
   // CALL STORE FROM GET API
   const cinemas = useSelector((state) => state.cinemas.cinemas);
@@ -134,9 +134,9 @@ function Booking() {
           if (res.data.url) {
             window.location.href = res.data.url;
           }
-          dispatch(createReservation(ticketPayment))
+          dispatch(createReservation(ticketPayment));
           newSelectSeats.map((item) =>
-          dispatch(updateStatusSeat(valueSeats, item))
+            dispatch(updateStatusSeat(valueSeats, item))
           );
         })
         .catch((err) => console.log(err.message));
@@ -154,10 +154,10 @@ function Booking() {
     let timeOut = setTimeout(async () => {
       await dispatch(getAllMovie());
       await dispatch(getAllCinema());
-       dispatch(getAllShowTime());
-       dispatch(getAllTicket());
-       dispatch(getAllFood());
-       dispatch(getAllSeat());
+      dispatch(getAllShowTime());
+      dispatch(getAllTicket());
+      dispatch(getAllFood());
+      dispatch(getAllSeat());
       setLoadingPage(false);
     }, 1200);
     return () => {
@@ -254,7 +254,7 @@ function Booking() {
                                     {movie.name}
                                   </span>{" "}
                                   -{" "}
-                                  <span className="capitalize lowercase ">
+                                  <span className="capitalize">
                                     {movie.namevn}
                                   </span>
                                 </div>
