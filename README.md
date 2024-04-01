@@ -5,6 +5,10 @@
 
 ## Run Locally
 
+## Account Test
+Email: phucnguyen1134@gmail.com
+Password: 123123
+
 ### 1. Clone repo
 
 ```
